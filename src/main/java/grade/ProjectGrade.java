@@ -1,6 +1,5 @@
 package grade;
 
-import java.util.Collection;
 import java.util.stream.IntStream;
 
 public class ProjectGrade {
@@ -21,7 +20,8 @@ public class ProjectGrade {
     }
 
     public static boolean usesLambda() {
-        return IntStream.of(0, 2, 4, 6, 8, 10).map(i -> i*i).allMatch(i -> (i + 1)%2 == 1);
+        return IntStream.of(0, 2, 4, 6, 8, 10).map(i -> i*i)
+                .allMatch(i -> (i + 1)%2 == 1);
     }
 
     /**
