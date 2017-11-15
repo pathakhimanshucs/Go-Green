@@ -10,3 +10,9 @@ buildNumber.properties
 
 # Exclude maven wrapper
 !/.mvn/wrapper/maven-wrapper.jar
+
+# Exclude IDE files
+*.iml
+.idea/
+*.project
+*.classpath
