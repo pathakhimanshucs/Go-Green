@@ -1,15 +1,6 @@
-# TI1216 Template Repository
+# GoGreen OOPP Project Group 10
 
-This a template repository to help you get started on making the best project possible!
-
-You can download the latest version [here](https://github.com/SERG-Delft/TI1216/releases)
-
-http://stackoverflow.com/a/6466993
-
-## How to import into your IDE
-
-Eclipse:
-[http://javapapers.com/java/import-maven-project-into-eclipse/](http://javapapers.com/java/import-maven-project-into-eclipse/)
+This is the repository of the GoGreen Project for Group 10
 
 Intellij:  
 [https://www.jetbrains.com/help/idea/2016.2/importing-project-from-maven-model.html](https://www.jetbrains.com/help/idea/2016.2/importing-project-from-maven-model.html)
