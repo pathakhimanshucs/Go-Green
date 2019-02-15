@@ -61,18 +61,30 @@ Personal Development:
 
 # Tamer's Personal Development Plan
 
-Tamer Sahin
+Name:Tamer Sahin
 
 
 
-4952936
+Studentnumber: 4952936
 
 
 
-tsahin
+NetID: tsahin
+
+Personal Plan:
+
+
+
+Because this is my first year with Java, and other programming stuff, I can not say that I'm a Java master. But I can think Object Oriented, so I think I will be fine.
 
 After the bachelor I know that as a programmer, you need to work with other people. So my main goal is to train myself to work efficiently with people who I don’t know. 
 Each of these people with other abilities will learn me a lot.
+
+The key to pass the course is: communicating! 
+
+If we work as a group, I'm sure that as a group we will all become better programmers. If I have to speak for myself. I am sure about that after this project I will be better at 
+coding and communicating.
+
 
 
 
