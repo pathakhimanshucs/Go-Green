@@ -62,7 +62,13 @@ Personal Development:
 # Tamer's Personal Development Plan
 
 Tamer Sahin
+
+
+
 4952936
+
+
+
 tsahin
 
 After the bachelor I know that as a programmer, you need to work with other people. So my main goal is to train myself to work efficiently with people who I don’t know. 
