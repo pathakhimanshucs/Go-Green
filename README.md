@@ -21,9 +21,12 @@ Student Number: 4823567
 NetID: hpathak
   
 Personal Development:
+
 **Strong Point**
 - Figuring out the possible paths that can be taken in order to create a function.
+
 **Weak Point**
+
 - Efficiently distributing work load between team members and working collaboratively in a group.
 - The different softwares that are required to make a functioning application with backend and frontend software and howthey communicate together.
 
