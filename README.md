@@ -90,6 +90,15 @@ NetID: jmchan
 ![MichaelImage](https://i.imgur.com/REav0N6.png)
 
 Personal Development Plan:
-Improving myself as a programmer by working together in a team on this project. This will allow me to learn how to program together as a team which will be very useful in the future when I am likely going to be working together with colleagues on different projects.
+
+Strong points:
+- Good at communicating with team members
+
+Weak points:
+- Not very creative
+- New to coding (I get stuck alot when I do coding)
+
+Goal:
+Get more experience with coding in general. I am currently really new at coding and I have never coded together in a team before. This project is a great opportunity to get more experienced with coding individually as well as coding in a team. We're also going to organize coding sessions so we can help eachother out whenever we are stuck.
 
 ---
