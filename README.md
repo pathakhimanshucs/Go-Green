@@ -58,3 +58,18 @@ Personal Development:
 1. Learn to efficiently work in a team and learn to delegate tasks based on strengths and weaknesses.
 1. Implement the different software systems that are required for making a robust piece of software that contains server/client communication and methods of storing and retrieving data.
 ---
+
+# Tamer's Personal Development Plan
+
+Tamer Sahin
+4952936
+tsahin
+
+After the bachelor I know that as a programmer, you need to work with other people. So my main goal is to train myself to work efficiently with people who I don’t know. 
+Each of these people with other abilities will learn me a lot.
+
+
+
+![image of Tamer](https://i.imgur.com/2ENGuAE.jpg)
+
+---
