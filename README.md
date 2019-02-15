@@ -61,33 +61,35 @@ Personal Development:
 
 # Tamer's Personal Development Plan
 
-Name:Tamer Sahin
+Tamer Sahin
 
 
 
-Studentnumber: 4952936
+4952936
 
 
 
-NetID: tsahin
+tsahin
 
-Personal Plan:
-
-
-
-Because this is my first year with Java, and other programming stuff, I can not say that I'm a Java master. But I can think Object Oriented, so I think I will be fine.
-
-After the bachelor I know that as a programmer, you need to work with other people. So my main goal is to train myself to work efficiently with people who I don’t know. 
+After the bachelor I know that as a programmer, you need to work with other people. So my main goal is to train myself to work efficiently with people who I donï¿½t know. 
 Each of these people with other abilities will learn me a lot.
-
-The key to pass the course is: communicating! 
-
-If we work as a group, I'm sure that as a group we will all become better programmers. If I have to speak for myself. I am sure about that after this project I will be better at 
-coding and communicating.
-
 
 
 
 ![image of Tamer](https://i.imgur.com/2ENGuAE.jpg)
+
+---
+# Michael's Personal Development Plan
+
+Name: Michael Chan
+
+Student Number: 4953770
+
+NetID: jmchan
+
+![MichaelImage](https://i.imgur.com/REav0N6.png)
+
+Personal Development Plan:
+Improving myself as a programmer by working together in a team on this project. This will allow me to learn how to program together as a team which will be very useful in the future when I am likely going to be working together with colleagues on different projects.
 
 ---
