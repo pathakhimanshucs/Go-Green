@@ -13,6 +13,8 @@ Run `maven install` ([Intellij](https://www.jetbrains.com/help/idea/2016.3/getti
 **Checkstyle**:  
 Run `maven site`
 
+## The team members and their development plans
+
 # Rauf's Personal Development Plan
 
 
@@ -110,5 +112,21 @@ Weak points:
 
 Goal:
 Get more experience with coding in general. I am currently really new at coding and I have never coded together in a team before. This project is a great opportunity to get more experienced with coding individually as well as coding in a team. We're also going to organize coding sessions so we can help eachother out whenever we are stuck.
+
+---
+# IJsbrand's Personal Development Plan
+
+name: IJsbrand Slagmolen  
+netid: islagmolen@tudelft.nl  
+![](https://media.licdn.com/dms/image/C5603AQGtYa5T7lgyYw/profile-displayphoto-shrink_100_100/0?e=1555545600&v=beta&t=mHuPsy9AASnk8TeI2RyoGPYCTLIqNH8RhCdEkWShnho)  
+
+Strong point: always looking to develop new skills. An example of this is that I stopped working and started studying again as I saw my current skills were unsufficient for the tasks I'm interested in. This shows in a team by me being driven to learn.  
+
+Weak point: planning. I'm not the most organised person. An example of this is how I struggle to combine life with studying. In a team this might show by me not being up to date on all the details.  
+
+What I want to gain most from doing this project is experience in developing an application. My current reality is that I have never done so before. I know how to code but I have never coded in a team.  
+I'm hoping to improve my general teamworking skills, specifically with regard to splitting up coding tasks. The thing I hope we'll use a lot for this is our SCRUM-board, as this is also the way to do things in a professional setting.  
+
+In addition, I hope to improve my planning skills. The main way I shall do this is by following a booklet on study planning I got. 
 
 ---
