@@ -130,3 +130,29 @@ I'm hoping to improve my general teamworking skills, specifically with regard to
 In addition, I hope to improve my planning skills. The main way I shall do this is by following a booklet on study planning I got. 
 
 ---
+
+## Oliver's Personal Development Plan
+name: Oliver Neut
+netid: oneut@tudelft.nl
+
+![](https://osistud.tudelft.nl/osiris_student/DownloadPasfoto.do?state=789C73720E0EB1B235F04D4D01C29CCCBCF4D43CBFCCD4D272CF92D4A2C492FC225B5D175D0320D009482D2ACECF4BCCC94C04B2824B4A5352F34AD014191A4080B9B189B105109A189B01A1B10E54B5634A516AB12186C1C8B246C8B22832C6D864D28BF2530BB03B07A62420B1382DBF249F489786156566A586A5E60075E2F425AA8B413A401A0C71BA1CA602B7DF602A50FD080076EC8B9F)
+
+Personal Development Plan :
+
+I really like creating stuff and this project is no exception, with this project I want to improve skills in various fields like communicating, creativity and engineering.
+
+# Weaknesses : 
+- beginner in java and other programming languages
+- not much understanding of how an application should be made and what goes into it
+
+# strengths :
+- I can learn decently things fast
+- I like working efficiently in group / being productive
+
+I started coding this year so I am very new to programming, so that's why in this project I want to: 
+- get to know how working on a big software project in team feels like
+- get better at coding in java in general
+- have a better understanding on how an application works
+- know what goes behind the making of an application
+- get good at working efficiently in a team
+
