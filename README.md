@@ -164,6 +164,8 @@ Name: Nima Khaksar
 netid: nkhaksar
 Student nr: 4840488
 
+
+
 I want to develop my ability to become a leader for future and larger projects by contributing with my skills and pushing my limits to the maximum. 
 
 The communication between the teammates are also an essential part for the leadership within a project and therefore, I also have the ambition to 
@@ -181,6 +183,5 @@ Finally, I want to improve my problem solving skills by simplify or finding new 
 # Weak Points:
 - I have to develop my ability to become a leader
 
-![](https:\Documents\PictureNima.png)
 ---
 
