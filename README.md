@@ -155,4 +155,32 @@ I started coding this year so I am very new to programming, so that's why in thi
 - have a better understanding on how an application works
 - know what goes behind the making of an application
 - get good at working efficiently in a team
+- 
+---
+
+## Nima Khaksar- Development plan:
+
+Name: Nima Khaksar
+netid: nkhaksar
+Student nr: 4840488
+
+I want to develop my ability to become a leader for future and larger projects by contributing with my skills and pushing my limits to the maximum. 
+
+The communication between the teammates are also an essential part for the leadership within a project and therefore, I also have the ambition to 
+improve my communication skills.
+
+Additionally, I want to develop my current programming skills with Java GUI by applying it to various fields and projects. 
+
+Finally, I want to improve my problem solving skills by simplify or finding new or alternative solutions to existing ones.
+
+# Strong Points:
+- Curious and always want to find new ways or solutions to existing problems
+- Do everything on time and contribute actively with my skills to all projects
+- I don`t leave anything half solved.
+
+# Weak Points:
+- I have to develop my ability to become a leader
+
+![](\Documents\PictureNima.png)
+---
 
