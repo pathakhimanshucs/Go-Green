@@ -181,6 +181,6 @@ Finally, I want to improve my problem solving skills by simplify or finding new 
 # Weak Points:
 - I have to develop my ability to become a leader
 
-![](\Documents\PictureNima.png)
+![](https:\Documents\PictureNima.png)
 ---
 
