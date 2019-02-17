@@ -49,12 +49,13 @@ NetID: hpathak
 Personal Development:
 
 **Strong Point**
-- Figuring out the possible paths that can be taken in order to create a function.
+- I like to challenge myself in finding the most efficient possible paths that can be taken in order to create a function.
+- I am fairly profficient in programming in java and have understanding of algorithms.
 
 **Weak Point**
 
 - Efficiently distributing work load between team members and working collaboratively in a group.
-- The different softwares that are required to make a functioning application with backend and frontend software and howthey communicate together.
+- Not much knowledge about different softwares that are required to make a functioning application with backend and frontend software and how they communicate together.
 
 **G (Grow)**
 1. Learn to efficiently work in a team and learn to delegate tasks based on strengths and weaknesses.
