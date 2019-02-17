@@ -160,10 +160,9 @@ I started coding this year so I am very new to programming, so that's why in thi
 
 ## Nima Khaksar- Development plan:
 
-Name: Nima Khaksar
-netid: nkhaksar
-Student nr: 4840488
-
+- Name: Nima Khaksar
+- netid: nkhaksar
+- Student nr: 4840488
 
 
 I want to develop my ability to become a leader for future and larger projects by contributing with my skills and pushing my limits to the maximum. 
