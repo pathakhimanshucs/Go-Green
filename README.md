@@ -45,6 +45,8 @@ Name: Himanshu Pathak
 Student Number: 4823567
   
 NetID: hpathak
+
+![himanshu](profilepicture/himanshu.jpg)
   
 Personal Development:
 
