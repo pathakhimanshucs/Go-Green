@@ -163,6 +163,7 @@ I started coding this year so I am very new to programming, so that's why in thi
 
 ## Nima Khaksar- Development plan:
 
+![PictureNima]( https://profilepicture/PictureNima.png)
 - Name: Nima Khaksar
 - netid: nkhaksar
 - Student nr: 4840488
