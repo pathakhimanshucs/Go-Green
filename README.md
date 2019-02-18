@@ -163,7 +163,7 @@ I started coding this year so I am very new to programming, so that's why in thi
 
 ## Nima Khaksar- Development plan:
 
-![](https://imgur.com/a/GArSFmN)
+![](https://imgur.com/a/GArSFmN.png)
 
 - Name: Nima Khaksar
 - netid: nkhaksar
