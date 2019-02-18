@@ -138,7 +138,7 @@ In addition, I hope to improve my planning skills. The main way I shall do this 
 name: Oliver Neut
 netid: oneut@tudelft.nl
 
-![](https://imgur.com/dOyw1bU)
+![Oliver](profilepicture/picture.jpg)
 
 Personal Development Plan :
 
@@ -149,7 +149,7 @@ I really like creating stuff and this project is no exception, with this project
 - not much understanding of how an application should be made and what goes into it
 
 # strengths :
-- I can learn decently things fast
+- I can pick up things decently fast
 - I like working efficiently in group / being productive
 
 I started coding this year so I am very new to programming, so that's why in this project I want to: 
