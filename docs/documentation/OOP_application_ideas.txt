@@ -1,0 +1,13 @@
+OOP application idea's:
+ - total CO2 score visible at the end of the day
+ - scoreboard with all the users their score for comparison
+ - recieve a 'tree' when you improve your score by x points (in relation to the average dutch CO2 footprint, perhaps)
+ - Net Beans for the GUI
+	> GUI has a mockup
+	> green color for the application
+	> drop down menu's, interlinked to let the first show food/energy/transport, the second shows e.g. 'eat vegetarian meal'
+ - the application uses a Web API and a (Mongo) DB
+ - no Android app will be made
+ - the application is not a web application, but a desktop application (connected to the internet)
+ - secure implementation, https-usage, password system
+ - three graphs per person that will constitute the final score
