@@ -1,0 +1,8 @@
+OOP group 10 contract:
+ - Anyone who's late to a meeting brings cake next time.
+ - We'll try to do 6 face-to-face hours on top of mandatory meetings, to make more progress/help each other out. Ideally we do this on one of the days where there is only one lecture.
+ - Whatsapp is the primary communication channel.
+ - Everybody works on the project according to their strengths (coding, databases, servers, etc..).
+	> In addition, we will try pair programming (two coders at the same computer)
+ - The language used during the project is english.
+ - The IDE for this project will be IntelliJ
