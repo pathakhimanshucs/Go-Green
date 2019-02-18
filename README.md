@@ -163,6 +163,8 @@ I started coding this year so I am very new to programming, so that's why in thi
 
 ## Nima Khaksar- Development plan:
 
+![](https://imgur.com/a/GArSFmN)
+
 ![PictureNima](https://gitlab.ewi.tudelft.nl/cse1105/2018-2019/oopp-group-10/go-green/blob/master/profilepicture/PictureNima.png)
 - Name: Nima Khaksar
 - netid: nkhaksar
