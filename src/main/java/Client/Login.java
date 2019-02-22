@@ -1,3 +1,5 @@
+package Client;
+
 public class Login {
     String userName;
     String passWord;

@@ -1,3 +1,7 @@
+package Server;
+
+import Client.Login;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -14,7 +18,7 @@ public class Server {
 
     public void runServer() throws IOException, ClassNotFoundException{
         ServerSocket serverSocket = new ServerSocket(PORT);
-        System.out.println("Server up and ready for connections .");
+        System.out.println("Server.Server up and ready for connections .");
         Socket socket = serverSocket.accept();
         ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
