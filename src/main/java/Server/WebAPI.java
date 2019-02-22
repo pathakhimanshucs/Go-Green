@@ -13,8 +13,6 @@ public class WebAPI {
     public String Request(@RequestParam(value="name", defaultValue="World") String name)
     {
 
-
-
         return "Hello " + name;
     }
 

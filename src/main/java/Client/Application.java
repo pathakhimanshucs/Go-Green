@@ -24,10 +24,8 @@ public class Application
             URL url = new URL("http://localhost:8080/request");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
-            //BufferedReader Reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
             Scanner sc = new Scanner(con.getInputStream());
             output = sc.nextLine();
-
             System.out.println(output);
 
           //  con.disconnect();
