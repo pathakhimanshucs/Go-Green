@@ -10,7 +10,7 @@ public class WebAPI {
 
 
     @RequestMapping("/request")
-    public String Request(@RequestParam(value="name", defaultValue="World") String name)
+    public String Request(@RequestParam(value="name", defaultValue="Anonymous") String name)
     {
 
         return "Hello " + name;
