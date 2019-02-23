@@ -1,28 +1,32 @@
-package Client;
-
+package client;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Scanner;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Scanner;
 
-public class Application
-{
-
-    public static void main(String[] args)
-    {
+/**
+ * Client application with main method.
+ */
+public class Application {
+    /**
+     * Main method.
+     * @param args Provided arguments.
+     */
+    public static void main(String[] args) {
         System.out.println("Please enter your name");
         Scanner sc = new Scanner(System.in);
-        Request("name="+sc.nextLine());
+        request("name=" + sc.nextLine());
         sc.close();
-
     }
 
-    public static void Request(String str)
-    {
-        try
-        {
+    /**
+     * Sends an HTTP request to the server with str as param.
+     * @param str Name to be displayed.
+     */
+    public static void request(String str) {
+        try {
             URL url = new URL("http://localhost:8080/request");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
@@ -39,12 +43,9 @@ public class Application
             System.out.println(output);
             con.disconnect();
             sc.close();
-        }
-        catch(IOException e)
-        {
+        } catch (IOException e) {
             System.out.println("Server is down");
             System.exit(1);
         }
     }
-
 }
