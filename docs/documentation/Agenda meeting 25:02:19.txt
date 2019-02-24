@@ -1,0 +1,23 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf100
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 OOPP group 10\
+meeting 3 agenda 25/02/19\
+\
+Do :\
+- present our first version of our go-green application to TA\
+- work on further implementing\
+- ... (things to add)\
+\
+Discuss : \
+- what did everyone do and  were there any problems ?\
+- what did we accomplish last week and what still needs to be finished?\
+- what are we going to implement for the next deadline and add it to the scrum board\
+- any ideas on how we could do things better/ more efficient? something else we want to discuss\
+- ... (things to add)\
+\
+}
