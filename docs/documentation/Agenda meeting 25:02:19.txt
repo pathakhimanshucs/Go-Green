@@ -14,10 +14,20 @@ Do :\
 - ... (things to add)\
 \
 Discuss : \
+- We never did an introduction round. Let's do an introduction round. (who are you, where are you from, what did you do before this, why did you start CSE at TU Delft?, and what do you hope to achieve (here and in general)?)\
 - what did everyone do and  were there any problems ?\
 - what did we accomplish last week and what still needs to be finished?\
 - what are we going to implement for the next deadline and add it to the scrum board\
 - any ideas on how we could do things better/ more efficient? something else we want to discuss\
+    > why did we build something without spring? then redid it with spring? (evaluate what went wrong, how it went wrong, "why did we end up spending time writing code we didn't end up using?", what is the consequence of this, what is the learning point here) (retrace our steps: Himanshu asked a TA who recommended to use a rest-api, why didn't we ask the TA sooner?)\
+- creation of the product backlog\
+- take notes every meeting, not just monday (at least: action points, evaluation points)\
+- maven code review\
+- using MVC for the GUI\
+- using merge requests for code reviews (four eyes principle)\
+- questions for Jacky\
+	> DB on git or not?\
+	> username should be a nickname? Or name/surname?\
 - ... (things to add)\
 \
 }
