@@ -35,5 +35,6 @@ Discuss : \
 	> username should be a nickname? Or name/surname?\
 - What can we do better for the upcoming weeks?
 - Which values should we add to our create account form.
+- We should talk about how we can protect our master branch, because we can lose points !!
 \
 }
