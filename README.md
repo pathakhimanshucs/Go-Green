@@ -15,17 +15,18 @@ Run `maven site`
 
 ## The team members and their development plans
 
-# Rauf's Personal Development Plan
+---
+Name: Rauf Akdemir
+Student Number: 4996961
+Net ID: rakdemir
 
+![alt text](https://media.licdn.com/dms/image/C5603AQHmI-xJStmlLQ/profile-displayphoto-shrink_200_200/0?e=1555545600&v=beta&t=zlD8jQxPPEU1ZPA8RR0JaKLAODxA9-gwu1Zb8wq5Fdc)
 
-## My plan: become better at retaining oversight in complex projects by effectively communicating (receiving and sending) ideas and tasks with other team members and making sure everyone is on the same page. 
-
-
+## My plan: become better at retaining oversight in complex projects by effectively communicating (receiving and sending) ideas and tasks with other team members and making sure everyone is on the same page.
 
 This is important to me because I believe synergy is the most important factor in getting complex work done, and I believe communication is key to this.
 
 This goal is achieved when we can effectively break down and tackle problem as a team; mid-project or nearing the end.
-
 
 
 I try to achieve this by talking openly, asking people for their ideas and having everyone say something they would like to add.
@@ -35,15 +36,9 @@ I hope to be able to implement communication systems, or agreements on particula
 
 I think Git will be able to help us in this.
 
-
-
-![alt text](https://media.licdn.com/dms/image/C5603AQHmI-xJStmlLQ/profile-displayphoto-shrink_200_200/0?e=1555545600&v=beta&t=zlD8jQxPPEU1ZPA8RR0JaKLAODxA9-gwu1Zb8wq5Fdc)
-
 ---
 Name: Himanshu Pathak
-  
 Student Number: 4823567
-  
 NetID: hpathak
 
 ![himanshu](profilepicture/himanshu.jpg)
@@ -63,21 +58,13 @@ Personal Development:
 1. Learn to efficiently work in a team and learn to delegate tasks based on strengths and weaknesses.
 1. Implement the different software systems that are required for making a robust piece of software that contains server/client communication and methods of storing and retrieving data.
 ---
-
-# Tamer's Personal Development Plan
-
 Name:Tamer Sahin
-
-
-
 Studentnumber: 4952936
-
 NetID: tsahin
 
+![image of Tamer](https://i.imgur.com/2ENGuAE.jpg)
+
 Personal Plan:
-
-
-
 Because this is my first year with Java, and other programming stuff, I can not say that I'm a Java master. But I can think Object Oriented, so I think I will be fine.
 
 After the bachelor I know that as a programmer, you need to work with other people. So my main goal is to train myself to work efficiently with people who I don’t know. 
@@ -89,17 +76,9 @@ If we work as a group, I'm sure that as a group we will all become better progra
 coding and communicating.
 
 
-
-![image of Tamer](https://i.imgur.com/2ENGuAE.jpg)
-
-
 ---
-# Michael's Personal Development Plan
-
 Name: Michael Chan
-
 Student Number: 4953770
-
 NetID: jmchan
 
 ![MichaelImage](https://i.imgur.com/REav0N6.png)
@@ -117,11 +96,11 @@ Goal:
 Get more experience with coding in general. I am currently really new at coding and I have never coded together in a team before. This project is a great opportunity to get more experienced with coding individually as well as coding in a team. We're also going to organize coding sessions so we can help eachother out whenever we are stuck.
 
 ---
-# IJsbrand's Personal Development Plan
+Name: IJsbrand Slagmolen
+Student Number: 4974042
+NetID: islagmolen
 
-name: IJsbrand Slagmolen  
-netid: islagmolen@tudelft.nl  
-![](https://media.licdn.com/dms/image/C5603AQGtYa5T7lgyYw/profile-displayphoto-shrink_100_100/0?e=1555545600&v=beta&t=mHuPsy9AASnk8TeI2RyoGPYCTLIqNH8RhCdEkWShnho)  
+![](https://media.licdn.com/dms/image/C5603AQGtYa5T7lgyYw/profile-displayphoto-shrink_100_100/0?e=1555545600&v=beta&t=mHuPsy9AASnk8TeI2RyoGPYCTLIqNH8RhCdEkWShnho)
 
 Strong point: always looking to develop new skills. An example of this is that I stopped working and started studying again as I saw my current skills were unsufficient for the tasks I'm interested in. This shows in a team by me being driven to learn.  
 
@@ -133,11 +112,9 @@ I'm hoping to improve my general teamworking skills, specifically with regard to
 In addition, I hope to improve my planning skills. The main way I shall do this is by following a booklet on study planning I got. 
 
 ---
-
-## Oliver's Personal Development Plan
-name: Oliver Neut
-netid: oneut@tudelft.nl
-student number : 4884663
+Name: Oliver Neut
+Student Number: 4884663
+NetID: oneut
 
 ![Oliver](profilepicture/picture.jpg)
 
@@ -159,16 +136,13 @@ I started coding this year so I am very new to programming, so that's why in thi
 - have a better understanding on how an application works
 - know what goes behind the making of an application
 - get good at working efficiently in a team
-- 
----
 
-## Nima Khaksar- Development plan:
+---
+Name: Nima Khaksar
+Student Number: 4840488
+NetID: nkhaksar
 
 ![Nima](https://imgur.com/a/GArSFmN)
-
-- Name: Nima Khaksar
-- netid: nkhaksar
-- Student nr: 4840488
 
 
 I want to develop my ability to become a leader for future and larger projects by contributing with my skills and pushing my limits to the maximum. 
@@ -189,4 +163,3 @@ Finally, I want to improve my problem solving skills by simplify or finding new 
 - I have to develop my ability to become a leader
 
 ---
-#test
