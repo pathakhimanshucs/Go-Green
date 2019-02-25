@@ -28,6 +28,6 @@ Discuss : \
 - questions for Jacky\
 	> DB on git or not?\
 	> username should be a nickname? Or name/surname?\
-- What can we do better for the upcoming wedeks?
+- What can we do better for the upcoming weeks?
 \
 }
