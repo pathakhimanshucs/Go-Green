@@ -1,4 +1,4 @@
-﻿# GoGreen OOPP Project Group 10
+## GoGreen OOPP Project Group 10
 
 This is the repository of the GoGreen Project for Group 10
 
@@ -137,12 +137,24 @@ I started coding this year so I am very new to programming, so that's why in thi
 - know what goes behind the making of an application
 - get good at working efficiently in a team
 
+<<<<<<< README.md
 ---
 Name: Nima Khaksar\
 Student Number: 4840488\
 NetID: nkhaksar\
 \
 ![Nima](https://i.imgur.com/OvaP5bu.jpg)
+=======
+<<<<<<< HEAD
+![Nima](profilepicture/PictureNima.png)
+=======
+![Nima](https://imgur.com/a/GArSFmN)
+>>>>>>> 2853118acc6e1310fc3ca4ac55f2b05e5fc1553b
+
+- Name: Nima Khaksar
+- netid: nkhaksar
+- Student nr: 4840488
+>>>>>>> README.md
 
 
 I want to develop my ability to become a leader for future and larger projects by contributing with my skills and pushing my limits to the maximum. 
