@@ -14,27 +14,27 @@ Do :\
 - ... (things to add)\
 \
 Discuss : \
-- We never did an introduction round. Let's do an introduction round. (who are you, where are you from, what did you do before this, why did you start CSE at TU Delft?, and what do you hope to achieve (here and in general)?)\
 - what did everyone do and  were there any problems ?\
 - what did we accomplish last week and what still needs to be finished?\
 - what are we going to implement for the next deadline and add it to the scrum board\
 - any ideas on how we could do things better/ more efficient? something else we want to discuss\
-    > why did we build something without spring? then redid it with spring?\
-    > why did testing end up as a last minute issue?
+    > we build a basic http request with and without spring. Let's evaluate how this could've been done more efficiently\
+    > let's plan testing more thoroughly\
 - creation of the product backlog\
-    > concept of 'user story': "In software development and product management, a user story is an informal, natural language description of one or more features of a software system." https://en.wikipedia.org/wiki/User_story\
-    > MoSCoW - create labels for 'must have', 'should have', 'could have' and 'won't have'\
+    > user stories\
+    > MoSCoW - create labels\
 - add 'testing' column on our SCRUM board as Andy explicitly mentioned it\
 - take notes every meeting, not just monday (at least: action points, evaluation points)\
 - maven code review\
-- Mockito research
+- Mockito research\
+- pipeline research\
 - using MVC for the GUI\
 - using merge requests for code reviews (four eyes principle)\
 - questions for Jacky\
 	> DB on git or not?\
 	> username should be a nickname? Or name/surname?\
-- What can we do better for the upcoming weeks?
-- Which values should we add to our create account form.
-- We should talk about how we can protect our master branch, because we can lose points !!
+- What can we do better for the upcoming weeks?\
+- Which values should we add to our create account form.\
+- We should talk about how we can protect our master branch, because we can lose points !!\
 \
 }

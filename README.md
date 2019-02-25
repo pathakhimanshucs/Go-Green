@@ -135,9 +135,9 @@ In addition, I hope to improve my planning skills. The main way I shall do this 
 ---
 
 ## Oliver's Personal Development Plan
-+ name: Oliver Neut
-+ netid: oneut@tudelft.nl
-+ student number : 4884663
+name: Oliver Neut
+netid: oneut@tudelft.nl
+student number : 4884663
 
 ![Oliver](profilepicture/picture.jpg)
 
@@ -164,7 +164,11 @@ I started coding this year so I am very new to programming, so that's why in thi
 
 ## Nima Khaksar- Development plan:
 
+<<<<<<< HEAD
 ![Nima](profilepicture/PictureNima.png)
+=======
+![Nima](https://imgur.com/a/GArSFmN)
+>>>>>>> 2853118acc6e1310fc3ca4ac55f2b05e5fc1553b
 
 - Name: Nima Khaksar
 - netid: nkhaksar
