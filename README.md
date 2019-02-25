@@ -16,10 +16,10 @@ Run `maven site`
 ## The team members and their development plans
 
 ---
-Name: Rauf Akdemir
-Student Number: 4996961
-Net ID: rakdemir
-
+Name: Rauf Akdemir\
+Student Number: 4996961\
+Net ID: rakdemir\
+\
 ![alt text](https://media.licdn.com/dms/image/C5603AQHmI-xJStmlLQ/profile-displayphoto-shrink_200_200/0?e=1555545600&v=beta&t=zlD8jQxPPEU1ZPA8RR0JaKLAODxA9-gwu1Zb8wq5Fdc)
 
 ## My plan: become better at retaining oversight in complex projects by effectively communicating (receiving and sending) ideas and tasks with other team members and making sure everyone is on the same page.
@@ -37,10 +37,10 @@ I hope to be able to implement communication systems, or agreements on particula
 I think Git will be able to help us in this.
 
 ---
-Name: Himanshu Pathak
-Student Number: 4823567
-NetID: hpathak
-
+Name: Himanshu Pathak\
+Student Number: 4823567\
+NetID: hpathak\
+\
 ![himanshu](profilepicture/himanshu.jpg)
   
 Personal Development:
@@ -58,10 +58,10 @@ Personal Development:
 1. Learn to efficiently work in a team and learn to delegate tasks based on strengths and weaknesses.
 1. Implement the different software systems that are required for making a robust piece of software that contains server/client communication and methods of storing and retrieving data.
 ---
-Name:Tamer Sahin
-Studentnumber: 4952936
-NetID: tsahin
-
+Name:Tamer Sahin\
+Studentnumber: 4952936\
+NetID: tsahin\
+\
 ![image of Tamer](https://i.imgur.com/2ENGuAE.jpg)
 
 Personal Plan:
@@ -77,10 +77,10 @@ coding and communicating.
 
 
 ---
-Name: Michael Chan
-Student Number: 4953770
-NetID: jmchan
-
+Name: Michael Chan\
+Student Number: 4953770\
+NetID: jmchan\
+\
 ![MichaelImage](https://i.imgur.com/REav0N6.png)
 
 Personal Development Plan:
@@ -96,10 +96,10 @@ Goal:
 Get more experience with coding in general. I am currently really new at coding and I have never coded together in a team before. This project is a great opportunity to get more experienced with coding individually as well as coding in a team. We're also going to organize coding sessions so we can help eachother out whenever we are stuck.
 
 ---
-Name: IJsbrand Slagmolen
-Student Number: 4974042
-NetID: islagmolen
-
+Name: IJsbrand Slagmolen\
+Student Number: 4974042\
+NetID: islagmolen\
+\
 ![](https://media.licdn.com/dms/image/C5603AQGtYa5T7lgyYw/profile-displayphoto-shrink_100_100/0?e=1555545600&v=beta&t=mHuPsy9AASnk8TeI2RyoGPYCTLIqNH8RhCdEkWShnho)
 
 Strong point: always looking to develop new skills. An example of this is that I stopped working and started studying again as I saw my current skills were unsufficient for the tasks I'm interested in. This shows in a team by me being driven to learn.  
@@ -112,10 +112,10 @@ I'm hoping to improve my general teamworking skills, specifically with regard to
 In addition, I hope to improve my planning skills. The main way I shall do this is by following a booklet on study planning I got. 
 
 ---
-Name: Oliver Neut
-Student Number: 4884663
-NetID: oneut
-
+Name: Oliver Neut\
+Student Number: 4884663\
+NetID: oneut\
+\
 ![Oliver](profilepicture/picture.jpg)
 
 Personal Development Plan :
