@@ -2,15 +2,15 @@
 
 This is the repository of the GoGreen Project for Group 10
 
-Intellij:  
+Intellij:
 [https://www.jetbrains.com/help/idea/2016.2/importing-project-from-maven-model.html](https://www.jetbrains.com/help/idea/2016.2/importing-project-from-maven-model.html)
 
 ## Getting your weekly reports
 
-**Jacoco**:  
+**Jacoco**:
 Run `maven install` ([Intellij](https://www.jetbrains.com/help/idea/2016.3/getting-started-with-maven.html#execute_maven_goal)/[Eclipse](http://imgur.com/a/6q7pV))
 
-**Checkstyle**:  
+**Checkstyle**:
 Run `maven site`
 
 ## The team members and their development plans
@@ -22,7 +22,7 @@ Net ID: rakdemir\
 \
 ![alt text](https://media.licdn.com/dms/image/C5603AQHmI-xJStmlLQ/profile-displayphoto-shrink_200_200/0?e=1555545600&v=beta&t=zlD8jQxPPEU1ZPA8RR0JaKLAODxA9-gwu1Zb8wq5Fdc)
 
-My plan: become better at retaining oversight in complex projects by effectively communicating (receiving and sending) ideas and tasks with other team members and making sure everyone is on the same page.
+### My plan: become better at retaining oversight in complex projects by effectively communicating (receiving and sending) ideas and tasks with other team members and making sure everyone is on the same page.
 
 This is important to me because I believe synergy is the most important factor in getting complex work done, and I believe communication is key to this.
 
