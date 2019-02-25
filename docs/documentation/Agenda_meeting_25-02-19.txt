@@ -22,6 +22,9 @@ Discuss : \
     > why did we build something without spring? then redid it with spring?\
     > why did testing end up as a last minute issue?
 - creation of the product backlog\
+    > concept of 'user story': "In software development and product management, a user story is an informal, natural language description of one or more features of a software system." https://en.wikipedia.org/wiki/User_story\
+    > MoSCoW - create labels for 'must have', 'should have', 'could have' and 'won't have'\
+- add 'testing' column on our SCRUM board as Andy explicitly mentioned it\
 - take notes every meeting, not just monday (at least: action points, evaluation points)\
 - maven code review\
 - Mockito research
