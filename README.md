@@ -138,9 +138,9 @@ I started coding this year so I am very new to programming, so that's why in thi
 - get good at working efficiently in a team
 
 ---
-Name: Nima Khaksar
-Student Number: 4840488
-NetID: nkhaksar
+Name: Nima Khaksar\
+Student Number: 4840488\
+NetID: nkhaksar\
 
 ![Nima](https://imgur.com/a/GArSFmN)
 
