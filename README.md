@@ -58,7 +58,7 @@ Personal Development:
 1. Learn to efficiently work in a team and learn to delegate tasks based on strengths and weaknesses.
 1. Implement the different software systems that are required for making a robust piece of software that contains server/client communication and methods of storing and retrieving data.
 ---
-Name:Tamer Sahin\
+Name: Tamer Sahin\
 Studentnumber: 4952936\
 NetID: tsahin\
 \
