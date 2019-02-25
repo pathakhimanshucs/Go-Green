@@ -142,7 +142,6 @@ I started coding this year so I am very new to programming, so that's why in thi
 Name: Nima Khaksar\
 Student Number: 4840488\
 NetID: nkhaksar\
-\
 
 ![Nima](https://i.imgur.com/OvaP5bu.jpg)
 
