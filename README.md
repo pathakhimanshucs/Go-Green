@@ -137,7 +137,6 @@ I started coding this year so I am very new to programming, so that's why in thi
 - know what goes behind the making of an application
 - get good at working efficiently in a team
 
-<<<<<<< README.md
 ---
 
 ![Nima](https://i.imgur.com/OvaP5bu.jpg)
@@ -148,10 +147,7 @@ I started coding this year so I am very new to programming, so that's why in thi
 ![Nima](https://imgur.com/a/GArSFmN)
 >>>>>>> 2853118acc6e1310fc3ca4ac55f2b05e5fc1553b
 
-- Name: Nima Khaksar
-- netid: nkhaksar
-- Student nr: 4840488
->>>>>>> README.md
+
 
 Name: Nima Khaksar\
 Student Number: 4840488\
