@@ -29,5 +29,6 @@ Discuss : \
 	> DB on git or not?\
 	> username should be a nickname? Or name/surname?\
 - What can we do better for the upcoming weeks?
+- Which values should we add to our create account form.
 \
 }
