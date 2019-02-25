@@ -1,4 +1,4 @@
-# GoGreen OOPP Project Group 10
+﻿# GoGreen OOPP Project Group 10
 
 This is the repository of the GoGreen Project for Group 10
 
@@ -163,7 +163,7 @@ I started coding this year so I am very new to programming, so that's why in thi
 
 ## Nima Khaksar- Development plan:
 
-![](https://imgur.com/a/GArSFmN)
+![Nima](https://imgur.com/a/GArSFmN)
 
 - Name: Nima Khaksar
 - netid: nkhaksar
