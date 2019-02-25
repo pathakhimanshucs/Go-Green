@@ -22,7 +22,7 @@ Net ID: rakdemir\
 \
 ![alt text](https://media.licdn.com/dms/image/C5603AQHmI-xJStmlLQ/profile-displayphoto-shrink_200_200/0?e=1555545600&v=beta&t=zlD8jQxPPEU1ZPA8RR0JaKLAODxA9-gwu1Zb8wq5Fdc)
 
-## My plan: become better at retaining oversight in complex projects by effectively communicating (receiving and sending) ideas and tasks with other team members and making sure everyone is on the same page.
+My plan: become better at retaining oversight in complex projects by effectively communicating (receiving and sending) ideas and tasks with other team members and making sure everyone is on the same page.
 
 This is important to me because I believe synergy is the most important factor in getting complex work done, and I believe communication is key to this.
 
