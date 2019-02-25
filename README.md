@@ -137,6 +137,7 @@ In addition, I hope to improve my planning skills. The main way I shall do this 
 ## Oliver's Personal Development Plan
 name: Oliver Neut
 netid: oneut@tudelft.nl
+student number : 4884663
 
 ![Oliver](profilepicture/picture.jpg)
 
@@ -144,11 +145,11 @@ Personal Development Plan :
 
 I really like creating stuff and this project is no exception, with this project I want to improve skills in various fields like communicating, creativity and engineering.
 
-# Weaknesses : 
+Weaknesses : 
 - beginner in java and other programming languages
 - not much understanding of how an application should be made and what goes into it
 
-# strengths :
+strengths :
 - I can pick up things decently fast
 - I like working efficiently in group / being productive
 
