@@ -145,14 +145,12 @@ NetID: nkhaksar\
 
 ![Nima](https://i.imgur.com/OvaP5bu.jpg)
 
-I want to develop my ability to become a leader for future and larger projects by contributing with my skills and pushing my limits to the maximum. 
+- I want to develop my ability to become a leader for future and larger projects by contributing with my skills and pushing my limits to the maximum. 
+- The communication between the teammates are also an essential part for the leadership within a project and therefore, I also have the ambition to 
+  improve my communication skills.
+- Additionally, I want to develop my current programming skills with Java GUI by applying it to various fields and projects. 
 
-The communication between the teammates are also an essential part for the leadership within a project and therefore, I also have the ambition to 
-improve my communication skills.
-
-Additionally, I want to develop my current programming skills with Java GUI by applying it to various fields and projects. 
-
-Finally, I want to improve my problem solving skills by simplify or finding new or alternative solutions to existing ones.
+- Finally, I want to improve my problem solving skills by simplify or finding new or alternative solutions to existing ones.
 
 # Strong Points:
 - Curious and always want to find new ways or solutions to existing problems
