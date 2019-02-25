@@ -145,10 +145,6 @@ NetID: nkhaksar\
 \
 
 ![Nima](https://i.imgur.com/OvaP5bu.jpg)
-=======
-
-
-
 
 I want to develop my ability to become a leader for future and larger projects by contributing with my skills and pushing my limits to the maximum. 
 
