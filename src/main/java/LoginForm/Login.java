@@ -2,6 +2,7 @@ package LoginForm;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -9,13 +10,16 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class Login extends JFrame {
+public class Login {
 
     public static void main(String[] args) {
+
+        //Scanner scan = new Scanner(System.in);
 
         JFrame frame1 = new JFrame("GO-GREEN!");
         frame1.setSize(400, 300);
@@ -33,19 +37,21 @@ public class Login extends JFrame {
         JTextField textfield1 = new JTextField();
         textfield1.setBounds(150, 70, 200, 30);
 
-
         JPasswordField passwordField = new JPasswordField();
         passwordField.setBounds(150, 110, 200, 30);
 
         JButton button1 = new JButton("Login");
         button1.setBounds(150, 160, 100, 30);
 
+        //String textFieldValue = textfield1.getText();
+        //System.out.print(textFieldValue);
+
         JPanel panel = new JPanel();
         panel.add(label1);
         panel.add(label2);
         panel.add(label3);
         panel.add(textfield1);
-        panel.add(label2);
+        panel.add(passwordField);
         panel.add(button1);
 
         frame1.add(textfield1);
@@ -59,9 +65,26 @@ public class Login extends JFrame {
         frame1.setLayout(null);
         frame1.setLocationRelativeTo(null);
         frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//			    button1.addActionListener(new Action());
+//			    frame1.add(panel); //Add the features in the panel into the frame
+
+        button1.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                String username =textfield1.getText();
+                String password = passwordField.getText();
+                System.out.println(username);
+                System.out.println(password);
+
+//					if (textfield1.getText() == null && passwordField.getText() == null) {
+//						JOptionPane.showMessageDialog(null, "Please make sure all fields are filled in");
+
+            }
+        });
+
         button1.addActionListener(new Action());
         frame1.add(panel); //Add the features in the panel into the frame
-
     }
 
 
@@ -71,16 +94,23 @@ public class Login extends JFrame {
 
         public void actionPerformed(ActionEvent e) {
 
-            JFrame Frame2 = new JFrame();
+            JFrame Frame2 = new JFrame("GO-GREEN");
             Frame2.setSize(600,600);
+            Frame2.setLayout(new FlowLayout());
             Frame2.setLocationRelativeTo(null);
             Frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            Frame2.getContentPane(). setBackground(Color.GREEN);
-            //Frame2.setBackground(Color.GREEN);
-            Frame2.setResizable(false);
+            Frame2.setResizable(true);
             Frame2.setVisible(true);
 
-            //////////////////////////////////////////////////////////////////////////////////////////
+            JLabel label3 = new JLabel("Kilometers travelled:");
+            //JLabel label4 = new JLabel("After entering your password, "
+            //+ "please press on the submit button:" + "\n\n\n");
+
+            JTextField textfield2 = new JTextField();
+            textfield2.setPreferredSize(new Dimension(200,25));
+
+            textfield2.setVisible(true);
+            textfield2.setEnabled(true);
 
             //Combobox and dropdown menubar
             String Planet[]={"", "Transport", "Food", "Energy"};
@@ -98,7 +128,12 @@ public class Login extends JFrame {
             Cars.setBounds(60,60,90,20);
             Frame2.add(Cars);
 
-            //////////////////////////////////////////////////////////////////////////////////////////
+            //Tick Box- Check box
+            JCheckBox checkbox = new JCheckBox();
+            checkbox.setText("Do you wish to proceed?");
+            checkbox.setVisible(true);
+            checkbox.setSelected(true);
+
 
             //Button
             JButton button2 = new JButton("SUBMIT");
@@ -106,28 +141,6 @@ public class Login extends JFrame {
             button2.setEnabled(true);
             button2.setVisible(true);
 
-            //////////////////////////////////////////////////////////////////////////////////////////
-
-            JLabel label3 = new JLabel("Kilometers travelled:");
-            //JLabel label4 = new JLabel("After entering your password, "
-            //+ "please press on the submit button:" + "\n\n\n");
-
-            //////////////////////////////////////////////////////////////////////////////////////////
-
-            JTextField textfield2 = new JTextField();
-            textfield2.setPreferredSize(new Dimension(200,25));
-            textfield2.setVisible(true);
-            textfield2.setEnabled(true);
-
-            //////////////////////////////////////////////////////////////////////////////////////////
-
-            //Tick Box- Check box
-            JCheckBox checkbox = new JCheckBox();
-            checkbox.setText("Do you wish to proceed?");
-            checkbox.setVisible(true);
-            checkbox.setSelected(true);
-
-            /////////////////////////////////////////////////////////////////////////////////////////
 
             JPanel panel2 = new JPanel();
             panel2.add(button2);
@@ -139,18 +152,14 @@ public class Login extends JFrame {
             Frame2.add(panel2);
         }
 
-        //////////////////////////////////////////////////////////////////////////////////////////
-
         static class Action2 implements ActionListener {
 
             public void actionPerformed(ActionEvent e) {
 
-                JFrame Frame3 = new JFrame();
-                Frame3.setSize(700,700);
+                JFrame Frame3 = new JFrame("GO-GREEN");
+                Frame3.setSize(600,600);
                 Frame3.setLocationRelativeTo(null);
                 Frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                Frame3.getContentPane(). setBackground(Color.GREEN);
-                //Frame3.setBackground(Color.GREEN);
                 Frame3.setResizable(false);
                 Frame3.setVisible(true);
 
