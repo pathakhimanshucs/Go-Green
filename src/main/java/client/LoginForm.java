@@ -1,21 +1,13 @@
-package LoginForm;
+package client;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 
-public class Login {
+import client.Application;
+
+public class LoginForm {
 
     public static void main(String[] args) {
 
@@ -25,7 +17,7 @@ public class Login {
         frame1.setSize(400, 300);
         frame1.setBackground(Color.green);
 
-        JLabel label1 = new JLabel("Login");
+        JLabel label1 = new JLabel("LoginForm");
         label1.setBounds(180, 30, 400, 30);
 
         JLabel label2 = new JLabel("Username");
@@ -40,7 +32,7 @@ public class Login {
         JPasswordField passwordField = new JPasswordField();
         passwordField.setBounds(150, 110, 200, 30);
 
-        JButton button1 = new JButton("Login");
+        JButton button1 = new JButton("LoginForm");
         button1.setBounds(150, 160, 100, 30);
 
         //String textFieldValue = textfield1.getText();
@@ -72,10 +64,9 @@ public class Login {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-                String username =textfield1.getText();
-                String password = passwordField.getText();
-                System.out.println(username);
-                System.out.println(password);
+                String username = textfield1.getText();
+                String password = new String(passwordField.getPassword());
+                System.out.println("Welcome " + Application.loginToServer(username, password));
 
 //					if (textfield1.getText() == null && passwordField.getText() == null) {
 //						JOptionPane.showMessageDialog(null, "Please make sure all fields are filled in");
@@ -88,14 +79,13 @@ public class Login {
     }
 
 
-
     //ActionListener once the submit button is pressed
     static class Action implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
 
             JFrame Frame2 = new JFrame("GO-GREEN");
-            Frame2.setSize(600,600);
+            Frame2.setSize(600, 600);
             Frame2.setLayout(new FlowLayout());
             Frame2.setLocationRelativeTo(null);
             Frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -103,29 +93,30 @@ public class Login {
             Frame2.setVisible(true);
 
             JLabel label3 = new JLabel("Kilometers travelled:");
+            JLabel nameLabel = new JLabel();
             //JLabel label4 = new JLabel("After entering your password, "
             //+ "please press on the submit button:" + "\n\n\n");
 
             JTextField textfield2 = new JTextField();
-            textfield2.setPreferredSize(new Dimension(200,25));
+            textfield2.setPreferredSize(new Dimension(200, 25));
 
             textfield2.setVisible(true);
             textfield2.setEnabled(true);
 
             //Combobox and dropdown menubar
-            String Planet[]={"", "Transport", "Food", "Energy"};
+            String[] Planet = {"", "Transport", "Food", "Energy"};
             JComboBox Environment = new JComboBox(Planet);
-            Environment.setBounds(60,60,90,20);
+            Environment.setBounds(60, 60, 90, 20);
             Frame2.add(Environment);
 
-            String Vehicle[]={""};
+            String[] Vehicle = {""};
             JComboBox VehicleType = new JComboBox(Vehicle);
-            VehicleType.setBounds(60,60,90,20);
+            VehicleType.setBounds(60, 60, 90, 20);
             Frame2.add(VehicleType);
 
-            String CarSelection[]={""};
+            String[] CarSelection = {""};
             JComboBox Cars = new JComboBox(CarSelection);
-            Cars.setBounds(60,60,90,20);
+            Cars.setBounds(60, 60, 90, 20);
             Frame2.add(Cars);
 
             //Tick Box- Check box
@@ -137,7 +128,7 @@ public class Login {
 
             //Button
             JButton button2 = new JButton("SUBMIT");
-            button2.setSize(100,100);
+            button2.setSize(100, 100);
             button2.setEnabled(true);
             button2.setVisible(true);
 
@@ -157,7 +148,7 @@ public class Login {
             public void actionPerformed(ActionEvent e) {
 
                 JFrame Frame3 = new JFrame("GO-GREEN");
-                Frame3.setSize(600,600);
+                Frame3.setSize(600, 600);
                 Frame3.setLocationRelativeTo(null);
                 Frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 Frame3.setResizable(false);
@@ -172,7 +163,9 @@ public class Login {
                 //private void createUIComponents() {
                 // TODO: place custom component creation code here
             }
-        }}}
+        }
+    }
+}
 
 
 
