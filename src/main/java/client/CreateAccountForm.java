@@ -1,22 +1,28 @@
 package client;
 
+import java.awt.Color;
+import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import java.awt.*;
+
 
 public class CreateAccountForm {
 
-    public static void main(String[] args){
+
+    /**
+    This is the main method.
+    @main method
+    **/
+    public static void main(String[] args) {
 
         JFrame newAccount = new JFrame("Create new account");
         newAccount.setSize(450,450);
-//        Container c = newAccount.getContentPane();
-//        c.setBackground(Color.green);
-//        newAccount.setVisible(true);
+        //Container c = newAccount.getContentPane();
+        //c.setBackground(Color.green);
+        //newAccount.setVisible(true);
         newAccount.setLayout(null);
 
         /*
@@ -40,8 +46,8 @@ public class CreateAccountForm {
         JLabel password2 = new JLabel("Confirm Password");
         password2.setBounds(20,250,150,20);
 
-       /*
-       Implementing Textfields
+        /*
+        Implementing Textfields
         */
 
         JTextField enterUsername = new JTextField();
@@ -69,20 +75,20 @@ public class CreateAccountForm {
 
         JButton wrongChoice = new JButton("Already have account");
         wrongChoice.setBounds(230,325,160,30);
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////
 
-//        JPanel panel2 = new JPanel();
-//        panel2.add(enterUsername);
-//        panel2.add(createAccount);
-//        panel2.add(wrongChoice);
-//        panel2.add(pressCreateAccount);
-//        panel2.add(confirmPassword);
-//        panel2.add(enterPassword);
-//        panel2.add(enterEmail);
-//        panel2.add(username);
-//        panel2.add(email);
-//        panel2.add(password);
-//        panel2.add(password2);
+        //JPanel panel2 = new JPanel();
+        //panel2.add(enterUsername);
+        //panel2.add(createAccount);
+        //panel2.add(wrongChoice);
+        //panel2.add(pressCreateAccount);
+        //panel2.add(confirmPassword);
+        //panel2.add(enterPassword);
+        //panel2.add(enterEmail);
+        //panel2.add(username);
+        //panel2.add(email);
+        //panel2.add(password);
+        //panel2.add(password2);
 
         newAccount.add(createAccount);
         newAccount.add(enterUsername);

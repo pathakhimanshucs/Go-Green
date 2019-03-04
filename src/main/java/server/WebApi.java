@@ -4,7 +4,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 
@@ -17,6 +21,12 @@ public class WebApi {
         return "Hello " + name;
     }
 
+    /**
+     * login method.
+     * @param email info
+     * @param password info
+     * @return map
+     */
     @RequestMapping("/login")
     public HashMap<String, String> login(
         @RequestParam(value = "email", defaultValue = "kek@gmail.com") String email,

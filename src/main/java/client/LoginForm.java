@@ -1,14 +1,25 @@
 package client;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import client.Application;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 public class LoginForm {
 
+    /**
+     * main method.
+     * @param args not defined
+     */
     public static void main(String[] args) {
 
         //Scanner scan = new Scanner(System.in);
@@ -57,8 +68,8 @@ public class LoginForm {
         frame1.setLayout(null);
         frame1.setLocationRelativeTo(null);
         frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//			    button1.addActionListener(new Action());
-//			    frame1.add(panel); //Add the features in the panel into the frame
+        //button1.addActionListener(new Action());
+        //frame1.add(panel); //Add the features in the panel into the frame
 
         button1.addActionListener(new ActionListener() {
 
@@ -68,9 +79,8 @@ public class LoginForm {
                 String password = new String(passwordField.getPassword());
                 System.out.println("Welcome " + Application.loginToServer(username, password));
 
-//					if (textfield1.getText() == null && passwordField.getText() == null) {
-//						JOptionPane.showMessageDialog(null, "Please make sure all fields are filled in");
-
+                //if (textfield1.getText() == null && passwordField.getText() == null) {
+                //JOptionPane.showMessageDialog(null, "Please make sure all fields are filled in");
             }
         });
 
@@ -82,17 +92,16 @@ public class LoginForm {
     //ActionListener once the submit button is pressed
     static class Action implements ActionListener {
 
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent actionEvent) {
 
-            JFrame Frame2 = new JFrame("GO-GREEN");
-            Frame2.setSize(600, 600);
-            Frame2.setLayout(new FlowLayout());
-            Frame2.setLocationRelativeTo(null);
-            Frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            Frame2.setResizable(true);
-            Frame2.setVisible(true);
+            JFrame frame2 = new JFrame("GO-GREEN");
+            frame2.setSize(600, 600);
+            frame2.setLayout(new FlowLayout());
+            frame2.setLocationRelativeTo(null);
+            frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame2.setResizable(true);
+            frame2.setVisible(true);
 
-            JLabel label3 = new JLabel("Kilometers travelled:");
             JLabel nameLabel = new JLabel();
             //JLabel label4 = new JLabel("After entering your password, "
             //+ "please press on the submit button:" + "\n\n\n");
@@ -104,20 +113,20 @@ public class LoginForm {
             textfield2.setEnabled(true);
 
             //Combobox and dropdown menubar
-            String[] Planet = {"", "Transport", "Food", "Energy"};
-            JComboBox Environment = new JComboBox(Planet);
-            Environment.setBounds(60, 60, 90, 20);
-            Frame2.add(Environment);
+            String[] planet = {"", "Transport", "Food", "Energy"};
+            JComboBox environment = new JComboBox(planet);
+            environment.setBounds(60, 60, 90, 20);
+            frame2.add(environment);
 
-            String[] Vehicle = {""};
-            JComboBox VehicleType = new JComboBox(Vehicle);
-            VehicleType.setBounds(60, 60, 90, 20);
-            Frame2.add(VehicleType);
+            String[] vehicle = {""};
+            JComboBox vehicleType = new JComboBox(vehicle);
+            vehicleType.setBounds(60, 60, 90, 20);
+            frame2.add(vehicleType);
 
-            String[] CarSelection = {""};
-            JComboBox Cars = new JComboBox(CarSelection);
-            Cars.setBounds(60, 60, 90, 20);
-            Frame2.add(Cars);
+            String[] carSelection = {""};
+            JComboBox cars = new JComboBox(carSelection);
+            cars.setBounds(60, 60, 90, 20);
+            frame2.add(cars);
 
             //Tick Box- Check box
             JCheckBox checkbox = new JCheckBox();
@@ -135,30 +144,31 @@ public class LoginForm {
 
             JPanel panel2 = new JPanel();
             panel2.add(button2);
+            JLabel label3 = new JLabel("Kilometers travelled:");
             panel2.add(label3);
             //panel2.add(label4);
             panel2.add(textfield2);
             panel2.add(checkbox);
             button2.addActionListener(new Action2());
-            Frame2.add(panel2);
+            frame2.add(panel2);
         }
 
         static class Action2 implements ActionListener {
 
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent actionEvent) {
 
-                JFrame Frame3 = new JFrame("GO-GREEN");
-                Frame3.setSize(600, 600);
-                Frame3.setLocationRelativeTo(null);
-                Frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                Frame3.setResizable(false);
-                Frame3.setVisible(true);
+                JFrame frame3 = new JFrame("GO-GREEN");
+                frame3.setSize(600, 600);
+                frame3.setLocationRelativeTo(null);
+                frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame3.setResizable(false);
+                frame3.setVisible(true);
 
                 JPanel panel = new JPanel();
 
                 //panel.add(button2);
                 //button2.addActionListener(new Action());
-                Frame3.add(panel); //Add the features in the panel
+                frame3.add(panel); //Add the features in the panel
 
                 //private void createUIComponents() {
                 // TODO: place custom component creation code here
