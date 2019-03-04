@@ -4,13 +4,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 
 @RestController
 public class WebApi {
-
     @RequestMapping("/request")
     public String request(@RequestParam(value = "name", defaultValue = "Anonymous") String name) {
         System.out.println("Received a request");
@@ -19,8 +22,8 @@ public class WebApi {
 
     @RequestMapping("/login")
     public HashMap<String, String> login(
-        @RequestParam(value = "email", defaultValue = "kek@gmail.com") String email,
-        @RequestParam(value = "password", defaultValue = "abcd") String password) {
+        @RequestParam(value = "email", required = true) String email,
+        @RequestParam(value = "password", required = true) String password) {
         System.out.println("Received a request");
         Connection connection = null;
         PreparedStatement stmt = null;
