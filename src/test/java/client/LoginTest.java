@@ -2,10 +2,6 @@ package client;
 
 import org.junit.Test;
 
-import javax.validation.constraints.AssertTrue;
-
-import java.util.Scanner;
-
 import static org.junit.Assert.*;
 
 public class LoginTest {
