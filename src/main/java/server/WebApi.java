@@ -20,6 +20,12 @@ public class WebApi {
         return "Hello " + name;
     }
 
+    /**
+     * Request mapping for login function.
+     * @param email Email of the user
+     * @param password Password of the user
+     * @return Returns a json object with the user name if the email and password are correct.
+     */
     @RequestMapping("/login")
     public HashMap<String, String> login(
         @RequestParam(value = "email", required = true) String email,
