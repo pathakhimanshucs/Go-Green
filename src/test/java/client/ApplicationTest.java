@@ -6,7 +6,5 @@ public class ApplicationTest {
 
     @Test
     public void request() {
-
-
     }
 }

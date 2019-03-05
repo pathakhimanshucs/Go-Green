@@ -1,10 +1,9 @@
 package server;
 
+import objects.LoginRequest;
+import objects.LoginResponse;
 import org.junit.Test;
 
-
-import java.sql.SQLException;
-import java.util.HashMap;
 
 import static org.junit.Assert.*;
 
@@ -25,16 +24,22 @@ public class WebApiTest {
     @Test
     public void loginError(){
         WebApi api = new WebApi();
-        HashMap<String, String> response = new HashMap<>();
-        response.put("name", "error");
-        assertEquals(api.login("", ""),response);
+        LoginRequest loginReq = new LoginRequest();
+        loginReq.setEmail("error@gmail.com");
+        loginReq.setPassword("wrongpassword");
+        LoginResponse loginRes = new LoginResponse();
+        loginRes.setName("error");
+        assertEquals(api.login(loginReq).getName(),loginRes.getName());
     }
 
     @Test
     public void loginSuccess(){
         WebApi api = new WebApi();
-        HashMap<String, String> response = new HashMap<>();
-        response.put("name", "Alice");
-        assertEquals(api.login("alice@gmail.com", "alicepwd"),response);
+        LoginRequest loginReq = new LoginRequest();
+        loginReq.setEmail("alice@gmail.com");
+        loginReq.setPassword("alicepwd");
+        LoginResponse loginRes = new LoginResponse();
+        loginRes.setName("Alice");
+        assertEquals(api.login(loginReq).getName(),loginRes.getName());
     }
 }

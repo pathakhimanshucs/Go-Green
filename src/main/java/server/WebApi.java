@@ -1,5 +1,8 @@
 package server;
 
+import objects.LoginRequest;
+import objects.LoginResponse;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,7 +12,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 
 
 @RestController
@@ -22,14 +24,13 @@ public class WebApi {
 
     /**
      * Request mapping for login function.
-     * @param email Email of the user
-     * @param password Password of the user
+     * @param loginReq LoginRequest object that is sent from the client
      * @return Returns a json object with the user name if the email and password are correct.
      */
-    @RequestMapping("/login")
-    public HashMap<String, String> login(
-        @RequestParam(value = "email", required = true) String email,
-        @RequestParam(value = "password", required = true) String password) {
+    @RequestMapping(path = "/login", consumes = "application/json", produces = "application/json")
+    public LoginResponse login(@RequestBody LoginRequest loginReq) {
+        String email = loginReq.getEmail();
+        String password = loginReq.getPassword();
         System.out.println("Received a request");
         Connection connection = null;
         PreparedStatement stmt = null;
@@ -59,13 +60,13 @@ public class WebApi {
             System.exit(0);
         }
         if (name == null) {
-            HashMap<String, String> map = new HashMap<>();
-            map.put("name", "error");
-            return map;
+            LoginResponse temp = new LoginResponse();
+            temp.setName("error");
+            return temp;
         } else {
-            HashMap<String, String> map = new HashMap<>();
-            map.put("name", name);
-            return map;
+            LoginResponse temp = new LoginResponse();
+            temp.setName(name);
+            return temp;
         }
     }
 }
