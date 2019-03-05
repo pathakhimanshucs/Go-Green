@@ -2,6 +2,8 @@ package client;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -75,6 +77,8 @@ public class CreateAccountForm {
 
         JButton wrongChoice = new JButton("Already have account");
         wrongChoice.setBounds(230,325,160,30);
+
+
         /////////////////
 
         //JPanel panel2 = new JPanel();
@@ -104,5 +108,20 @@ public class CreateAccountForm {
         newAccount.add(wrongChoice);
         newAccount.setVisible(true);
         newAccount.setLocationRelativeTo(null);
+
+        pressCreateAccount.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                String username = enterUsername.getText();
+                String password = new String(enterPassword.getPassword());
+                String confirm = new String(confirmPassword.getPassword());
+                String email = enterEmail.getText();
+                //System.out.println("Welcome " + Application.loginToServer(username, password));
+
+                //if (textfield1.getText() == null && passwordField.getText() == null) {
+                //JOptionPane.showMessageDialog(null, "Please make sure all fields are filled in");
+            }
+        });
     }
 }
