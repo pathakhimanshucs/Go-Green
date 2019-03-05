@@ -14,7 +14,6 @@ import java.util.HashMap;
 
 @RestController
 public class WebApi {
-
     @RequestMapping("/request")
     public String request(@RequestParam(value = "name", defaultValue = "Anonymous") String name) {
         System.out.println("Received a request");
@@ -22,15 +21,15 @@ public class WebApi {
     }
 
     /**
-     * login method.
-     * @param email info
-     * @param password info
-     * @return map
+     * Request mapping for login function.
+     * @param email Email of the user
+     * @param password Password of the user
+     * @return Returns a json object with the user name if the email and password are correct.
      */
     @RequestMapping("/login")
     public HashMap<String, String> login(
-        @RequestParam(value = "email", defaultValue = "kek@gmail.com") String email,
-        @RequestParam(value = "password", defaultValue = "abcd") String password) {
+        @RequestParam(value = "email", required = true) String email,
+        @RequestParam(value = "password", required = true) String password) {
         System.out.println("Received a request");
         Connection connection = null;
         PreparedStatement stmt = null;

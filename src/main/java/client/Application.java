@@ -3,8 +3,6 @@ package client;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-import java.util.Scanner;
-import client.Application;
 
 /**
  * Client application with main method.
@@ -20,7 +18,8 @@ public class Application {
 
     /**
      * Sends an HTTP request to the server with str as param.
-     * @param str Name to be displayed.
+     * @param email Email of the login
+     * @param password Password of the login
      */
     public static Login loginToServer(String email, String password) {
         String apiEndpointUrl = "http://localhost:8080/login";
