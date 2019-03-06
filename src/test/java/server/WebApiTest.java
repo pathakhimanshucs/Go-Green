@@ -21,25 +21,25 @@ public class WebApiTest {
         assertFalse(api.request("").equals("Hello World"));
     }
 
-    @Test
-    public void loginError(){
-        WebApi api = new WebApi();
-        LoginRequest loginReq = new LoginRequest();
-        loginReq.setEmail("error@gmail.com");
-        loginReq.setPassword("wrongpassword");
-        LoginResponse loginRes = new LoginResponse();
-        loginRes.setName("error");
-        assertEquals(api.login(loginReq).getName(),loginRes.getName());
-    }
-
-    @Test
-    public void loginSuccess(){
-        WebApi api = new WebApi();
-        LoginRequest loginReq = new LoginRequest();
-        loginReq.setEmail("alice@gmail.com");
-        loginReq.setPassword("alicepwd");
-        LoginResponse loginRes = new LoginResponse();
-        loginRes.setName("Alice");
-        assertEquals(api.login(loginReq).getName(),loginRes.getName());
-    }
+//    @Test
+//    public void loginError(){
+//        WebApi api = new WebApi();
+//        LoginRequest loginReq = new LoginRequest();
+//        loginReq.setEmail("error@gmail.com");
+//        loginReq.setPassword("wrongpassword");
+//        LoginResponse loginRes = new LoginResponse();
+//        loginRes.setName("error");
+//        assertEquals(api.login(loginReq).getName(),loginRes.getName());
+//    }
+//
+//    @Test
+//    public void loginSuccess(){
+//        WebApi api = new WebApi();
+//        LoginRequest loginReq = new LoginRequest();
+//        loginReq.setEmail("alice@gmail.com");
+//        loginReq.setPassword("alicepwd");
+//        LoginResponse loginRes = new LoginResponse();
+//        loginRes.setName("Alice");
+//        assertEquals(api.login(loginReq).getName(),loginRes.getName());
+//    }
 }

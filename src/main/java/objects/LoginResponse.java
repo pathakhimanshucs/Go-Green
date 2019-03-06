@@ -2,8 +2,6 @@ package objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.util.Objects;
-
 @JsonIgnoreProperties
 public class LoginResponse {
     public String name;
