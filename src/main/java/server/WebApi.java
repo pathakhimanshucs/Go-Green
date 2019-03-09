@@ -70,6 +70,11 @@ public class WebApi {
         }
     }
 
+    /**
+     * Adds user to the database.
+     * @param regReq Client registration request.
+     * @return
+     */
     @RequestMapping(path = "/register",
         consumes = "application/json",
         produces = "application/json")

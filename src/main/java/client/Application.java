@@ -2,6 +2,8 @@ package client;
 
 import objects.LoginRequest;
 import objects.LoginResponse;
+import objects.RegisterRequest;
+import objects.RegisterResponse;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.client.RestTemplate;
@@ -34,8 +36,9 @@ public class Application {
         } catch (URISyntaxException e) {
             System.err.println(e);
         }
+        String newEmail = email.toLowerCase();
         LoginRequest loginReq = new LoginRequest();
-        loginReq.setEmail(email);
+        loginReq.setEmail(newEmail);
         loginReq.setPassword(password);
 
         HttpHeaders headers = new HttpHeaders();
@@ -45,4 +48,42 @@ public class Application {
         LoginResponse login = restTemplate.postForObject(uri, request, LoginResponse.class);
         return login;
     }
+
+    /**
+     * Creates an account on the database.
+     * @param email Email of user.
+     * @param name Name of user.
+     * @param password Password of user.
+     * @param confirm Confirmation of password.
+     * @return Returns the response of the server.
+     */
+    public static String createAccount(String email,String name ,String password, String confirm) {
+        final String baseUrl = "http://localhost:" + 8080 + "/register/";
+        URI uri = null;
+        try {
+            uri = new URI(baseUrl);
+        } catch (URISyntaxException e) {
+            System.err.println(e);
+        }
+        if (password.equals(confirm) == false) {
+            return "Failed to create account: Password and confirmation does not match";
+        }
+        String newEmail = email.toLowerCase();
+        RegisterRequest registerReq = new RegisterRequest();
+        registerReq.setEmail(newEmail);
+        registerReq.setName(name);
+        registerReq.setPassword(password);
+
+        HttpHeaders headers = new HttpHeaders();
+
+        HttpEntity<RegisterRequest> req = new HttpEntity<>(registerReq, headers);
+        RestTemplate restTemplate = new RestTemplate();
+        RegisterResponse response = restTemplate.postForObject(uri, req, RegisterResponse.class);
+        if (response.registerSuccess == false) {
+            return "Failed to create account";
+        } else {
+            return "Account " + response.getName() + " created";
+        }
+    }
+
 }

@@ -117,10 +117,8 @@ public class CreateAccountForm {
                 String password = new String(enterPassword.getPassword());
                 String confirm = new String(confirmPassword.getPassword());
                 String email = enterEmail.getText();
-                //System.out.println("Welcome " + Application.loginToServer(username, password));
-
-                //if (textfield1.getText() == null && passwordField.getText() == null) {
-                //JOptionPane.showMessageDialog(null, "Please make sure all fields are filled in");
+                String response = Application.createAccount(email, username, password, confirm);
+                System.out.println(response);
             }
         });
     }
