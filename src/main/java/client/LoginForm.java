@@ -77,7 +77,7 @@ public class LoginForm {
             public void actionPerformed(ActionEvent ae) {
                 String username = textfield1.getText();
                 String password = new String(passwordField.getPassword());
-                System.out.println("Welcome " + Application.loginToServer(username, password));
+                System.out.println("Welcome " + Application.loginToServer(username, password).getName());
 
                 //if (textfield1.getText() == null && passwordField.getText() == null) {
                 //JOptionPane.showMessageDialog(null, "Please make sure all fields are filled in");
