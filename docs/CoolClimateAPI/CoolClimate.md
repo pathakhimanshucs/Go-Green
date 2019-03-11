@@ -10,4 +10,10 @@ The API is free until a certain limit of requests per time unit. I don't think t
 
 >https://api-central.berkeley.edu/api/11/interactive-docs//coolclimate
 
+#App ID
 
+#>94664a05
+
+#App Keys
+
+#>14697feb364873b9306809196030f19f
