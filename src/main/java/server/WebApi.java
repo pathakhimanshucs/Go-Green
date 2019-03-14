@@ -129,21 +129,16 @@ public class WebApi {
         String email = vegMealReq.getEmail();
         int amount = vegMealReq.getAmount();
 
-        //if (!checkIfEmailExists(email)) {
-
         logger.info("adding vegetarian meal..");
         VegetarianMealResponse response = new VegetarianMealResponse();
-        response.;
-        createAccInDB(email, name, password);
-        response.setName(name);
+        if ( addVMealInDB(email,amount) == 1) {
+            logger.info("vegetarian meal added successfully");
+            response.setAddVegetarianMealSuccess(true);
+        } else {
+            logger.info("error: vegetarian meal not added");
+            response.setAddVegetarianMealSuccess(false);
+        }
         return response;
-
-      /*  } else {
-            logger.info("Email already exists");
-            RegisterResponse response = new RegisterResponse();
-            response.setRegisterSuccess(false);
-            return response;
-        }*/
     }
 
     private int getUserIdFromEmail(String email) {
