@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Timestamp;
+
 @RestController
 public class WebApi {
 
@@ -117,5 +119,26 @@ public class WebApi {
         logger.info("Added user to DB");
         String query = "INSERT INTO users (email, name, password) VALUES (?,?,?)";
         jdbcTemplate.update(query, email, name, password);
+    }
+
+    private int getUserIdFromEmail(String email) {
+        if (checkIfEmailExists(email)) {
+            String query = "select userid from users where email = ?";
+            SqlRowSet result = jdbcTemplate.queryForRowSet(query, email);
+            return result.getInt("userid");
+        } else {
+            return -1;
+        }
+    }
+
+    private int addVMealInDB(String email, int amount) {
+        int userid = getUserIdFromEmail(email);
+        if (userid != -1 && amount > 0) {
+            String query = "INSERT INTO vegmeal (userid, time, amount) VALUES (?,?,?)";
+            jdbcTemplate.update(query, userid, new Timestamp(System.currentTimeMillis()), amount);
+            return 1;
+        } else {
+            return -1;
+        }
     }
 }
