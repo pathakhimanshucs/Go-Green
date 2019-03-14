@@ -1,9 +1,6 @@
 package client;
 
-import objects.LoginRequest;
-import objects.LoginResponse;
-import objects.RegisterRequest;
-import objects.RegisterResponse;
+import objects.*;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.client.RestTemplate;
@@ -75,7 +72,6 @@ public class Application {
         registerReq.setPassword(password);
 
         HttpHeaders headers = new HttpHeaders();
-
         HttpEntity<RegisterRequest> req = new HttpEntity<>(registerReq, headers);
         RestTemplate restTemplate = new RestTemplate();
         RegisterResponse response = restTemplate.postForObject(uri, req, RegisterResponse.class);
@@ -83,6 +79,29 @@ public class Application {
             return "Failed to create account";
         } else {
             return "Account " + response.getName() + " created";
+        }
+    }
+
+    public static void addVegMeal(String email, int amount){
+        final String baseUrl = "http://localhost:" + 8080 + "/addvegmeal/";
+        URI uri = null;
+        try {
+            uri = new URI(baseUrl);
+        } catch (URISyntaxException e) {
+            System.err.println(e);
+        }
+
+        VegetarianMealRequest vegReq = new VegetarianMealRequest();
+        vegReq.setAmount(amount);
+        vegReq.setEmail(email);
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<VegetarianMealRequest> req = new HttpEntity<>(vegReq, headers);
+        RestTemplate restTemplate = new RestTemplate();
+        VegetarianMealResponse response = restTemplate.postForObject(uri, req, VegetarianMealResponse.class);
+
+        if(response.isAddVegetarianMealSuccess()){
+            System.out.println("Succesfully added veg meal to db");
         }
     }
 

@@ -124,27 +124,27 @@ public class WebApi {
      * @param vegMealReq VegetarianMealRequest object that is sent from the client
      * @return Returns a json object with the user name and the amount of meals eaten.
      */
-    @RequestMapping(path = "/addvegmeal", consumes = "application/json", produces = "application/json")
-    public VegetarianMealResponse addvegmeal(@RequestBody VegetarianMealRequest vegMealReq) {
-        String email = vegMealReq.getEmail();
-        int amount = vegMealReq.getAmount();
-
-        //if (!checkIfEmailExists(email)) {
-
-        logger.info("adding vegetarian meal..");
-        VegetarianMealResponse response = new VegetarianMealResponse();
-        response.;
-        createAccInDB(email, name, password);
-        response.setName(name);
-        return response;
-
-      /*  } else {
-            logger.info("Email already exists");
-            RegisterResponse response = new RegisterResponse();
-            response.setRegisterSuccess(false);
-            return response;
-        }*/
-    }
+//    @RequestMapping(path = "/addvegmeal", consumes = "application/json", produces = "application/json")
+//    public VegetarianMealResponse addvegmeal(@RequestBody VegetarianMealRequest vegMealReq) {
+//        String email = vegMealReq.getEmail();
+//        int amount = vegMealReq.getAmount();
+//
+//        //if (!checkIfEmailExists(email)) {
+//
+//        logger.info("adding vegetarian meal..");
+//        VegetarianMealResponse response = new VegetarianMealResponse();
+//        response.;
+//        createAccInDB(email, name, password);
+//        response.setName(name);
+//        return response;
+//
+//      /*  } else {
+//            logger.info("Email already exists");
+//            RegisterResponse response = new RegisterResponse();
+//            response.setRegisterSuccess(false);
+//            return response;
+//        }*/
+//    }
 
     private int getUserIdFromEmail(String email) {
         if (checkIfEmailExists(email)) {
