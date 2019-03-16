@@ -1,6 +1,14 @@
 package server;
 
-import objects.*;
+import objects.LoginRequest;
+import objects.LoginResponse;
+import objects.Meal;
+import objects.RegisterRequest;
+import objects.RegisterResponse;
+import objects.VegetarianMealListRequest;
+import objects.VegetarianMealListResponse;
+import objects.VegetarianMealRequest;
+import objects.VegetarianMealResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +70,7 @@ public class WebApi {
 
     private String attemptLogin(String email, String password) {
         String query = "SELECT * FROM users WHERE email = ? AND password = ?";
-        SqlRowSet result = jdbcTemplate.queryForRowSet( query, email, password);
+        SqlRowSet result = jdbcTemplate.queryForRowSet(query, email, password);
         if (result.next()) {
             return result.getString("name");
         } else {
@@ -72,6 +80,7 @@ public class WebApi {
 
     /**
      * Adds user to the database.
+     *
      * @param regReq Client registration request.
      * @return
      */
@@ -126,14 +135,15 @@ public class WebApi {
      * @return Returns a json object with the user name and the amount of meals eaten.
      */
 
-    @RequestMapping(path = "/addvegmeal", consumes = "application/json", produces = "application/json")
+    @RequestMapping(path = "/addvegmeal",
+        consumes = "application/json", produces = "application/json")
     public VegetarianMealResponse addvegmeal(@RequestBody VegetarianMealRequest vegMealReq) {
         String email = vegMealReq.getEmail();
         int amount = vegMealReq.getAmount();
 
         logger.info("adding vegetarian meal..");
         VegetarianMealResponse response = new VegetarianMealResponse();
-        if ( addVMealInDB(email,amount) == 1) {
+        if (addVMealInDB(email, amount) == 1) {
             logger.info("vegetarian meal added successfully");
             response.setAddVegetarianMealSuccess(true);
         } else {
@@ -143,19 +153,20 @@ public class WebApi {
         return response;
     }
 
-    @RequestMapping(path = "/getVegMealsList", consumes = "application/json", produces = "application/json")
+    @RequestMapping(path = "/getVegMealsList",
+        consumes = "application/json", produces = "application/json")
     public VegetarianMealListResponse getVegMealsList(@RequestBody VegetarianMealListRequest req) {
         String email = req.getEmail();
 
         logger.info("getting vegetarian meals for " + email);
         LinkedList<Meal> meals = findAllUserMeals(email);
-        if(meals != null){
+        if (meals != null) {
             VegetarianMealListResponse res = new VegetarianMealListResponse();
             res.setMeals(meals);
             res.setEmail(email);
             res.setMealsListSuccess(true);
             return res;
-        }else{
+        } else {
             VegetarianMealListResponse res = new VegetarianMealListResponse();
             res.setEmail(email);
             res.setMealsListSuccess(false);
@@ -188,24 +199,24 @@ public class WebApi {
         }
     }
 
-    private LinkedList<Meal> findAllUserMeals(String email){
+    private LinkedList<Meal> findAllUserMeals(String email) {
         int userid = getUserIdFromEmail(email);
-        if(userid != -1){
+        if (userid != -1) {
             LinkedList<Meal> mealsList = new LinkedList<>();
             SqlRowSet mealsDB = getAllMealsFromDB(userid);
-            while(mealsDB.next()){
+            while (mealsDB.next()) {
                 Meal meal = new Meal();
                 meal.setMealAmount(mealsDB.getInt("amount"));
                 meal.setTime(mealsDB.getTimestamp("time"));
                 mealsList.add(meal);
             }
             return mealsList;
-        }else{
+        } else {
             return null;
         }
     }
 
-    private SqlRowSet getAllMealsFromDB(int userid){
+    private SqlRowSet getAllMealsFromDB(int userid) {
         String query = "SELECT * FROM VEGMEAL WHERE USERID = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(query, userid);
         return result;
