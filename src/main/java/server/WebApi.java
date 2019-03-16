@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Timestamp;
+import java.util.LinkedList;
 
 @RestController
 public class WebApi {
@@ -142,11 +143,35 @@ public class WebApi {
         return response;
     }
 
+    @RequestMapping(path = "/getVegMealsList", consumes = "application/json", produces = "application/json")
+    public VegetarianMealListResponse getVegMealsList(@RequestBody VegetarianMealListRequest req) {
+        String email = req.getEmail();
+
+        logger.info("getting vegetarian meals for " + email);
+        LinkedList<Meal> meals = findAllUserMeals(email);
+        if(meals != null){
+            VegetarianMealListResponse res = new VegetarianMealListResponse();
+            res.setMeals(meals);
+            res.setEmail(email);
+            res.setMealsListSuccess(true);
+            return res;
+        }else{
+            VegetarianMealListResponse res = new VegetarianMealListResponse();
+            res.setEmail(email);
+            res.setMealsListSuccess(false);
+            return res;
+        }
+    }
+
     private int getUserIdFromEmail(String email) {
         if (checkIfEmailExists(email)) {
-            String query = "select userid from users where email = ?";
+            String query = "select * from users where email = ?";
             SqlRowSet result = jdbcTemplate.queryForRowSet(query, email);
-            return result.getInt("userid");
+            if (result.next()) {
+                return result.getInt("userid");
+            } else {
+                return -1;
+            }
         } else {
             return -1;
         }
@@ -161,5 +186,28 @@ public class WebApi {
         } else {
             return -1;
         }
+    }
+
+    private LinkedList<Meal> findAllUserMeals(String email){
+        int userid = getUserIdFromEmail(email);
+        if(userid != -1){
+            LinkedList<Meal> mealsList = new LinkedList<>();
+            SqlRowSet mealsDB = getAllMealsFromDB(userid);
+            while(mealsDB.next()){
+                Meal meal = new Meal();
+                meal.setMealAmount(mealsDB.getInt("amount"));
+                meal.setTime(mealsDB.getTimestamp("time"));
+                mealsList.add(meal);
+            }
+            return mealsList;
+        }else{
+            return null;
+        }
+    }
+
+    private SqlRowSet getAllMealsFromDB(int userid){
+        String query = "SELECT * FROM VEGMEAL WHERE USERID = ?";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(query, userid);
+        return result;
     }
 }
