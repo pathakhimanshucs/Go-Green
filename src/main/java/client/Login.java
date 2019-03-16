@@ -1,21 +1,24 @@
-package client;
+package  client;
 
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class Login {
+public class Login  {
 
     public static void main(String[] args) {
 
@@ -403,6 +406,6 @@ class Action1 extends JFrame implements ActionListener {
             //button2.addActionListener(new Action());
             Frame3.add(panel3); //Add the features in the panel
         }
-//// Gui for demo 2/////////////////////////////////
+//// DEMO 2 GUI PART
     }
 }

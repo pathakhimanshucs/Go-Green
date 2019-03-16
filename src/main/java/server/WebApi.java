@@ -2,8 +2,13 @@ package server;
 
 import objects.LoginRequest;
 import objects.LoginResponse;
+import objects.Meal;
 import objects.RegisterRequest;
 import objects.RegisterResponse;
+import objects.VegetarianMealListRequest;
+import objects.VegetarianMealListResponse;
+import objects.VegetarianMealRequest;
+import objects.VegetarianMealResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.sql.Timestamp;
+import java.util.LinkedList;
 
 @RestController
 public class WebApi {
@@ -62,7 +70,7 @@ public class WebApi {
 
     private String attemptLogin(String email, String password) {
         String query = "SELECT * FROM users WHERE email = ? AND password = ?";
-        SqlRowSet result = jdbcTemplate.queryForRowSet( query, email, password);
+        SqlRowSet result = jdbcTemplate.queryForRowSet(query, email, password);
         if (result.next()) {
             return result.getString("name");
         } else {
@@ -72,6 +80,7 @@ public class WebApi {
 
     /**
      * Adds user to the database.
+     *
      * @param regReq Client registration request.
      * @return
      */
@@ -117,5 +126,99 @@ public class WebApi {
         logger.info("Added user to DB");
         String query = "INSERT INTO users (email, name, password) VALUES (?,?,?)";
         jdbcTemplate.update(query, email, name, password);
+    }
+
+    /**
+     * Request mapping for adding a vegetarian meal.
+     *
+     * @param vegMealReq VegetarianMealRequest object that is sent from the client
+     * @return Returns a json object with the user name and the amount of meals eaten.
+     */
+
+    @RequestMapping(path = "/addvegmeal",
+        consumes = "application/json", produces = "application/json")
+    public VegetarianMealResponse addvegmeal(@RequestBody VegetarianMealRequest vegMealReq) {
+        String email = vegMealReq.getEmail();
+        int amount = vegMealReq.getAmount();
+
+        logger.info("adding vegetarian meal..");
+        VegetarianMealResponse response = new VegetarianMealResponse();
+        if (addVMealInDB(email, amount) == 1) {
+            logger.info("vegetarian meal added successfully");
+            response.setAddVegetarianMealSuccess(true);
+        } else {
+            logger.info("error: vegetarian meal not added");
+            response.setAddVegetarianMealSuccess(false);
+        }
+        return response;
+    }
+
+    @RequestMapping(path = "/getVegMealsList",
+        consumes = "application/json", produces = "application/json")
+    public VegetarianMealListResponse getVegMealsList(@RequestBody VegetarianMealListRequest req) {
+        String email = req.getEmail();
+
+        logger.info("getting vegetarian meals for " + email);
+        LinkedList<Meal> meals = findAllUserMeals(email);
+        if (meals != null) {
+            VegetarianMealListResponse res = new VegetarianMealListResponse();
+            res.setMeals(meals);
+            res.setEmail(email);
+            res.setMealsListSuccess(true);
+            return res;
+        } else {
+            VegetarianMealListResponse res = new VegetarianMealListResponse();
+            res.setEmail(email);
+            res.setMealsListSuccess(false);
+            return res;
+        }
+    }
+
+    private int getUserIdFromEmail(String email) {
+        if (checkIfEmailExists(email)) {
+            String query = "select * from users where email = ?";
+            SqlRowSet result = jdbcTemplate.queryForRowSet(query, email);
+            if (result.next()) {
+                return result.getInt("userid");
+            } else {
+                return -1;
+            }
+        } else {
+            return -1;
+        }
+    }
+
+    private int addVMealInDB(String email, int amount) {
+        int userid = getUserIdFromEmail(email);
+        if (userid != -1 && amount > 0) {
+            String query = "INSERT INTO vegmeal (userid, time, amount) VALUES (?,?,?)";
+            jdbcTemplate.update(query, userid, new Timestamp(System.currentTimeMillis()), amount);
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    private LinkedList<Meal> findAllUserMeals(String email) {
+        int userid = getUserIdFromEmail(email);
+        if (userid != -1) {
+            LinkedList<Meal> mealsList = new LinkedList<>();
+            SqlRowSet mealsDB = getAllMealsFromDB(userid);
+            while (mealsDB.next()) {
+                Meal meal = new Meal();
+                meal.setMealAmount(mealsDB.getInt("amount"));
+                meal.setTime(mealsDB.getTimestamp("time"));
+                mealsList.add(meal);
+            }
+            return mealsList;
+        } else {
+            return null;
+        }
+    }
+
+    private SqlRowSet getAllMealsFromDB(int userid) {
+        String query = "SELECT * FROM VEGMEAL WHERE USERID = ?";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(query, userid);
+        return result;
     }
 }
