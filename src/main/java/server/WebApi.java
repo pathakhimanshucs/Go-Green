@@ -26,6 +26,7 @@ import java.util.LinkedList;
 public class WebApi {
 
     private static final Logger logger = LoggerFactory.getLogger(WebApi.class);
+
     @Autowired
     JdbcTemplate jdbcTemplate;
 
@@ -68,7 +69,7 @@ public class WebApi {
         }
     }
 
-    private String attemptLogin(String email, String password) {
+    public String attemptLogin(String email, String password) {
         String query = "SELECT * FROM users WHERE email = ? AND password = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(query, email, password);
         if (result.next()) {
@@ -107,7 +108,7 @@ public class WebApi {
         }
     }
 
-    private boolean checkIfEmailExists(String email) {
+    public boolean checkIfEmailExists(String email) {
         String query = "SELECT * FROM users WHERE email = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(query, email);
         if (!result.isBeforeFirst()) {
@@ -122,7 +123,7 @@ public class WebApi {
         }
     }
 
-    private void createAccInDB(String email, String name, String password) {
+    public void createAccInDB(String email, String name, String password) {
         logger.info("Added user to DB");
         String query = "INSERT INTO users (email, name, password) VALUES (?,?,?)";
         jdbcTemplate.update(query, email, name, password);
@@ -174,7 +175,7 @@ public class WebApi {
         }
     }
 
-    private int getUserIdFromEmail(String email) {
+    public int getUserIdFromEmail(String email) {
         if (checkIfEmailExists(email)) {
             String query = "select * from users where email = ?";
             SqlRowSet result = jdbcTemplate.queryForRowSet(query, email);
@@ -188,7 +189,7 @@ public class WebApi {
         }
     }
 
-    private int addVMealInDB(String email, int amount) {
+    public int addVMealInDB(String email, int amount) {
         int userid = getUserIdFromEmail(email);
         if (userid != -1 && amount > 0) {
             String query = "INSERT INTO vegmeal (userid, time, amount) VALUES (?,?,?)";
@@ -199,7 +200,7 @@ public class WebApi {
         }
     }
 
-    private LinkedList<Meal> findAllUserMeals(String email) {
+    public LinkedList<Meal> findAllUserMeals(String email) {
         int userid = getUserIdFromEmail(email);
         if (userid != -1) {
             LinkedList<Meal> mealsList = new LinkedList<>();
@@ -216,7 +217,7 @@ public class WebApi {
         }
     }
 
-    private SqlRowSet getAllMealsFromDB(int userid) {
+    public SqlRowSet getAllMealsFromDB(int userid) {
         String query = "SELECT * FROM VEGMEAL WHERE USERID = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(query, userid);
         return result;
