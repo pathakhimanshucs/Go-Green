@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class VegetarianMealResponse {
     public boolean addVegetarianMealSuccess;
 
-    public VegetarianMealResponse(){
+    public VegetarianMealResponse() {
     }
 
     public boolean isAddVegetarianMealSuccess() { return addVegetarianMealSuccess; }

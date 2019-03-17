@@ -69,6 +69,12 @@ public class WebApi {
         }
     }
 
+    /**
+     * attemptLogin method.
+     * @param email string
+     * @param password string
+     * @return String
+     */
     public String attemptLogin(String email, String password) {
         String query = "SELECT * FROM users WHERE email = ? AND password = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(query, email, password);
@@ -108,6 +114,11 @@ public class WebApi {
         }
     }
 
+    /**
+     * checkIfEmailExists method.
+     * @param email String
+     * @return boolean
+     */
     public boolean checkIfEmailExists(String email) {
         String query = "SELECT * FROM users WHERE email = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(query, email);
@@ -123,6 +134,12 @@ public class WebApi {
         }
     }
 
+    /**
+     * createAccInDB method.
+     * @param email String
+     * @param name String
+     * @param password String
+     */
     public void createAccInDB(String email, String name, String password) {
         logger.info("Added user to DB");
         String query = "INSERT INTO users (email, name, password) VALUES (?,?,?)";
@@ -154,6 +171,11 @@ public class WebApi {
         return response;
     }
 
+    /**
+     * method.
+     * @param req VegetarianMealListRequest
+     * @return
+     */
     @RequestMapping(path = "/getVegMealsList",
         consumes = "application/json", produces = "application/json")
     public VegetarianMealListResponse getVegMealsList(@RequestBody VegetarianMealListRequest req) {
@@ -175,6 +197,12 @@ public class WebApi {
         }
     }
 
+
+    /**
+     * getUserIdFromEmail method.
+     * @param email String
+     * @return
+     */
     public int getUserIdFromEmail(String email) {
         if (checkIfEmailExists(email)) {
             String query = "select * from users where email = ?";
@@ -190,6 +218,12 @@ public class WebApi {
         }
     }
 
+    /**
+     * addVMealInDB method.
+     * @param email String
+     * @param amount integer
+     * @return
+     */
     public int addVMealInDB(String email, int amount) {
         int userid = getUserIdFromEmail(email);
         if (userid != -1 && amount > 0) {
@@ -201,6 +235,11 @@ public class WebApi {
         }
     }
 
+    /**
+     * findAllUserMeals method.
+     * @param email String
+     * @return LinkedList
+     */
     public LinkedList<Meal> findAllUserMeals(String email) {
         int userid = getUserIdFromEmail(email);
         if (userid != -1) {
@@ -218,6 +257,11 @@ public class WebApi {
         }
     }
 
+    /**
+     * getAllMeals method.
+     * @param userid integer
+     * @return SqlRowSet
+     */
     public SqlRowSet getAllMealsFromDB(int userid) {
         String query = "SELECT * FROM VEGMEAL WHERE USERID = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(query, userid);
