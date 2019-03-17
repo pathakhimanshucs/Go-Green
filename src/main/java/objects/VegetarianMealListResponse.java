@@ -26,8 +26,17 @@ public class VegetarianMealListResponse {
         this.meals = meals;
     }
 
+    /**
+     * Adds meal to list or creates a new list and adds the meak.
+     * @param meal Meal to be added.
+     */
     public void addMeal(Meal meal) {
-        meals.add(meal);
+        if (meals != null) {
+            meals.add(meal);
+        } else {
+            meals = new LinkedList<>();
+            meals.add(meal);
+        }
     }
 
     public boolean isMealsListSuccess() {

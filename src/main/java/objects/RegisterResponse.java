@@ -12,10 +12,6 @@ public class RegisterResponse {
     public RegisterResponse(){
     }
 
-    public boolean isRegisterSuccess() {
-        return registerSuccess;
-    }
-
     public void setRegisterSuccess(boolean registerSuccess) {
         this.registerSuccess = registerSuccess;
     }
