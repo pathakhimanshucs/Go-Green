@@ -26,5 +26,7 @@ public class RegisterResponse {
         this.name = name;
     }
 
-    public boolean getRegisterSuccess() { return registerSuccess; }
+    public boolean getRegisterSuccess() {
+        return registerSuccess;
+    }
 }

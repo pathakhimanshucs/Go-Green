@@ -1,6 +1,11 @@
 package client;
 
-import objects.*;
+import objects.LoginRequest;
+import objects.LoginResponse;
+import objects.RegisterRequest;
+import objects.RegisterResponse;
+import objects.VegetarianMealRequest;
+import objects.VegetarianMealResponse;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.client.RestTemplate;
@@ -17,6 +22,7 @@ public class Application {
      * Main method.
      * @param args Provided arguments.
      */
+
     public static void main(String[] args) {
         System.out.println("Welcome " + loginToServer("alice@gmail.com","alicepwd").toString());
     }
@@ -56,7 +62,9 @@ public class Application {
      * @param confirm Confirmation of password.
      * @return Returns the response of the server.
      */
-    public static RegisterResponse createAccount(String email,String name ,String password, String confirm) {
+
+    public static RegisterResponse createAccount(String email, String name ,
+                                                 String password, String confirm) {
         final String baseUrl = "http://localhost:" + 8080 + "/register/";
         URI uri = null;
         try {
@@ -79,7 +87,8 @@ public class Application {
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<RegisterRequest> req = new HttpEntity<>(registerReq, headers);
         RestTemplate restTemplate = new RestTemplate();
-        RegisterResponse responseMessage = restTemplate.postForObject(uri, req, RegisterResponse.class);
+        RegisterResponse responseMessage = restTemplate.postForObject(uri,
+                req, RegisterResponse.class);
         if (responseMessage.registerSuccess == false) {
             response.setName("Failed to create account");
             response.setRegisterSuccess(false);
@@ -91,7 +100,11 @@ public class Application {
         }
     }
 
-    public static void addVegMeal(int amount){
+    /**
+     * adds Veg Meal method.
+     * @param amount of vegmeal
+     */
+    public static void addVegMeal(int amount) {
         final String baseUrl = "http://localhost:" + 8080 + "/addvegmeal/";
         URI uri = null;
         try {
@@ -107,9 +120,10 @@ public class Application {
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<VegetarianMealRequest> req = new HttpEntity<>(vegReq, headers);
         RestTemplate restTemplate = new RestTemplate();
-        VegetarianMealResponse response = restTemplate.postForObject(uri, req, VegetarianMealResponse.class);
+        VegetarianMealResponse response = restTemplate.postForObject(uri,
+                req, VegetarianMealResponse.class);
 
-        if(response.isAddVegetarianMealSuccess()){
+        if (response.isAddVegetarianMealSuccess()) {
             System.out.println("Succesfully added veg meal to db");
         }
     }

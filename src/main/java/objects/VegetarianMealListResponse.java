@@ -26,7 +26,7 @@ public class VegetarianMealListResponse {
         this.meals = meals;
     }
 
-    public void addMeal (Meal meal){
+    public void addMeal(Meal meal) {
         meals.add(meal);
     }
 
