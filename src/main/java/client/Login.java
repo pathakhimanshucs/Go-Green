@@ -86,7 +86,7 @@ public class Login  {
                 String password = enterPassword.getText();
                 System.out.println(username);
                 System.out.println(password);
-
+                System.out.println("Welcome " + Application.loginToServer(username, password).getName());
             }});
 
         pressCreateAccount.addActionListener(new ActionListener() {
@@ -159,17 +159,20 @@ public class Login  {
             submit.setBounds(230,325,160,30);
 
             back.addActionListener(new Action1());
-            back.addActionListener(new ActionListener() {
+            submit.addActionListener(new ActionListener() {
 
 
                 @Override
                 public void actionPerformed(ActionEvent ae) {
 //				JOptionPane.showMessageDialog((Component) e.getSource(), "Your have chosen a non-sustainable energy");
 //		        JOptionPane.setDefaultLocale(null);
-                    String username =enterUsername.getText();
-                    String password = enterPassword.getText();
-                    System.out.println(username);
-                    System.out.println(password);
+                    String username = enterUsername.getText();
+                    String password = new String(enterPassword.getPassword());
+                    String confirm = new String(confirmPassword.getPassword());
+                    String email = enterEmail.getText();
+                    String response = Application.createAccount(email, username, password, confirm);
+                    System.out.println(response);
+
 
 //					if (back.getModel().isPressed()) {
 //			           newAccount2.setVisible(false);
@@ -271,6 +274,8 @@ class Action1 extends JFrame implements ActionListener {
         Vegetarian.setBounds(100,80,200,30);
         Vegetarian.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                ///////////////////////////
+                Application.addVegMeal(1);
                 JOptionPane.showMessageDialog((Component) e.getSource(), "You have chosen a Vegetarian meal");
                 JOptionPane.setDefaultLocale(null);
             }

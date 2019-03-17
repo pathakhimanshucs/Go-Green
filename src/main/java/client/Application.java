@@ -12,6 +12,7 @@ import java.net.URISyntaxException;
  * Client application with main method.
  */
 public class Application {
+    static String eMail;
     /**
      * Main method.
      * @param args Provided arguments.
@@ -37,12 +38,13 @@ public class Application {
         LoginRequest loginReq = new LoginRequest();
         loginReq.setEmail(newEmail);
         loginReq.setPassword(password);
-
+        System.out.println("oke");
         HttpHeaders headers = new HttpHeaders();
 
         HttpEntity<LoginRequest> request = new HttpEntity<>(loginReq, headers);
         RestTemplate restTemplate = new RestTemplate();
         LoginResponse login = restTemplate.postForObject(uri, request, LoginResponse.class);
+        eMail = newEmail;
         return login;
     }
 
@@ -82,7 +84,7 @@ public class Application {
         }
     }
 
-    public static void addVegMeal(String email, int amount){
+    public static void addVegMeal(int amount){
         final String baseUrl = "http://localhost:" + 8080 + "/addvegmeal/";
         URI uri = null;
         try {
@@ -93,7 +95,7 @@ public class Application {
 
         VegetarianMealRequest vegReq = new VegetarianMealRequest();
         vegReq.setAmount(amount);
-        vegReq.setEmail(email);
+        vegReq.setEmail(eMail);
 
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<VegetarianMealRequest> req = new HttpEntity<>(vegReq, headers);
