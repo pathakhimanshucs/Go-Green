@@ -39,7 +39,7 @@ public class Login  {
         createAccount.setFont(new Font("Arial", Font.BOLD, 20));
         createAccount.setForeground(Color.BLACK);
 
-        JLabel username = new JLabel("Username");
+        JLabel username = new JLabel("Email");
         username.setBounds(20,100,150,20);
 
         JLabel password = new JLabel("Password");
