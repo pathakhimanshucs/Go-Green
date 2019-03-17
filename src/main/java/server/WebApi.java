@@ -180,6 +180,7 @@ public class WebApi {
             String query = "select * from users where email = ?";
             SqlRowSet result = jdbcTemplate.queryForRowSet(query, email);
             if (result.next()) {
+                logger.info("found user id");
                 return result.getInt("userid");
             } else {
                 return -1;

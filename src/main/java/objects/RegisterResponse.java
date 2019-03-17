@@ -2,6 +2,8 @@ package objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.Objects;
+
 @JsonIgnoreProperties
 public class RegisterResponse {
     public boolean registerSuccess;
@@ -27,4 +29,17 @@ public class RegisterResponse {
     }
 
     public boolean getRegisterSuccess() { return registerSuccess; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        RegisterResponse response = (RegisterResponse) o;
+        return registerSuccess == response.registerSuccess &&
+            Objects.equals(name, response.name);
+    }
 }

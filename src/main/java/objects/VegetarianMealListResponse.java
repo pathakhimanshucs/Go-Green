@@ -37,4 +37,24 @@ public class VegetarianMealListResponse {
     public void setMealsListSuccess(boolean mealsListSuccess) {
         this.mealsListSuccess = mealsListSuccess;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        VegetarianMealListResponse that = (VegetarianMealListResponse) o;
+
+        if (mealsListSuccess != that.mealsListSuccess) {
+            return false;
+        }
+        if (email != null ? !email.equals(that.email) : that.email != null) {
+            return false;
+        }
+        return meals != null ? meals.equals(that.meals) : that.meals == null;
+    }
 }
