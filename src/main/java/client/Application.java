@@ -1,17 +1,15 @@
 package client;
 
-import objects.LoginRequest;
-import objects.LoginResponse;
-import objects.RegisterRequest;
-import objects.RegisterResponse;
-import objects.VegetarianMealRequest;
-import objects.VegetarianMealResponse;
+import objects.*;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 /**
  * Client application with main method.
@@ -126,6 +124,42 @@ public class Application {
         if (response.isAddVegetarianMealSuccess()) {
             System.out.println("Succesfully added veg meal to db");
         }
+    }
+
+    public static Object[][] getVegMeals(){
+        final String baseUrl = "http://localhost:" + 8080 + "/getVegMealsList/";
+        URI uri = null;
+        try {
+            uri = new URI(baseUrl);
+        } catch (URISyntaxException e) {
+            System.err.println(e);
+        }
+
+        VegetarianMealListRequest req = new VegetarianMealListRequest();
+        req.setEmail(eMail);
+
+        RestTemplate restTemplate = new RestTemplate();
+        VegetarianMealListResponse res = restTemplate.postForObject(uri,
+            req, VegetarianMealListResponse.class);
+
+        int size = res.getMeals().size();
+        Object[][] data = new Object[size][2];
+        for(int i = 0; i < size; i++){
+            Meal curr = res.getMeals().get(i);
+            String time = timeFormatter(curr.getTime());
+            int amount = curr.getMealAmount();
+            data[i][0] = time;
+            data[i][1] = amount;
+        }
+        return data;
+    }
+
+    private static String timeFormatter(Timestamp time){
+        String pattern = "EEEEE dd MMMMM yyyy HH:mm";
+        SimpleDateFormat simpleDateFormat =
+            new SimpleDateFormat(pattern, new Locale("en", "US"));
+
+        return simpleDateFormat.format(time);
     }
 
 }

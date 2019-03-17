@@ -4,13 +4,19 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
 
 //ActionListener once the submit button is pressed
 class Action1 extends JFrame implements ActionListener {
@@ -53,6 +59,9 @@ class Action1 extends JFrame implements ActionListener {
                 JOptionPane.setDefaultLocale(null);
             }
         });
+
+        JButton showMeals = new JButton("Show Meals");
+        showMeals.setBounds(230,400,150,30);
 
         JLabel label4 = new JLabel("Please select your transportation-option:");
         label4.setBounds(200, 150, 250, 25);
@@ -115,10 +124,12 @@ class Action1 extends JFrame implements ActionListener {
 
         //panel2.add(button2);
         panel2.add(vegetarian);
+        panel2.add(nonVegetarian);
         panel2.add(sustainableTransportation);
         panel2.add(nonSustainableTransportion);
         panel2.add(sustainableEnergy);
         panel2.add(nonSustainableEnergy);
+        panel2.add(showMeals);
 
         frame2.add(label3);
         frame2.add(label4);
@@ -129,6 +140,7 @@ class Action1 extends JFrame implements ActionListener {
         frame2.add(nonSustainableTransportion);
         frame2.add(sustainableEnergy);
         frame2.add(nonSustainableEnergy);
+        frame2.add(showMeals);
 
         frame2.setVisible(true);
         frame2.setResizable(true);
@@ -138,12 +150,13 @@ class Action1 extends JFrame implements ActionListener {
         frame2.setBackground(Color.green);
 
         //button2.addActionListener(new Action2());
-        vegetarian.addActionListener(new client.Action1.Action2());
+//        vegetarian.addActionListener(new client.Action1.Action2());
         nonVegetarian.addActionListener(new client.Action1.Action2());
         sustainableTransportation.addActionListener(new client.Action1.Action2());
         nonSustainableTransportion.addActionListener(new client.Action1.Action2());
         sustainableEnergy.addActionListener(new client.Action1.Action2());
         nonSustainableEnergy.addActionListener(new client.Action1.Action2());
+        showMeals.addActionListener(new client.Action1.Action2());
 
     }
 
@@ -169,6 +182,24 @@ class Action1 extends JFrame implements ActionListener {
             panel3.add(label6);
             frame3.add(label6);
 
+            String[] columnNames = {"Time",
+                "Amount"};
+
+            Object[][] data = Application.getVegMeals();
+
+            final JTable table = new JTable(data, columnNames);
+            table.setPreferredScrollableViewportSize(new Dimension(100, 70));
+            table.setFillsViewportHeight(true);
+            table.setBackground(Color.green);
+
+            //Create the scroll pane and add the table to it.
+            JScrollPane scrollPane = new JScrollPane(table);
+
+            //Add the scroll pane to this panel.
+            panel3.add(scrollPane);
+            frame3.add(panel3); //Add the features in the panel
+            frame3.add(scrollPane);
+
             frame3.setVisible(true);
             frame3.setResizable(true);
             frame3.setLayout(null);
@@ -177,7 +208,7 @@ class Action1 extends JFrame implements ActionListener {
             frame3.setBackground(Color.green);
 
             //button2.addActionListener(new Action());
-            frame3.add(panel3); //Add the features in the panel
+
         }
         //// DEMO 2 GUI PART
     }
