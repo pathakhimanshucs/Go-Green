@@ -28,18 +28,20 @@ public class RegisterResponse {
         this.name = name;
     }
 
-    public boolean getRegisterSuccess() { return registerSuccess; }
+    public boolean getRegisterSuccess() {
+        return registerSuccess;
+    }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        RegisterResponse response = (RegisterResponse) o;
-        return registerSuccess == response.registerSuccess &&
-            Objects.equals(name, response.name);
+        RegisterResponse response = (RegisterResponse) obj;
+        return registerSuccess == response.registerSuccess
+            && Objects.equals(name, response.name);
     }
 }

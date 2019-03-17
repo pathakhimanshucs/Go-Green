@@ -9,18 +9,23 @@ public class VegetarianMealResponse {
     public VegetarianMealResponse() {
     }
 
-    public boolean isAddVegetarianMealSuccess() { return addVegetarianMealSuccess; }
-    public void setAddVegetarianMealSuccess(boolean addVegetarianMealSuccess) { this.addVegetarianMealSuccess = addVegetarianMealSuccess; }
+    public boolean isAddVegetarianMealSuccess() {
+        return addVegetarianMealSuccess;
+    }
+
+    public void setAddVegetarianMealSuccess(boolean addVegetarianMealSuccess) {
+        this.addVegetarianMealSuccess = addVegetarianMealSuccess;
+    }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        VegetarianMealResponse that = (VegetarianMealResponse) o;
+        VegetarianMealResponse that = (VegetarianMealResponse) obj;
         return addVegetarianMealSuccess == that.addVegetarianMealSuccess;
     }
 }
