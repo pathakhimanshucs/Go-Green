@@ -1,5 +1,7 @@
 package  client;
 
+import objects.RegisterResponse;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -77,7 +79,7 @@ public class Login  {
         newAccount.add(LoginChoice);
         newAccount.setVisible(true);
         newAccount.setLocationRelativeTo(null);
-        LoginChoice.addActionListener(new Action1());
+        //LoginChoice.addActionListener(new Action1());
         LoginChoice.addActionListener(new ActionListener() {
 
             @Override
@@ -86,7 +88,12 @@ public class Login  {
                 String password = enterPassword.getText();
                 System.out.println(username);
                 System.out.println(password);
-                System.out.println("Welcome " + Application.loginToServer(username, password).getName());
+                if (Application.loginToServer(username, password).getName().equals("error") == false)
+                {
+                    JButton logIn = new JButton();
+                    logIn.addActionListener(new Action1());
+                    logIn.doClick();
+                }
             }});
 
         pressCreateAccount.addActionListener(new ActionListener() {
@@ -158,7 +165,6 @@ public class Login  {
             JButton submit = new JButton("SUBMIT");
             submit.setBounds(230,325,160,30);
 
-            back.addActionListener(new Action1());
             submit.addActionListener(new ActionListener() {
 
 
@@ -170,8 +176,15 @@ public class Login  {
                     String password = new String(enterPassword.getPassword());
                     String confirm = new String(confirmPassword.getPassword());
                     String email = enterEmail.getText();
-                    String response = Application.createAccount(email, username, password, confirm);
-                    System.out.println(response);
+                    RegisterResponse response = Application.createAccount(email, username, password, confirm);
+                    System.out.println(response.getName());
+                    if(response.getRegisterSuccess()== true){
+                        JButton create = new JButton();
+                        create.addActionListener(new Action1());
+                        create.doClick();
+                        newAccount2.setVisible(false);
+                        newAccount2.dispose();
+                    }
 
 
 //					if (back.getModel().isPressed()) {
@@ -184,13 +197,8 @@ public class Login  {
 
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    String username =enterUsername.getText();
-                    String password = enterPassword.getText();
-                    System.out.println(username);
-                    System.out.println(password);
-//				        JOptionPane.showMessageDialog((Component) e.getSource(), "Your details are now saved");
-//				        JOptionPane.setDefaultLocale(null);
-
+                    newAccount2.setVisible(false);
+                    newAccount2.dispose();
                 }});
 
             JPanel panel2 = new JPanel();

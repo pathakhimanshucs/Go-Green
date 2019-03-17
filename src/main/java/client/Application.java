@@ -56,7 +56,7 @@ public class Application {
      * @param confirm Confirmation of password.
      * @return Returns the response of the server.
      */
-    public static String createAccount(String email,String name ,String password, String confirm) {
+    public static RegisterResponse createAccount(String email,String name ,String password, String confirm) {
         final String baseUrl = "http://localhost:" + 8080 + "/register/";
         URI uri = null;
         try {
@@ -64,8 +64,11 @@ public class Application {
         } catch (URISyntaxException e) {
             System.err.println(e);
         }
+        RegisterResponse response = new RegisterResponse();
         if (password.equals(confirm) == false) {
-            return "Failed to create account: Password and confirmation does not match";
+            response.setName("Failed to create account: Password and confirmation does not match");
+            response.setRegisterSuccess(false);
+            return response;
         }
         String newEmail = email.toLowerCase();
         RegisterRequest registerReq = new RegisterRequest();
@@ -76,11 +79,15 @@ public class Application {
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<RegisterRequest> req = new HttpEntity<>(registerReq, headers);
         RestTemplate restTemplate = new RestTemplate();
-        RegisterResponse response = restTemplate.postForObject(uri, req, RegisterResponse.class);
-        if (response.registerSuccess == false) {
-            return "Failed to create account";
+        RegisterResponse responseMessage = restTemplate.postForObject(uri, req, RegisterResponse.class);
+        if (responseMessage.registerSuccess == false) {
+            response.setName("Failed to create account");
+            response.setRegisterSuccess(false);
+            return response;
         } else {
-            return "Account " + response.getName() + " created";
+            response.setName("Account " + responseMessage.getName() + " created");
+            response.setRegisterSuccess(true);
+            return response;
         }
     }
 

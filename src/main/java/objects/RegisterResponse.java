@@ -25,4 +25,6 @@ public class RegisterResponse {
     public void setName(String name) {
         this.name = name;
     }
+
+    public boolean getRegisterSuccess() { return registerSuccess; }
 }
