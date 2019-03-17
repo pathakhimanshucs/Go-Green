@@ -26,10 +26,17 @@ public class VegetarianMealListResponse {
         this.meals = meals;
     }
 
-    public void addMeal(Meal meal) {
-        meals.add(meal);
-    }
 
+    public void addMeal(Meal meal) {
+        if (meals != null)
+        {
+            meals.add(meal);
+        } else {
+            meals = new LinkedList<>();
+            meals.add(meal);
+        }
+
+    }
     public boolean isMealsListSuccess() {
         return mealsListSuccess;
     }
