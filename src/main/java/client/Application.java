@@ -1,6 +1,15 @@
 package client;
 
-import objects.*;
+import objects.LoginRequest;
+import objects.LoginResponse;
+import objects.Meal;
+import objects.RegisterRequest;
+import objects.RegisterResponse;
+import objects.VegetarianMealListRequest;
+import objects.VegetarianMealListResponse;
+import objects.VegetarianMealRequest;
+import objects.VegetarianMealResponse;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.client.RestTemplate;
@@ -126,7 +135,7 @@ public class Application {
         }
     }
 
-    public static Object[][] getVegMeals(){
+    public static Object[][] getVegMeals() {
         final String baseUrl = "http://localhost:" + 8080 + "/getVegMealsList/";
         URI uri = null;
         try {
@@ -144,7 +153,7 @@ public class Application {
 
         int size = res.getMeals().size();
         Object[][] data = new Object[size][2];
-        for(int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             Meal curr = res.getMeals().get(i);
             String time = timeFormatter(curr.getTime());
             int amount = curr.getMealAmount();
@@ -154,12 +163,11 @@ public class Application {
         return data;
     }
 
-    private static String timeFormatter(Timestamp time){
+    private static String timeFormatter(Timestamp time) {
         String pattern = "EEEEE dd MMMMM yyyy HH:mm";
         SimpleDateFormat simpleDateFormat =
             new SimpleDateFormat(pattern, new Locale("en", "US"));
 
         return simpleDateFormat.format(time);
     }
-
 }

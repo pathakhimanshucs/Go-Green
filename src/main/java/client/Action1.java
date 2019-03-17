@@ -3,20 +3,17 @@ package client;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 //ActionListener once the submit button is pressed
 class Action1 extends JFrame implements ActionListener {
@@ -149,8 +146,6 @@ class Action1 extends JFrame implements ActionListener {
         frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame2.setBackground(Color.green);
 
-        //button2.addActionListener(new Action2());
-//        vegetarian.addActionListener(new client.Action1.Action2());
         nonVegetarian.addActionListener(new client.Action1.Action2());
         sustainableTransportation.addActionListener(new client.Action1.Action2());
         nonSustainableTransportion.addActionListener(new client.Action1.Action2());
