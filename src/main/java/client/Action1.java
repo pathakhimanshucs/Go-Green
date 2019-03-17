@@ -162,7 +162,7 @@ class Action1 extends JFrame implements ActionListener {
             JFrame frame3 = new JFrame("GO-GREEN");
             frame3.setSize(600,600);
             frame3.setLocationRelativeTo(null);
-            frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            //frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame3.setResizable(false);
             frame3.setVisible(true);
 
@@ -199,7 +199,7 @@ class Action1 extends JFrame implements ActionListener {
             frame3.setResizable(true);
             frame3.setLayout(null);
             frame3.setLocationRelativeTo(null);
-            frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            //frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame3.setBackground(Color.green);
 
             //button2.addActionListener(new Action());

@@ -51,7 +51,7 @@ public class Application {
         LoginRequest loginReq = new LoginRequest();
         loginReq.setEmail(newEmail);
         loginReq.setPassword(password);
-        System.out.println("oke");
+
         HttpHeaders headers = new HttpHeaders();
 
         HttpEntity<LoginRequest> request = new HttpEntity<>(loginReq, headers);
@@ -82,6 +82,11 @@ public class Application {
         RegisterResponse response = new RegisterResponse();
         if (password.equals(confirm) == false) {
             response.setName("Failed to create account: Password and confirmation does not match");
+            response.setRegisterSuccess(false);
+            return response;
+        }
+        if (password.equals("") || email.equals("") || name.equals("")) {
+            response.setName("Please fill in all fields");
             response.setRegisterSuccess(false);
             return response;
         }
@@ -135,6 +140,10 @@ public class Application {
         }
     }
 
+    /**
+     * Retrieves vergmeals from server.
+     * @return Object.
+     */
     public static Object[][] getVegMeals() {
         final String baseUrl = "http://localhost:" + 8080 + "/getVegMealsList/";
         URI uri = null;
