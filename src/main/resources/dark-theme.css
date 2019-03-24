@@ -58,6 +58,14 @@
     -fx-text-fill: derive(-fx-secondary, 20%);
 }
 
+/* Dialog Box Styling */
+.dialog-pane {
+}
+
+.dialog-pane .label {
+    -fx-font-size: 15pt;
+}
+
 /*TabPane styling*/
 .tab-label{
     -fx-text-fill: -fx-secondary;

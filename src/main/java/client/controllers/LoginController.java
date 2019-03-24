@@ -1,7 +1,6 @@
 package client.controllers;
 
 import client.Application;
-import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
@@ -9,9 +8,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.DialogPane;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
 
 
 import java.io.IOException;
@@ -48,8 +48,16 @@ public class LoginController {
 
             stage.setScene(new Scene(root));
         }else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Login Failure");
+            alert.setContentText("Login was unsuccessful");
+            alert.setHeaderText(null);
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(
+                getClass().getResource("/dark-theme.css").toExternalForm());
+            alert.showAndWait();
             System.out.println("Alert Dialog!");
-            AlertBox.display("Login Failure", "Login was unsuccessful");
+//            AlertBox.display("Login Failure", "Login was unsuccessful");
 
         }
     }

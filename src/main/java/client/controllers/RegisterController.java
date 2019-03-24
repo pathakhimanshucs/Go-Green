@@ -25,6 +25,7 @@ public class RegisterController {
 
     @FXML
     void backLogin(MouseEvent event) {
+
         Parent root = null;
         try {
             root = FXMLLoader.load(getClass().getResource("/login.fxml"));
