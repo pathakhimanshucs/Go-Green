@@ -1,14 +1,6 @@
 package server;
 
-import objects.LoginRequest;
-import objects.LoginResponse;
-import objects.Meal;
-import objects.RegisterRequest;
-import objects.RegisterResponse;
-import objects.VegetarianMealListRequest;
-import objects.VegetarianMealListResponse;
-import objects.VegetarianMealRequest;
-import objects.VegetarianMealResponse;
+import objects.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -266,5 +258,46 @@ public class WebApi {
         String query = "SELECT * FROM VEGMEAL WHERE USERID = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(query, userid);
         return result;
+    }
+
+    @RequestMapping(path = "/addFriend",
+        consumes = "application/json", produces = "application/json")
+    public AddFriendResponse addFriend(@RequestBody AddFriendRequest addReq) {
+        String friend1 = addReq.getFriend1email();
+        String friend2 = addReq.getFriend2email();
+
+        logger.info("Attempting to add friends");
+        if(addFriendsToDB(friend1, friend2) != -1) {
+            AddFriendResponse res = new AddFriendResponse();
+            res.setAddFriendSuccess(true);
+            res.setFriend2(friend2);
+            return res;
+        }else{
+            AddFriendResponse res = new AddFriendResponse();
+            res.setAddFriendSuccess(false);
+            return res;
+        }
+/*        VegetarianMealResponse response = new VegetarianMealResponse();
+        if (addVMealInDB(email, amount) == 1) {
+            logger.info("vegetarian meal added successfully");
+            response.setAddVegetarianMealSuccess(true);
+        } else {
+            logger.info("error: vegetarian meal not added");
+            response.setAddVegetarianMealSuccess(false);
+        }
+        return response;*/
+    }
+
+    private int addFriendsToDB(String friend1email, String friend2email){
+        int friend1 = getUserIdFromEmail(friend1email);
+        int friend2 = getUserIdFromEmail(friend2email);
+
+        if(friend1 == -1 || friend2 == -1){
+            return -1;
+        }else{
+            String query = "INSERT INTO friends (friend1, friend2) VALUES (?,?)";
+            jdbcTemplate.update(query, friend1,friend2);
+            return 1;
+        }
     }
 }
