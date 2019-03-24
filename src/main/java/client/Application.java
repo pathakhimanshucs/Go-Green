@@ -57,7 +57,10 @@ public class Application {
         HttpEntity<LoginRequest> request = new HttpEntity<>(loginReq, headers);
         RestTemplate restTemplate = new RestTemplate();
         LoginResponse login = restTemplate.postForObject(uri, request, LoginResponse.class);
-        eMail = newEmail;
+        if (login.getName().equals("error") == false){
+            eMail = newEmail;
+            System.out.println("Logged in");
+        }
         return login;
     }
 

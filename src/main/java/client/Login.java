@@ -77,6 +77,7 @@ public class Login  {
         newAccount.add(loginChoice);
         newAccount.setVisible(true);
         newAccount.setLocationRelativeTo(null);
+        newAccount.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //loginChoice.addActionListener(new Action1());
         loginChoice.addActionListener(new ActionListener() {
 
@@ -91,6 +92,8 @@ public class Login  {
                     JButton logIn = new JButton();
                     logIn.addActionListener(new Action1());
                     logIn.doClick();
+                    newAccount.setVisible(false);
+                    newAccount.dispose();
                 }
             }
         });
@@ -182,8 +185,8 @@ public class Login  {
                     System.out.println(response.getName());
                     if (response.getRegisterSuccess() == true) {
                         JButton create = new JButton();
-                        create.addActionListener(new Action1());
-                        create.doClick();
+                        //create.addActionListener(new Action1());
+                        //create.doClick();
                         newAccount2.setVisible(false);
                         newAccount2.dispose();
                     }
@@ -230,7 +233,7 @@ public class Login  {
             newAccount2.add(back);
             newAccount2.setVisible(true);
             newAccount2.setLocationRelativeTo(null);
-            newAccount2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            //newAccount2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             //back.addActionListener(new Action1());
 
