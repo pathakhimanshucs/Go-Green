@@ -277,15 +277,6 @@ public class WebApi {
             res.setAddFriendSuccess(false);
             return res;
         }
-/*        VegetarianMealResponse response = new VegetarianMealResponse();
-        if (addVMealInDB(email, amount) == 1) {
-            logger.info("vegetarian meal added successfully");
-            response.setAddVegetarianMealSuccess(true);
-        } else {
-            logger.info("error: vegetarian meal not added");
-            response.setAddVegetarianMealSuccess(false);
-        }
-        return response;*/
     }
 
     private int addFriendsToDB(String friend1email, String friend2email){
@@ -298,6 +289,60 @@ public class WebApi {
             String query = "INSERT INTO friends (friend1, friend2) VALUES (?,?)";
             jdbcTemplate.update(query, friend1,friend2);
             return 1;
+        }
+    }
+
+    private LinkedList<String> getFriends(String email){
+        int friend1ID = getUserIdFromEmail(email);
+        if(friend1ID != -1){
+            SqlRowSet result = getAllFriendsFromDB(friend1ID);
+            LinkedList<String> friendsList = new LinkedList<>();
+            while (result.next()) {
+                int friend = result.getInt("friend2");
+                String friendEmail = getEmailFromUserID(friend);
+                friendsList.add(friendEmail);
+            }
+            return friendsList;
+        }else{
+            return null;
+        }
+    }
+
+    private String getEmailFromUserID(int userId) {
+        String query = "select * from users where userid = ?";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(query, userId);
+        if (result.next()) {
+            logger.info("found email");
+            return result.getString("email");
+        } else {
+            return null;
+        }
+    }
+
+    private SqlRowSet getAllFriendsFromDB(int userid){
+        String query = "SELECT * FROM friends WHERE friend1 = ?";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(query, userid);
+        return result;
+    }
+
+    @RequestMapping(path = "/getFriendsList",
+        consumes = "application/json", produces = "application/json")
+    public FriendListResponse getVegMealsList(@RequestBody FriendsListRequest req) {
+        String email = req.getEmail();
+
+        logger.info("getting friends for" + email);
+        LinkedList<String> friends = getFriends(email);
+        if (friends != null) {
+            FriendListResponse res = new FriendListResponse();
+            res.setEmail(email);
+            res.setFriendsListSuccess(true);
+            res.setFriends(friends);
+            return res;
+        } else {
+            FriendListResponse res = new FriendListResponse();
+            res.setEmail(email);
+            res.setFriendsListSuccess(false);
+            return res;
         }
     }
 }
