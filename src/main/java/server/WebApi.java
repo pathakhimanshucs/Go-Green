@@ -1,14 +1,6 @@
 package server;
 
-import objects.LoginRequest;
-import objects.LoginResponse;
-import objects.Meal;
-import objects.RegisterRequest;
-import objects.RegisterResponse;
-import objects.VegetarianMealListRequest;
-import objects.VegetarianMealListResponse;
-import objects.VegetarianMealRequest;
-import objects.VegetarianMealResponse;
+import objects.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import sun.security.krb5.internal.EncTGSRepPart;
 
 import java.sql.Timestamp;
 import java.util.LinkedList;
@@ -76,10 +69,18 @@ public class WebApi {
      * @return String
      */
     public String attemptLogin(String email, String password) {
-        String query = "SELECT * FROM users WHERE email = ? AND password = ?";
-        SqlRowSet result = jdbcTemplate.queryForRowSet(query, email, password);
+        String query = "SELECT * FROM users WHERE email = ?";
+
+        SqlRowSet result = jdbcTemplate.queryForRowSet(query, email);
         if (result.next()) {
-            return result.getString("name");
+            String userSentPassWord = Encrypt.decryptPassWord(email, password);
+            String dbReturnedEncryption = result.getString("password");
+            String dbReturnedPassWord = Encrypt.decryptPassWord(email, dbReturnedEncryption);
+            if(userSentPassWord.equals(dbReturnedPassWord)) {
+                return result.getString("name");
+            } else {
+                return null;
+            }
         } else {
             return null;
         }
@@ -267,4 +268,7 @@ public class WebApi {
         SqlRowSet result = jdbcTemplate.queryForRowSet(query, userid);
         return result;
     }
+
+
+
 }

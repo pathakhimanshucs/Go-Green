@@ -1,14 +1,6 @@
 package client;
 
-import objects.LoginRequest;
-import objects.LoginResponse;
-import objects.Meal;
-import objects.RegisterRequest;
-import objects.RegisterResponse;
-import objects.VegetarianMealListRequest;
-import objects.VegetarianMealListResponse;
-import objects.VegetarianMealRequest;
-import objects.VegetarianMealResponse;
+import objects.*;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -50,7 +42,7 @@ public class Application {
         String newEmail = email.toLowerCase();
         LoginRequest loginReq = new LoginRequest();
         loginReq.setEmail(newEmail);
-        loginReq.setPassword(password);
+        loginReq.setPassword(Encrypt.encryptPassWord(email, password));
 
         HttpHeaders headers = new HttpHeaders();
 
@@ -94,7 +86,7 @@ public class Application {
         RegisterRequest registerReq = new RegisterRequest();
         registerReq.setEmail(newEmail);
         registerReq.setName(name);
-        registerReq.setPassword(password);
+        registerReq.setPassword(Encrypt.encryptPassWord(email,password));
 
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<RegisterRequest> req = new HttpEntity<>(registerReq, headers);
