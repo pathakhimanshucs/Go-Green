@@ -269,6 +269,89 @@ public class WebApi {
         return result;
     }
 
+    @RequestMapping(path = "/addFriend",
+        consumes = "application/json", produces = "application/json")
+    public AddFriendResponse addFriend(@RequestBody AddFriendRequest addReq) {
+        String friend1 = addReq.getFriend1email();
+        String friend2 = addReq.getFriend2email();
 
+        logger.info("Attempting to add friends");
+        if(addFriendsToDB(friend1, friend2) != -1) {
+            AddFriendResponse res = new AddFriendResponse();
+            res.setAddFriendSuccess(true);
+            res.setFriend2(friend2);
+            return res;
+        }else{
+            AddFriendResponse res = new AddFriendResponse();
+            res.setAddFriendSuccess(false);
+            return res;
+        }
+    }
 
+    private int addFriendsToDB(String friend1email, String friend2email){
+        int friend1 = getUserIdFromEmail(friend1email);
+        int friend2 = getUserIdFromEmail(friend2email);
+
+        if(friend1 == -1 || friend2 == -1){
+            return -1;
+        }else{
+            String query = "INSERT INTO friends (friend1, friend2) VALUES (?,?)";
+            jdbcTemplate.update(query, friend1,friend2);
+            return 1;
+        }
+    }
+
+    private LinkedList<String> getFriends(String email){
+        int friend1ID = getUserIdFromEmail(email);
+        if(friend1ID != -1){
+            SqlRowSet result = getAllFriendsFromDB(friend1ID);
+            LinkedList<String> friendsList = new LinkedList<>();
+            while (result.next()) {
+                int friend = result.getInt("friend2");
+                String friendEmail = getEmailFromUserID(friend);
+                friendsList.add(friendEmail);
+            }
+            return friendsList;
+        }else{
+            return null;
+        }
+    }
+
+    private String getEmailFromUserID(int userId) {
+        String query = "select * from users where userid = ?";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(query, userId);
+        if (result.next()) {
+            logger.info("found email");
+            return result.getString("email");
+        } else {
+            return null;
+        }
+    }
+
+    private SqlRowSet getAllFriendsFromDB(int userid){
+        String query = "SELECT * FROM friends WHERE friend1 = ?";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(query, userid);
+        return result;
+    }
+
+    @RequestMapping(path = "/getFriendsList",
+        consumes = "application/json", produces = "application/json")
+    public FriendListResponse getVegMealsList(@RequestBody FriendsListRequest req) {
+        String email = req.getEmail();
+
+        logger.info("getting friends for" + email);
+        LinkedList<String> friends = getFriends(email);
+        if (friends != null) {
+            FriendListResponse res = new FriendListResponse();
+            res.setEmail(email);
+            res.setFriendsListSuccess(true);
+            res.setFriends(friends);
+            return res;
+        } else {
+            FriendListResponse res = new FriendListResponse();
+            res.setEmail(email);
+            res.setFriendsListSuccess(false);
+            return res;
+        }
+    }
 }

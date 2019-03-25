@@ -10,11 +10,9 @@ public class MainController {
     @FXML
     private JFXListView<Label> mylistview;
 
-
     @FXML
     void clickedList(MouseEvent event) {
         mylistview.getItems().add(new Label("Item"));
     }
-
 
 }

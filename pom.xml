@@ -18,6 +18,14 @@
         <jacoco-maven-plugin.version>0.8.3</jacoco-maven-plugin.version>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>bintray-jerady-maven</id>
+            <name>bintray</name>
+            <url>https://dl.bintray.com/jerady/maven</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -51,12 +59,6 @@
             <artifactId>spring-boot-starter-jdbc</artifactId>
             <version>RELEASE</version>
         </dependency>
-        <dependency>
-            <groupId>com.jfoenix</groupId>
-            <artifactId>jfoenix</artifactId>
-            <version>9.0.8</version>
-        </dependency>
-
         <dependency>
             <groupId>com.jfoenix</groupId>
             <artifactId>jfoenix</artifactId>
