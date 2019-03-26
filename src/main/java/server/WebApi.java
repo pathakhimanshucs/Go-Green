@@ -120,6 +120,7 @@ public class WebApi {
      * @param email String
      * @return boolean
      */
+
     public boolean checkIfEmailExists(String email) {
         String query = "SELECT * FROM users WHERE email = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(query, email);
@@ -150,24 +151,24 @@ public class WebApi {
     /**
      * Request mapping for adding a vegetarian meal.
      *
-     * @param vegMealReq VegetarianMealRequest object that is sent from the client
      * @return Returns a json object with the user name and the amount of meals eaten.
      */
 
-    @RequestMapping(path = "/addvegmeal",
+    @RequestMapping(path = "/addactivity",
         consumes = "application/json", produces = "application/json")
-    public VegetarianMealResponse addvegmeal(@RequestBody VegetarianMealRequest vegMealReq) {
-        String email = vegMealReq.getEmail();
-        int amount = vegMealReq.getAmount();
+    public ActivityResponse addActivity(@RequestBody ActivityRequest actReq) {
+        String email = actReq.getEmail();
+        int amount = actReq.getAmount();
+        Activity activity = actReq.getActivity();
 
-        logger.info("adding vegetarian meal..");
-        VegetarianMealResponse response = new VegetarianMealResponse();
-        if (addVMealInDB(email, amount) == 1) {
-            logger.info("vegetarian meal added successfully");
-            response.setAddVegetarianMealSuccess(true);
+        logger.info("adding activity..");
+        ActivityResponse response = new ActivityResponse();
+        if (addActivityInDB(email, amount, activity) == 1) {
+            logger.info("activity added successfully");
+            response.setAddActivitySuccess(true);
         } else {
-            logger.info("error: vegetarian meal not added");
-            response.setAddVegetarianMealSuccess(false);
+            logger.info("error: activity not added");
+            response.setAddActivitySuccess(false);
         }
         return response;
     }
@@ -177,21 +178,21 @@ public class WebApi {
      * @param req VegetarianMealListRequest
      * @return
      */
-    @RequestMapping(path = "/getVegMealsList",
+    @RequestMapping(path = "/getActivityList",
         consumes = "application/json", produces = "application/json")
-    public VegetarianMealListResponse getVegMealsList(@RequestBody VegetarianMealListRequest req) {
+    public ActivityListResponse getActivityList(@RequestBody ActivityListRequest req) {
         String email = req.getEmail();
 
-        logger.info("getting vegetarian meals for " + email);
-        LinkedList<Meal> meals = findAllUserMeals(email);
-        if (meals != null) {
-            VegetarianMealListResponse res = new VegetarianMealListResponse();
-            res.setMeals(meals);
+        logger.info("getting activities " + email);
+        LinkedList<Activity> activities = findAllActivities(email);
+        if (activities != null) {
+            ActivityListResponse res = new ActivityListResponse();
+            res.setActivities(activities);
             res.setEmail(email);
             res.setMealsListSuccess(true);
             return res;
         } else {
-            VegetarianMealListResponse res = new VegetarianMealListResponse();
+            ActivityListResponse res = new ActivityListResponse();
             res.setEmail(email);
             res.setMealsListSuccess(false);
             return res;

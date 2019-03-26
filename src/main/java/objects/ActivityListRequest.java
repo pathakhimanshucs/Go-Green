@@ -3,7 +3,9 @@ package objects;
 public class ActivityListRequest {
     private String email;
 
+
     public ActivityListRequest() {
+
     }
 
     public String getEmail() {
