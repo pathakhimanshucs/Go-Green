@@ -44,24 +44,28 @@ public class WebApiTest {
 
     @Test
     public void loginMappingSuccessTest() {
-        //CheckIfEmailExists
-        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
-        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
-        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
-        Mockito.doReturn(true).when(sqlRowSet).next();
+//        //CheckIfEmailExists
+//        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
+//        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
+//        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
+//        Mockito.doReturn(true).when(sqlRowSet).next();
 
         //AttemptLogin
         SqlRowSet sqlRowSet1 = Mockito.mock(SqlRowSet.class);
-        Mockito.doReturn(sqlRowSet1).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ? AND password = ?", "alice@gmail.com", "alicepwd");
+        Mockito.doReturn(sqlRowSet1).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
         Mockito.doReturn(true).when(sqlRowSet1).next();
+        Mockito.doReturn(Encrypt.encryptPassWord("alice@gmail.com", "alicepwd")).when(sqlRowSet1).getString("password");
         Mockito.doReturn("Alice").when(sqlRowSet1).getString("name");
+        Mockito.doReturn(true).when(sqlRowSet1).isBeforeFirst();
 
+        String encryptedPWD = Encrypt.encryptPassWord("alice@gmail.com", "alicepwd");
         LoginRequest req = new LoginRequest();
         req.setEmail("alice@gmail.com");
-        req.setPassword("alicepwd");
+        req.setPassword(encryptedPWD);
 
         LoginResponse res = new LoginResponse();
         res.setName("Alice");
+
 
         assertEquals(webApi.login(req), res);
     }
@@ -70,14 +74,14 @@ public class WebApiTest {
     public void loginMappingEmailExistFail() {
         //CheckIfEmailExists
         SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
-        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
-        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
-        Mockito.doReturn(true).when(sqlRowSet).next();
+//        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
+//        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
+//        Mockito.doReturn(true).when(sqlRowSet).next();
 
         //AttemptLogin
         SqlRowSet sqlRowSet1 = Mockito.mock(SqlRowSet.class);
-        Mockito.doReturn(sqlRowSet1).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ? AND password = ?", "alice@gmail.com", "alicepwd");
-        Mockito.doReturn(false).when(sqlRowSet1).next();
+        Mockito.doReturn(sqlRowSet1).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
+//        Mockito.doReturn(false).when(sqlRowSet1).next();
 
         LoginRequest req = new LoginRequest();
         req.setEmail("alice@gmail.com");
@@ -111,15 +115,17 @@ public class WebApiTest {
         SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
         Mockito.doReturn(true).when(sqlRowSet).next();
         Mockito.doReturn("Alice").when(sqlRowSet).getString("name");
-        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet(Mockito.anyString(), Mockito.anyString(),Mockito.anyString());
-        Assert.assertEquals(webApi.attemptLogin("alice@gmail.com", "alicepwd"), "Alice");
+        Mockito.doReturn(Encrypt.encryptPassWord("alice@gmail.com", "alicepwd")).when(sqlRowSet).getString("password");
+        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet(Mockito.anyString(), Mockito.anyString());
+        String encryptedPWD = Encrypt.encryptPassWord("alice@gmail.com", "alicepwd");
+        Assert.assertEquals(webApi.attemptLogin("alice@gmail.com", encryptedPWD), "Alice");
     }
 
     @Test
     public void testAttemptLoginFail(){
         SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
         Mockito.doReturn(false).when(sqlRowSet).next();
-        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet(Mockito.anyString(), Mockito.anyString(),Mockito.anyString());
+        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet(Mockito.anyString(), Mockito.anyString());
         Assert.assertEquals(webApi.attemptLogin("wrong@gmail.com", "wrongpwd"), null);
     }
 
