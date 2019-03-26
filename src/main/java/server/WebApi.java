@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.SecureRandom;
 import java.sql.Timestamp;
+import java.util.Base64;
 import java.util.LinkedList;
 
 @RestController
@@ -39,7 +41,7 @@ public class WebApi {
         String email = loginReq.getEmail();
         String password = loginReq.getPassword();
         logger.info("Received a login request");
-
+        generateAuthToken(email);
         if (checkIfEmailExists(email)) {
             String name = attemptLogin(email, password);
             if (name != null) {
@@ -372,4 +374,50 @@ public class WebApi {
             return res;
         }
     }
+
+    private String generateAuthToken(String email){
+        removeDuplicateToken(email);
+        removeExpiredTokens();
+
+        SecureRandom random = new SecureRandom();
+        byte[] bytes = new byte[20];
+        random.nextBytes(bytes);
+        String token = Base64.getEncoder().encodeToString(bytes);
+        addTokenToDB(email, token);
+        logger.info(token);
+        return token;
+    }
+
+    private void addTokenToDB(String email, String token){
+        String query = "INSERT INTO sessiontokens (email, time, token) VALUES (?,?,?)";
+        jdbcTemplate.update(query, email, new Timestamp(System.currentTimeMillis()), token);
+    }
+
+    private void removeDuplicateToken(String email){
+        String query = "SELECT remove_duplicate_tokens(?)";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(query, email);
+    }
+    private void removeExpiredTokens(){
+        String query = "SELECT remove_expired_tokens()";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(query);
+    }
+
+    private boolean checkTokenValidity(String token){
+        removeExpiredTokens();
+
+        String query = "SELECT * FROM sessiontokens WHERE token = ?";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(query, token);
+
+        if (!result.isBeforeFirst()) {
+            logger.info("Token doesnt exist");
+            return false;
+        } else {
+            if (result.next()) {
+                logger.info("Token exists");
+                return true;
+            }
+            return false;
+        }
+    }
+
 }
