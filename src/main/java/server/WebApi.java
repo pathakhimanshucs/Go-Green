@@ -220,51 +220,69 @@ public class WebApi {
     }
 
     /**
-     * addVMealInDB method.
+     * addActivityInDB method.
      * @param email String
      * @param amount integer
+     * @param activity Activity
      * @return
      */
-    public int addVMealInDB(String email, int amount) {
+    public int addActivityInDB(String email, int amount, Activity activity) {
         int userid = getUserIdFromEmail(email);
+        String activityType = "";
+
+        switch(activity.getActivity()) {
+            case VEGMEAL: activityType = "vegmeal";
+                break;
+            case LOCALFOOD: activityType = "localfood";
+                break;
+            case BIKE: activityType = "bike";
+                break;
+            case PUBTRANS: activityType = "pubtrans";
+                break;
+            case HOMETEMP: activityType = "hometemp";
+                break;
+            case SOLARPANELS: activityType = "solarpanels";
+                break;
+        }
+
         if (userid != -1 && amount > 0) {
-            String query = "INSERT INTO vegmeal (userid, time, amount) VALUES (?,?,?)";
-            jdbcTemplate.update(query, userid, new Timestamp(System.currentTimeMillis()), amount);
+            String query = "INSERT INTO ? (userid, time, amount) VALUES (?,?,?)";
+            jdbcTemplate.update(query, activityType, userid, new Timestamp(System.currentTimeMillis()), amount);
+
             return 1;
         } else {
             return -1;
         }
     }
-
     /**
-     * findAllUserMeals method.
+     * findAllActivities method.
      * @param email String
      * @return LinkedList
      */
-    public LinkedList<Meal> findAllUserMeals(String email) {
+    public LinkedList<Activity> findAllActivities(String email) {
         int userid = getUserIdFromEmail(email);
         if (userid != -1) {
-            LinkedList<Meal> mealsList = new LinkedList<>();
-            SqlRowSet mealsDB = getAllMealsFromDB(userid);
-            while (mealsDB.next()) {
-                Meal meal = new Meal();
-                meal.setMealAmount(mealsDB.getInt("amount"));
-                meal.setTime(mealsDB.getTimestamp("time"));
-                mealsList.add(meal);
+            LinkedList<Activity> activitiesList = new LinkedList<>();
+            SqlRowSet activitiesDB = getAllActivitiesFromDB(userid);
+            while (activitiesDB.next()) {
+                Activity activity = new Activity();
+                activity.setAmount(activitiesDB.getInt("amount"));
+                activity.setTime(activitiesDB.getTimestamp("time"));
+                activitiesList.add(activity);
             }
-            return mealsList;
+            return activitiesList;
         } else {
             return null;
         }
     }
 
     /**
-     * getAllMeals method.
+     * getAllActivitiesFromDB method.
      * @param userid integer
      * @return SqlRowSet
      */
-    public SqlRowSet getAllMealsFromDB(int userid) {
-        String query = "SELECT * FROM VEGMEAL WHERE USERID = ?";
+    public SqlRowSet getAllActivitiesFromDB(int userid) {
+        String query = "SELECT * FROM activities JOIN WHERE USERID = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(query, userid);
         return result;
     }
