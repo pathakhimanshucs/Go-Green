@@ -356,8 +356,16 @@ public class WebApi {
 
     @RequestMapping(path = "/getFriendsList",
         consumes = "application/json", produces = "application/json")
-    public FriendListResponse getVegMealsList(@RequestBody FriendsListRequest req) {
+    public FriendListResponse getFriendsList(@RequestBody FriendsListRequest req) {
         String email = req.getEmail();
+        AuthToken token = req.getToken();
+
+        if(!checkTokenValidity(token.getToken())){
+            FriendListResponse res = new FriendListResponse();
+            res.setEmail(email);
+            res.setFriendsListSuccess(false);
+            return res;
+        }
 
         logger.info("getting friends for" + email);
         LinkedList<String> friends = getFriends(email);

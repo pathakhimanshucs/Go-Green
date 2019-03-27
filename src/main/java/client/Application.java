@@ -45,7 +45,6 @@ public class Application {
         loginReq.setPassword(Encrypt.encryptPassWord(email, password));
 
         HttpHeaders headers = new HttpHeaders();
-
         HttpEntity<LoginRequest> request = new HttpEntity<>(loginReq, headers);
         RestTemplate restTemplate = new RestTemplate();
         LoginResponse login = restTemplate.postForObject(uri, request, LoginResponse.class);
