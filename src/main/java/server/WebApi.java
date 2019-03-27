@@ -41,12 +41,12 @@ public class WebApi {
         String email = loginReq.getEmail();
         String password = loginReq.getPassword();
         logger.info("Received a login request");
-        generateAuthToken(email);
         if (checkIfEmailExists(email)) {
             String name = attemptLogin(email, password);
             if (name != null) {
                 LoginResponse temp = new LoginResponse();
                 temp.setName(name);
+                temp.setToken(generateAuthToken(email));
                 logger.info("User " + name + " logged in using email " + email);
                 return temp;
             } else {
@@ -375,7 +375,7 @@ public class WebApi {
         }
     }
 
-    private String generateAuthToken(String email){
+    private AuthToken generateAuthToken(String email){
         removeDuplicateToken(email);
         removeExpiredTokens();
 
@@ -385,7 +385,10 @@ public class WebApi {
         String token = Base64.getEncoder().encodeToString(bytes);
         addTokenToDB(email, token);
         logger.info(token);
-        return token;
+        AuthToken resToken = new AuthToken();
+        resToken.setEmail(email);
+        resToken.setToken(token);
+        return resToken;
     }
 
     private void addTokenToDB(String email, String token){

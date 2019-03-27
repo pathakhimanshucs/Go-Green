@@ -11,7 +11,7 @@ public class LoginResponseTest {
     public void setNameTest(){
         LoginResponse loginRes = new LoginResponse();
         loginRes.setName("Alice");
-        assertEquals(loginRes.name, "Alice");
+        assertEquals(loginRes.getName(), "Alice");
     }
 
     @Test
