@@ -1,8 +1,7 @@
 package objects;
 
-import java.util.LinkedList;
-
 public class FriendsListRequest {
+    private AuthToken token;
     private String email;
 
     public String getEmail() {
@@ -11,5 +10,13 @@ public class FriendsListRequest {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public AuthToken getToken() {
+        return token;
+    }
+
+    public void setToken(AuthToken token) {
+        this.token = token;
     }
 }
