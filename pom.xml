@@ -18,6 +18,14 @@
         <jacoco-maven-plugin.version>0.8.3</jacoco-maven-plugin.version>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>bintray-jerady-maven</id>
+            <name>bintray</name>
+            <url>https://dl.bintray.com/jerady/maven</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -50,6 +58,27 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
             <version>RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jfoenix</groupId>
+            <artifactId>jfoenix</artifactId>
+            <version>8.0.8</version>
+        </dependency>
+        <dependency>
+            <groupId>de.jensd</groupId>
+            <artifactId>fontawesomefx-commons</artifactId>
+            <version>8.15</version>
+        </dependency>
+        <dependency>
+            <groupId>de.jensd</groupId>
+            <artifactId>fontawesomefx-fontawesome</artifactId>
+            <version>4.7.0-5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt-spring2</artifactId>
+            <version>1.9.2</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
