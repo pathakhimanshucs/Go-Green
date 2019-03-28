@@ -8,6 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import objects.RegisterResponse;
@@ -60,6 +62,16 @@ public class RegisterController {
             Stage stage = (Stage) node.getScene().getWindow();
 
             stage.setScene(new Scene(root));
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Register Failure");
+            alert.setContentText("Registration was unsuccessful");
+            alert.setHeaderText(null);
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(
+                    getClass().getResource("/dark-theme.css").toExternalForm());
+            alert.showAndWait();
+            System.out.println("Alert Dialog!");
         }
     }
 

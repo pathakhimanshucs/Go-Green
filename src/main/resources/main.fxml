@@ -29,7 +29,7 @@
       </JFXTabPane>
       <Button layoutX="500.0" layoutY="600.0" mnemonicParsing="false" style="-fx-border-color: -fx-primary;">
          <graphic>
-            <FontAwesomeIconView glyphName="PLUS_CIRCLE" size="50" text="" textAlignment="CENTER" x="550.0" y="650.0" />
+            <FontAwesomeIconView glyphName="PLUS_CIRCLE" onMouseClicked="#pressPlusButton" size="50" text="" textAlignment="CENTER" x="550.0" y="650.0" />
          </graphic>
       </Button>
    </children>

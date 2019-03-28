@@ -47,7 +47,7 @@ public class LoginController {
             Stage stage = (Stage) node.getScene().getWindow();
 
             stage.setScene(new Scene(root));
-        }else{
+        } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Login Failure");
             alert.setContentText("Login was unsuccessful");
