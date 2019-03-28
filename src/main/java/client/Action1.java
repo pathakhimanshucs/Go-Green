@@ -40,7 +40,7 @@ class Action1 extends JFrame implements ActionListener {
         vegetarian.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent1) {
                 ///////////////////////////
-                Application.addVegMeal(1);
+                Application.addActivity(1);
                 JOptionPane.showMessageDialog((Component) actionEvent1.getSource(),
                         "You have chosen a vegetarian meal");
                 JOptionPane.setDefaultLocale(null);
@@ -180,7 +180,7 @@ class Action1 extends JFrame implements ActionListener {
             String[] columnNames = {"Time",
                 "Amount"};
 
-            Object[][] data = Application.getVegMeals();
+            Object[][] data = Application.getActivities();
 
             final JTable table = new JTable(data, columnNames);
             table.setPreferredScrollableViewportSize(new Dimension(100, 70));

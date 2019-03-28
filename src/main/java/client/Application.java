@@ -108,8 +108,8 @@ public class Application {
      * adds Veg Meal method.
      * @param amount of vegmeal
      */
-    public static void addVegMeal(int amount) {
-        final String baseUrl = "http://localhost:" + 8080 + "/addvegmeal/";
+    public static void addActivity(int amount) {
+        final String baseUrl = "http://localhost:" + 8080 + "/addactiviy/";
         URI uri = null;
         try {
             uri = new URI(baseUrl);
@@ -117,17 +117,17 @@ public class Application {
             System.err.println(e);
         }
 
-        VegetarianMealRequest vegReq = new VegetarianMealRequest();
-        vegReq.setAmount(amount);
-        vegReq.setEmail(eMail);
+        ActivityRequest actReq = new ActivityRequest();
+        actReq.setAmount(amount);
+        actReq.setEmail(eMail);
 
         HttpHeaders headers = new HttpHeaders();
-        HttpEntity<VegetarianMealRequest> req = new HttpEntity<>(vegReq, headers);
+        HttpEntity<ActivityRequest> req = new HttpEntity<>(actReq, headers);
         RestTemplate restTemplate = new RestTemplate();
-        VegetarianMealResponse response = restTemplate.postForObject(uri,
-                req, VegetarianMealResponse.class);
+        ActivityResponse response = restTemplate.postForObject(uri,
+                req, ActivityResponse.class);
 
-        if (response.isAddVegetarianMealSuccess()) {
+        if (response.isAddActivitySuccess()) {
             System.out.println("Succesfully added veg meal to db");
         }
     }
@@ -136,8 +136,8 @@ public class Application {
      * Retrieves vergmeals from server.
      * @return Object.
      */
-    public static Object[][] getVegMeals() {
-        final String baseUrl = "http://localhost:" + 8080 + "/getVegMealsList/";
+    public static Object[][] getActivities() {
+        final String baseUrl = "http://localhost:" + 8080 + "/getActivityList/";
         URI uri = null;
         try {
             uri = new URI(baseUrl);
@@ -145,19 +145,19 @@ public class Application {
             System.err.println(e);
         }
 
-        VegetarianMealListRequest req = new VegetarianMealListRequest();
+        ActivityListRequest req = new ActivityListRequest();
         req.setEmail(eMail);
 
         RestTemplate restTemplate = new RestTemplate();
-        VegetarianMealListResponse res = restTemplate.postForObject(uri,
-            req, VegetarianMealListResponse.class);
+        ActivityListResponse res = restTemplate.postForObject(uri,
+            req, ActivityListResponse.class);
 
-        int size = res.getMeals().size();
+        int size = res.getActivities().size();
         Object[][] data = new Object[size][2];
         for (int i = 0; i < size; i++) {
-            Meal curr = res.getMeals().get(i);
+            Activity curr = res.getActivities().get(i);
             String time = timeFormatter(curr.getTime());
-            int amount = curr.getMealAmount();
+            int amount = curr.getAmount();
             data[i][0] = time;
             data[i][1] = amount;
         }
