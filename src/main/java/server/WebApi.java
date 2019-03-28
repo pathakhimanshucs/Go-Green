@@ -162,7 +162,7 @@ public class WebApi {
         int amount = actReq.getAmount();
         Activity activity = actReq.getActivity();
 
-        logger.info("adding activity..");
+        logger.info("adding activity...");
         ActivityResponse response = new ActivityResponse();
         if (addActivityInDB(email, amount, activity) == 1) {
             logger.info("activity added successfully");
@@ -176,7 +176,7 @@ public class WebApi {
 
     /**
      * method.
-     * @param req VegetarianMealListRequest
+     * @param req ActivityListRequest
      * @return
      */
     @RequestMapping(path = "/getActivityList",
@@ -190,12 +190,12 @@ public class WebApi {
             ActivityListResponse res = new ActivityListResponse();
             res.setActivities(activities);
             res.setEmail(email);
-            res.setMealsListSuccess(true);
+            res.setActivityListSuccess(true);
             return res;
         } else {
             ActivityListResponse res = new ActivityListResponse();
             res.setEmail(email);
-            res.setMealsListSuccess(false);
+            res.setActivityListSuccess(false);
             return res;
         }
     }
@@ -270,6 +270,7 @@ public class WebApi {
                 Activity activity = new Activity();
                 activity.setAmount(activitiesDB.getInt("amount"));
                 activity.setTime(activitiesDB.getTimestamp("time"));
+                activity.setActivity(Activity.activityObject.valueOf(activitiesDB.getString("table_name")));
                 activitiesList.add(activity);
             }
             return activitiesList;
@@ -284,7 +285,7 @@ public class WebApi {
      * @return SqlRowSet
      */
     public SqlRowSet getAllActivitiesFromDB(int userid) {
-        String query = "SELECT * FROM activities JOIN WHERE USERID = ?";
+        String query = "SELECT * FROM activities WHERE userid = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(query, userid);
         return result;
     }

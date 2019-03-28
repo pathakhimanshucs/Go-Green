@@ -10,9 +10,6 @@ public class ActivityResponse {
     public boolean isAddActivitySuccess() {
         return addActivitySuccess;
     }
-    public boolean isAddActivityResponse() {
-        return addActivitySuccess;
-    }
 
     public void setAddActivitySuccess(boolean addActivitySuccess) {
         this.addActivitySuccess = addActivitySuccess;
