@@ -4,7 +4,11 @@
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Tab?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" stylesheets="@dark-theme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.MainController">
@@ -25,6 +29,47 @@
                   </AnchorPane>
               </content>
             </Tab>
+             <Tab text="Achievements">
+                 <content>
+                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@dark-theme.css">
+                     <children>
+                        <AnchorPane fx:id="achievement_font" prefHeight="534.0" prefWidth="600.0">
+                           <children>
+                              <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="470.0" layoutY="258.0">
+                                 <image>
+                                    <Image url="@green-house-png-6.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="120.0" fitWidth="130.0" layoutX="460.0" layoutY="368.0">
+                                 <image>
+                                    <Image url="@tree.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="465.0" layoutY="138.0">
+                                 <image>
+                                    <Image url="@bus-icon.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="450.0">
+                                 <image>
+                                    <Image url="@Vegetarian-Icon.png" />
+                                 </image>
+                              </ImageView>
+                               
+                               <Label layoutX="26.0" layoutY="60.0" text="Food" />
+                              <Label layoutX="26.0" layoutY="298.0" prefHeight="38.0" prefWidth="219.0" text="Green  Energy" />
+                              <Label layoutX="26.0" layoutY="164.0" prefHeight="69.0" prefWidth="248.0" text="Public Transport" />
+                              <Label layoutX="26.0" layoutY="409.0" prefHeight="38.0" prefWidth="356.0" text="Overall score (saved trees)" />
+                              <Label layoutX="433.0" layoutY="412.0" text="# *" />
+                              <ProgressBar fx:id="food_bar" layoutX="260.0" layoutY="67.0" prefWidth="200.0" progress="0.0" />
+                              <ProgressBar fx:id="public_transport_bar" layoutX="260.0" layoutY="188.0" prefWidth="200.0" progress="0.69" />
+                              <ProgressBar fx:id="energy_bar" layoutX="260.0" layoutY="307.0" prefWidth="200.0" progress="0.57" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                     </AnchorPane>
+                 </content>
+             </Tab>
          </tabs>
       </JFXTabPane>
       <Button layoutX="500.0" layoutY="600.0" mnemonicParsing="false" style="-fx-border-color: -fx-primary;">
