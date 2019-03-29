@@ -1,9 +1,11 @@
 package server;
 
 import objects.*;
+import org.postgresql.util.PSQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -331,7 +333,12 @@ public class WebApi {
             return -1;
         }else{
             String query = "INSERT INTO friends (friend1, friend2) VALUES (?,?)";
-            jdbcTemplate.update(query, friend1,friend2);
+            try{
+                jdbcTemplate.update(query, friend1,friend2);
+            }catch (DataAccessException e){
+                logger.info("Two users are already friends");
+                return -1;
+            }
             return 1;
         }
     }
