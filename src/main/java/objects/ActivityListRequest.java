@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties
 public class ActivityListRequest {
+    private AuthToken token;
     private String email;
 
 
@@ -17,5 +18,13 @@ public class ActivityListRequest {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public AuthToken getToken() {
+        return token;
+    }
+
+    public void setToken(AuthToken token) {
+        this.token = token;
     }
 }

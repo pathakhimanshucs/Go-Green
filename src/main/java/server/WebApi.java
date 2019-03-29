@@ -184,6 +184,15 @@ public class WebApi {
     public ActivityListResponse getActivityList(@RequestBody ActivityListRequest req) {
         String email = req.getEmail();
 
+        AuthToken token = req.getToken();
+
+        if(!checkTokenValidity(token.getToken())){
+            ActivityListResponse res = new ActivityListResponse();
+            res.setEmail(email);
+            res.setActivityListSuccess(false);
+            return res;
+        }
+
         logger.info("getting activities " + email);
         LinkedList<Activity> activities = findAllActivities(email);
         activities=  calculateCO2(activities);
