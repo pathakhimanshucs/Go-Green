@@ -80,6 +80,11 @@
             <version>1.9.2</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>javaFX</artifactId>
+            <version>RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>
