@@ -120,7 +120,7 @@ public class Application {
         }
 
         ActivityRequest actReq = new ActivityRequest();
-        actReq.setAmount(amount);
+        actReq.getActivity().setAmount(amount);
         actReq.setEmail(eMail);
 
         HttpHeaders headers = new HttpHeaders();

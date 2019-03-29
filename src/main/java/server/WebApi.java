@@ -159,10 +159,10 @@ public class WebApi {
         consumes = "application/json", produces = "application/json")
     public ActivityResponse addActivity(@RequestBody ActivityRequest actReq) {
         String email = actReq.getEmail();
-        int amount = actReq.getAmount();
+        int amount = actReq.getActivity().getAmount();
         Activity activity = actReq.getActivity();
 
-        logger.info("adding activity..");
+        logger.info("adding activity...");
         ActivityResponse response = new ActivityResponse();
         if (addActivityInDB(email, amount, activity) == 1) {
             logger.info("activity added successfully");
@@ -176,7 +176,7 @@ public class WebApi {
 
     /**
      * method.
-     * @param req VegetarianMealListRequest
+     * @param req ActivityListRequest
      * @return
      */
     @RequestMapping(path = "/getActivityList",
@@ -186,18 +186,37 @@ public class WebApi {
 
         logger.info("getting activities " + email);
         LinkedList<Activity> activities = findAllActivities(email);
+        activities=  calculateCO2(activities);
         if (activities != null) {
             ActivityListResponse res = new ActivityListResponse();
             res.setActivities(activities);
             res.setEmail(email);
-            res.setMealsListSuccess(true);
+            res.setActivityListSuccess(true);
             return res;
         } else {
             ActivityListResponse res = new ActivityListResponse();
             res.setEmail(email);
-            res.setMealsListSuccess(false);
+            res.setActivityListSuccess(false);
             return res;
         }
+    }
+
+    public LinkedList<Activity> calculateCO2(LinkedList<Activity> activities){
+        for(Activity activity : activities){
+            String activityType = activity.getActivity().toString().toLowerCase();
+            float co2multiplier = getCO2FromDB(activityType);
+            activity.setCO2Amount(activity.getAmount()*co2multiplier);
+        }
+        return activities;
+    }
+
+    private float getCO2FromDB(String valueName){
+        String query = "select * from activityvalues WHERE name = ?";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(query, valueName);
+        if(result.next()){
+            return result.getFloat("value");
+        }
+        return 0;
     }
 
 
@@ -230,26 +249,12 @@ public class WebApi {
      */
     public int addActivityInDB(String email, int amount, Activity activity) {
         int userid = getUserIdFromEmail(email);
-        String activityType = "";
-
-        switch(activity.getActivity()) {
-            case VEGMEAL: activityType = "vegmeal";
-                break;
-            case LOCALFOOD: activityType = "localfood";
-                break;
-            case BIKE: activityType = "bike";
-                break;
-            case PUBTRANS: activityType = "pubtrans";
-                break;
-            case HOMETEMP: activityType = "hometemp";
-                break;
-            case SOLARPANELS: activityType = "solarpanels";
-                break;
-        }
+        String activityType = activity.getActivity().toString();
 
         if (userid != -1 && amount > 0) {
-            String query = "INSERT INTO ? (userid, time, amount) VALUES (?,?,?)";
-            jdbcTemplate.update(query, activityType, userid, new Timestamp(System.currentTimeMillis()), amount);
+            String query = "INSERT INTO \"%s\" (userid, time, amount) VALUES (?,?,?)";
+            query = String.format(query, activityType);
+            jdbcTemplate.update(query, userid, new Timestamp(System.currentTimeMillis()), amount);
 
             return 1;
         } else {
@@ -270,6 +275,7 @@ public class WebApi {
                 Activity activity = new Activity();
                 activity.setAmount(activitiesDB.getInt("amount"));
                 activity.setTime(activitiesDB.getTimestamp("time"));
+                activity.setActivity(Activity.activityObject.valueOf(activitiesDB.getString("table_name")));
                 activitiesList.add(activity);
             }
             return activitiesList;
@@ -284,7 +290,7 @@ public class WebApi {
      * @return SqlRowSet
      */
     public SqlRowSet getAllActivitiesFromDB(int userid) {
-        String query = "SELECT * FROM activities JOIN WHERE USERID = ?";
+        String query = "SELECT * FROM activities WHERE userid = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(query, userid);
         return result;
     }
