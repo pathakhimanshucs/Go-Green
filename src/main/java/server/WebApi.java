@@ -109,6 +109,7 @@ public class WebApi {
             response.setRegisterSuccess(true);
             createAccInDB(email, name, password);
             response.setName(name);
+            response.setToken(generateAuthToken(email));
             return response;
         } else {
             logger.info("Email already exists");
@@ -164,16 +165,26 @@ public class WebApi {
         int amount = actReq.getActivity().getAmount();
         Activity activity = actReq.getActivity();
 
+        AuthToken token = actReq.getToken();
+
+        if(!checkTokenValidity(token.getToken())){
+            ActivityResponse response = new ActivityResponse();
+            response.setAddActivitySuccess(false);
+            return response;
+        }
+
         logger.info("adding activity...");
-        ActivityResponse response = new ActivityResponse();
         if (addActivityInDB(email, amount, activity) == 1) {
             logger.info("activity added successfully");
+            ActivityResponse response = new ActivityResponse();
             response.setAddActivitySuccess(true);
+            return response;
         } else {
             logger.info("error: activity not added");
+            ActivityResponse response = new ActivityResponse();
             response.setAddActivitySuccess(false);
+            return response;
         }
-        return response;
     }
 
     /**
@@ -311,6 +322,14 @@ public class WebApi {
     public AddFriendResponse addFriend(@RequestBody AddFriendRequest addReq) {
         String friend1 = addReq.getFriend1email();
         String friend2 = addReq.getFriend2email();
+
+        AuthToken token = addReq.getToken();
+
+        if(!checkTokenValidity(token.getToken())){
+            AddFriendResponse res = new AddFriendResponse();
+            res.setAddFriendSuccess(false);
+            return res;
+        }
 
         logger.info("Attempting to add friends");
         if(addFriendsToDB(friend1, friend2) != -1) {

@@ -3,6 +3,7 @@ package objects;
 import java.util.LinkedList;
 
 public class FriendListResponse {
+    private AuthToken token;
     private String email;
     private LinkedList<String> friends;
     private boolean friendsListSuccess;
@@ -29,5 +30,13 @@ public class FriendListResponse {
 
     public void setFriendsListSuccess(boolean friendsListSuccess) {
         this.friendsListSuccess = friendsListSuccess;
+    }
+
+    public AuthToken getToken() {
+        return token;
+    }
+
+    public void setToken(AuthToken token) {
+        this.token = token;
     }
 }
