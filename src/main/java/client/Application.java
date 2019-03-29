@@ -98,11 +98,11 @@ public class Application {
         if (responseMessage.registerSuccess == false) {
             response.setName("Failed to create account");
             response.setRegisterSuccess(false);
-            eMail = newEmail;
             return response;
         } else {
             response.setName("Account " + responseMessage.getName() + " created");
             response.setRegisterSuccess(true);
+            eMail = newEmail;
             return response;
         }
     }
