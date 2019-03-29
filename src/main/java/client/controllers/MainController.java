@@ -56,4 +56,15 @@ public class MainController {
         }
     }
 
+    @FXML
+    void displayFriends(MouseEvent event) {
+        String email = tf_friendmail.getText();
+        boolean response = Application.addFriend(email);
+        if (response == true) {
+            System.out.println(response);
+        } else {
+            System.out.println(response);
+        }
+    }
+
 }

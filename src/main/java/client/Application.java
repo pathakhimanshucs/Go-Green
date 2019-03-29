@@ -212,4 +212,26 @@ public class Application {
             return false;
         }
     }
+
+    public static FriendListResponse showFriends() {
+        final String baseUrl = "http://localhost:" + 8080 + "/addFriend/";
+        URI uri = null;
+        try {
+            uri = new URI(baseUrl);
+        } catch (URISyntaxException e) {
+            System.err.println(e);
+        }
+
+        FriendsListRequest fr = new FriendsListRequest();
+        fr.setEmail(eMail);
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<FriendsListRequest> req = new HttpEntity<>(fr, headers);
+        RestTemplate restTemplate = new RestTemplate();
+        FriendListResponse response = restTemplate.postForObject(uri,
+                req, FriendListResponse.class);
+        return response;
+    }
+
+
 }
