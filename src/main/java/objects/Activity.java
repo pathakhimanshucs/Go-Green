@@ -1,11 +1,14 @@
 package objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.sql.Timestamp;
 import java.util.Objects;
 
+@JsonIgnoreProperties
 public class  Activity{
     private Timestamp time;
-    private int CO2Amount;
+    private float CO2Amount;
     private int amount;
     private activityObject activity;
 
@@ -29,7 +32,7 @@ public class  Activity{
         this.time = time;
     }
 
-    public int getCO2Amount() {
+    public float getCO2Amount() {
         return CO2Amount;
     }
 
@@ -59,7 +62,7 @@ public class  Activity{
                 Objects.equals(time, activity.time);
     }
 
-    public void setCO2Amount(int CO2Amount) {
+    public void setCO2Amount(float CO2Amount) {
         this.CO2Amount = CO2Amount;
     }
 }

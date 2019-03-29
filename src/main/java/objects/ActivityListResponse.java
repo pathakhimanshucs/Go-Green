@@ -1,6 +1,8 @@
 package objects;
-import java.util.LinkedList;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.LinkedList;
+@JsonIgnoreProperties
 public class ActivityListResponse {
     private String email;
     private LinkedList<Activity> activities;

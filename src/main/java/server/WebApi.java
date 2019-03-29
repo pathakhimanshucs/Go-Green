@@ -159,7 +159,7 @@ public class WebApi {
         consumes = "application/json", produces = "application/json")
     public ActivityResponse addActivity(@RequestBody ActivityRequest actReq) {
         String email = actReq.getEmail();
-        int amount = actReq.getAmount();
+        int amount = actReq.getActivity().getAmount();
         Activity activity = actReq.getActivity();
 
         logger.info("adding activity...");
@@ -186,6 +186,7 @@ public class WebApi {
 
         logger.info("getting activities " + email);
         LinkedList<Activity> activities = findAllActivities(email);
+        activities=  calculateCO2(activities);
         if (activities != null) {
             ActivityListResponse res = new ActivityListResponse();
             res.setActivities(activities);
@@ -198,6 +199,24 @@ public class WebApi {
             res.setActivityListSuccess(false);
             return res;
         }
+    }
+
+    public LinkedList<Activity> calculateCO2(LinkedList<Activity> activities){
+        for(Activity activity : activities){
+            String activityType = activity.getActivity().toString().toLowerCase();
+            float co2multiplier = getCO2FromDB(activityType);
+            activity.setCO2Amount(activity.getAmount()*co2multiplier);
+        }
+        return activities;
+    }
+
+    private float getCO2FromDB(String valueName){
+        String query = "select * from activityvalues WHERE name = ?";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(query, valueName);
+        if(result.next()){
+            return result.getFloat("value");
+        }
+        return 0;
     }
 
 
@@ -230,26 +249,12 @@ public class WebApi {
      */
     public int addActivityInDB(String email, int amount, Activity activity) {
         int userid = getUserIdFromEmail(email);
-        String activityType = "";
-
-        switch(activity.getActivity()) {
-            case VEGMEAL: activityType = "vegmeal";
-                break;
-            case LOCALFOOD: activityType = "localfood";
-                break;
-            case BIKE: activityType = "bike";
-                break;
-            case PUBTRANS: activityType = "pubtrans";
-                break;
-            case HOMETEMP: activityType = "hometemp";
-                break;
-            case SOLARPANELS: activityType = "solarpanels";
-                break;
-        }
+        String activityType = activity.getActivity().toString();
 
         if (userid != -1 && amount > 0) {
-            String query = "INSERT INTO ? (userid, time, amount) VALUES (?,?,?)";
-            jdbcTemplate.update(query, activityType, userid, new Timestamp(System.currentTimeMillis()), amount);
+            String query = "INSERT INTO \"%s\" (userid, time, amount) VALUES (?,?,?)";
+            query = String.format(query, activityType);
+            jdbcTemplate.update(query, userid, new Timestamp(System.currentTimeMillis()), amount);
 
             return 1;
         } else {
