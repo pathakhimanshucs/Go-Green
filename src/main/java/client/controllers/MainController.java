@@ -1,6 +1,8 @@
 package client.controllers;
 
+import client.Application;
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -16,6 +18,9 @@ public class MainController {
 
     @FXML
     private JFXListView<Label> mylistview;
+
+    @FXML
+    private JFXTextField tf_friendmail;
 
     @FXML
     void clickedList(MouseEvent event) {
@@ -38,6 +43,17 @@ public class MainController {
 
         stage.setScene(new Scene(root));
 
+    }
+
+    @FXML
+    void friendButton(MouseEvent event) {
+        String email = tf_friendmail.getText();
+        boolean response = Application.addFriend(email);
+        if (response == true) {
+            System.out.println(response);
+        } else {
+            System.out.println(response);
+        }
     }
 
 }

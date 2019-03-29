@@ -98,6 +98,7 @@ public class Application {
         if (responseMessage.registerSuccess == false) {
             response.setName("Failed to create account");
             response.setRegisterSuccess(false);
+            eMail = newEmail;
             return response;
         } else {
             response.setName("Account " + responseMessage.getName() + " created");
@@ -172,5 +173,43 @@ public class Application {
             new SimpleDateFormat(pattern, new Locale("en", "US"));
 
         return simpleDateFormat.format(time);
+    }
+
+    /**
+     * Adds friend.
+     * @param email Email of friend.
+     * @return
+     */
+    public static boolean addFriend(String email) {
+        final String baseUrl = "http://localhost:" + 8080 + "/addFriend/";
+        URI uri = null;
+        try {
+            uri = new URI(baseUrl);
+        } catch (URISyntaxException e) {
+            System.err.println(e);
+        }
+
+        String friendEmail = email.toLowerCase();
+
+        if (friendEmail.equals(eMail)){
+            return false;
+        }
+
+
+        AddFriendRequest fr = new AddFriendRequest();
+        fr.setFriend1email(eMail);
+        fr.setFriend2email(friendEmail);
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<AddFriendRequest> req = new HttpEntity<>(fr, headers);
+        RestTemplate restTemplate = new RestTemplate();
+        AddFriendResponse response = restTemplate.postForObject(uri,
+                req, AddFriendResponse.class);
+
+        if (response.isAddFriendSuccess()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

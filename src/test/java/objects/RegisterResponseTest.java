@@ -74,7 +74,7 @@ public class RegisterResponseTest {
         RegisterResponse regRes = new RegisterResponse();
         regRes.setRegisterSuccess(true);
         regRes.setName("kek");
-        Meal meal = new Meal();
-        assertFalse(regRes.equals(meal));
+        LoginResponse response = new LoginResponse();
+        assertFalse(regRes.equals(response));
     }
 }
