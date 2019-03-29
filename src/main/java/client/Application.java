@@ -16,7 +16,8 @@ import java.util.Locale;
  * Client application with main method.
  */
 public class Application {
-    static String eMail;
+    //static String eMail;
+    static AuthToken token;
     /**
      * Main method.
      * @param args Provided arguments.
@@ -49,7 +50,9 @@ public class Application {
         RestTemplate restTemplate = new RestTemplate();
         LoginResponse login = restTemplate.postForObject(uri, request, LoginResponse.class);
         if (login.getName().equals("error") == false){
-            eMail = newEmail;
+            token = login.getToken();
+            System.out.println(token.getToken());
+            System.out.println(token.getEmail());
             System.out.println("Logged in");
         }
         return login;
@@ -102,7 +105,7 @@ public class Application {
         } else {
             response.setName("Account " + responseMessage.getName() + " created");
             response.setRegisterSuccess(true);
-            eMail = newEmail;
+            token = responseMessage.getToken();
             return response;
         }
     }
@@ -122,7 +125,8 @@ public class Application {
 
         ActivityRequest actReq = new ActivityRequest();
         actReq.getActivity().setAmount(amount);
-        actReq.setEmail(eMail);
+        actReq.setToken(token);
+        actReq.setEmail(token.getEmail());
 
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<ActivityRequest> req = new HttpEntity<>(actReq, headers);
@@ -149,7 +153,8 @@ public class Application {
         }
 
         ActivityListRequest req = new ActivityListRequest();
-        req.setEmail(eMail);
+        req.setToken(token);
+        req.setEmail(token.getEmail());
 
         RestTemplate restTemplate = new RestTemplate();
         ActivityListResponse res = restTemplate.postForObject(uri,
@@ -191,14 +196,15 @@ public class Application {
 
         String friendEmail = email.toLowerCase();
 
-        if (friendEmail.equals(eMail)){
+        if (friendEmail.equals(token.getEmail())){
             return false;
         }
 
 
         AddFriendRequest fr = new AddFriendRequest();
-        fr.setFriend1email(eMail);
+        fr.setFriend1email(token.getEmail());
         fr.setFriend2email(friendEmail);
+        fr.setToken(token);
 
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<AddFriendRequest> req = new HttpEntity<>(fr, headers);
@@ -223,7 +229,8 @@ public class Application {
         }
 
         FriendsListRequest fr = new FriendsListRequest();
-        fr.setEmail(eMail);
+        fr.setEmail(token.getEmail());
+        fr.setToken(token);
 
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<FriendsListRequest> req = new HttpEntity<>(fr, headers);

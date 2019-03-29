@@ -55,7 +55,7 @@ public class MainController {
             System.out.println(response);
         }
     }
-
+    // STILL IN CONSTRUCTION!
     @FXML
     void displayFriends(MouseEvent event) {
         String email = tf_friendmail.getText();
