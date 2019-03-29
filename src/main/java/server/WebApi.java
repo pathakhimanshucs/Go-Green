@@ -1,9 +1,11 @@
 package server;
 
 import objects.*;
+import org.postgresql.util.PSQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -107,6 +109,7 @@ public class WebApi {
             response.setRegisterSuccess(true);
             createAccInDB(email, name, password);
             response.setName(name);
+            response.setToken(generateAuthToken(email));
             return response;
         } else {
             logger.info("Email already exists");
@@ -162,16 +165,26 @@ public class WebApi {
         int amount = actReq.getActivity().getAmount();
         Activity activity = actReq.getActivity();
 
+        AuthToken token = actReq.getToken();
+
+        if(!checkTokenValidity(token.getToken())){
+            ActivityResponse response = new ActivityResponse();
+            response.setAddActivitySuccess(false);
+            return response;
+        }
+
         logger.info("adding activity...");
-        ActivityResponse response = new ActivityResponse();
         if (addActivityInDB(email, amount, activity) == 1) {
             logger.info("activity added successfully");
+            ActivityResponse response = new ActivityResponse();
             response.setAddActivitySuccess(true);
+            return response;
         } else {
             logger.info("error: activity not added");
+            ActivityResponse response = new ActivityResponse();
             response.setAddActivitySuccess(false);
+            return response;
         }
-        return response;
     }
 
     /**
@@ -310,6 +323,14 @@ public class WebApi {
         String friend1 = addReq.getFriend1email();
         String friend2 = addReq.getFriend2email();
 
+        AuthToken token = addReq.getToken();
+
+        if(!checkTokenValidity(token.getToken())){
+            AddFriendResponse res = new AddFriendResponse();
+            res.setAddFriendSuccess(false);
+            return res;
+        }
+
         logger.info("Attempting to add friends");
         if(addFriendsToDB(friend1, friend2) != -1) {
             AddFriendResponse res = new AddFriendResponse();
@@ -331,7 +352,12 @@ public class WebApi {
             return -1;
         }else{
             String query = "INSERT INTO friends (friend1, friend2) VALUES (?,?)";
-            jdbcTemplate.update(query, friend1,friend2);
+            try{
+                jdbcTemplate.update(query, friend1,friend2);
+            }catch (DataAccessException e){
+                logger.info("Two users are already friends");
+                return -1;
+            }
             return 1;
         }
     }

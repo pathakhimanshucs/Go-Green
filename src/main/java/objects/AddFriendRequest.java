@@ -1,6 +1,7 @@
 package objects;
 
 public class AddFriendRequest {
+    private AuthToken token;
     private String friend1email;
     private String friend2email;
 
@@ -21,5 +22,13 @@ public class AddFriendRequest {
 
     public void setFriend2email(String friend2email) {
         this.friend2email = friend2email;
+    }
+
+    public AuthToken getToken() {
+        return token;
+    }
+
+    public void setToken(AuthToken token) {
+        this.token = token;
     }
 }
