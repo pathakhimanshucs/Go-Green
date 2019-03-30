@@ -31,7 +31,8 @@ public class MainController {
 
     @FXML
     void clickedList(MouseEvent event) {
-        mylistview.getItems().add(new Label("Item"));
+        //mylistview.getItems().add(new Label("Item"));
+        Application.addActivity(1, "VEGMEAL");
     }
 
     @FXML

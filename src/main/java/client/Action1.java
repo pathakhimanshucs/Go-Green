@@ -40,7 +40,7 @@ class Action1 extends JFrame implements ActionListener {
         vegetarian.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent1) {
                 ///////////////////////////
-                Application.addActivity(1);
+                //Application.addActivity(1);
                 JOptionPane.showMessageDialog((Component) actionEvent1.getSource(),
                         "You have chosen a vegetarian meal");
                 JOptionPane.setDefaultLocale(null);
