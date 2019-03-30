@@ -1,9 +1,9 @@
 package objects;
 
 public class ActivityRequest {
-    private AuthToken token;
     String email;
     Activity activity;
+    private AuthToken token;
 
     public AuthToken getToken() {
         return token;

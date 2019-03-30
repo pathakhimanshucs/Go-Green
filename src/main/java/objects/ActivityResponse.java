@@ -1,12 +1,11 @@
 package objects;
 
-import java.util.Objects;
-
 public class ActivityResponse {
     public boolean addActivitySuccess;
 
     public ActivityResponse() {
     }
+
     public boolean isAddActivitySuccess() {
         return addActivitySuccess;
     }
@@ -16,10 +15,14 @@ public class ActivityResponse {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ActivityResponse that = (ActivityResponse) o;
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        ActivityResponse that = (ActivityResponse) obj;
         return addActivitySuccess == that.addActivitySuccess;
     }
 

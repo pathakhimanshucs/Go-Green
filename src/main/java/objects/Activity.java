@@ -6,11 +6,15 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @JsonIgnoreProperties
-public class  Activity{
+public class Activity {
     private Timestamp time;
-    private float CO2Amount;
+    private float co2Amount;
     private int amount;
-    private activityObject activity;
+    private ActivityObject activity;
+
+    public Activity() {
+
+    }
 
     public int getAmount() {
         return amount;
@@ -18,10 +22,6 @@ public class  Activity{
 
     public void setAmount(int amount) {
         this.amount = amount;
-    }
-
-    public Activity() {
-
     }
 
     public Timestamp getTime() {
@@ -32,37 +32,41 @@ public class  Activity{
         this.time = time;
     }
 
-    public float getCO2Amount() {
-        return CO2Amount;
+    public float getCo2Amount() {
+        return co2Amount;
     }
 
-    public enum activityObject {
+    public void setCo2Amount(float co2Amount) {
+        this.co2Amount = co2Amount;
+    }
+
+    public ActivityObject getActivity() {
+        return activity;
+    }
+
+    public void setActivity(ActivityObject activity) {
+        this.activity = activity;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Activity activity = (Activity) obj;
+        return co2Amount == activity.co2Amount
+            && Objects.equals(time, activity.time);
+    }
+
+    public enum ActivityObject {
         VEGMEAL,
         LOCALFOOD,
         BIKE,
         PUBTRANS,
         HOMETEMP,
         SOLARPANELS
-    }
-
-    public activityObject getActivity() {
-        return activity;
-    }
-
-    public void setActivity(activityObject activity) {
-        this.activity = activity;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Activity activity = (Activity) o;
-        return CO2Amount == activity.CO2Amount &&
-                Objects.equals(time, activity.time);
-    }
-
-    public void setCO2Amount(float CO2Amount) {
-        this.CO2Amount = CO2Amount;
     }
 }

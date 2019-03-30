@@ -6,15 +6,11 @@ import java.util.Objects;
 
 @JsonIgnoreProperties
 public class RegisterResponse {
-    private AuthToken token;
     public boolean registerSuccess;
     public String name;
+    private AuthToken token;
 
-    public RegisterResponse(){
-    }
-
-    public void setRegisterSuccess(boolean registerSuccess) {
-        this.registerSuccess = registerSuccess;
+    public RegisterResponse() {
     }
 
     public String getName() {
@@ -27,6 +23,10 @@ public class RegisterResponse {
 
     public boolean getRegisterSuccess() {
         return registerSuccess;
+    }
+
+    public void setRegisterSuccess(boolean registerSuccess) {
+        this.registerSuccess = registerSuccess;
     }
 
     public AuthToken getToken() {

@@ -1,7 +1,20 @@
 package server;
 
-import objects.*;
-import org.postgresql.util.PSQLException;
+import objects.Activity;
+import objects.ActivityListRequest;
+import objects.ActivityListResponse;
+import objects.ActivityRequest;
+import objects.ActivityResponse;
+import objects.AddFriendRequest;
+import objects.AddFriendResponse;
+import objects.AuthToken;
+import objects.Encrypt;
+import objects.FriendListResponse;
+import objects.FriendsListRequest;
+import objects.LoginRequest;
+import objects.LoginResponse;
+import objects.RegisterRequest;
+import objects.RegisterResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +80,8 @@ public class WebApi {
 
     /**
      * attemptLogin method.
-     * @param email string
+     *
+     * @param email    string
      * @param password string
      * @return String
      */
@@ -79,7 +93,7 @@ public class WebApi {
             String userSentPassWord = Encrypt.decryptPassWord(email, password);
             String dbReturnedEncryption = result.getString("password");
             String dbReturnedPassWord = Encrypt.decryptPassWord(email, dbReturnedEncryption);
-            if(userSentPassWord.equals(dbReturnedPassWord)) {
+            if (userSentPassWord.equals(dbReturnedPassWord)) {
                 return result.getString("name");
             } else {
                 return null;
@@ -121,6 +135,7 @@ public class WebApi {
 
     /**
      * checkIfEmailExists method.
+     *
      * @param email String
      * @return boolean
      */
@@ -142,8 +157,9 @@ public class WebApi {
 
     /**
      * createAccInDB method.
-     * @param email String
-     * @param name String
+     *
+     * @param email    String
+     * @param name     String
      * @param password String
      */
     public void createAccInDB(String email, String name, String password) {
@@ -161,13 +177,14 @@ public class WebApi {
     @RequestMapping(path = "/addactivity",
         consumes = "application/json", produces = "application/json")
     public ActivityResponse addActivity(@RequestBody ActivityRequest actReq) {
-        String email = actReq.getEmail();
-        int amount = actReq.getActivity().getAmount();
+        AuthToken token = actReq.getToken();
         Activity activity = actReq.getActivity();
 
-        AuthToken token = actReq.getToken();
+        String email = token.getEmail();
+        int amount = activity.getAmount();
 
-        if(!checkTokenValidity(token.getToken())){
+
+        if (!checkTokenValidity(token.getToken())) {
             ActivityResponse response = new ActivityResponse();
             response.setAddActivitySuccess(false);
             return response;
@@ -189,17 +206,19 @@ public class WebApi {
 
     /**
      * method.
+     *
      * @param req ActivityListRequest
      * @return
      */
     @RequestMapping(path = "/getActivityList",
         consumes = "application/json", produces = "application/json")
     public ActivityListResponse getActivityList(@RequestBody ActivityListRequest req) {
-        String email = req.getEmail();
-
         AuthToken token = req.getToken();
 
-        if(!checkTokenValidity(token.getToken())){
+        String email = token.getEmail();
+
+
+        if (!checkTokenValidity(token.getToken())) {
             ActivityListResponse res = new ActivityListResponse();
             res.setEmail(email);
             res.setActivityListSuccess(false);
@@ -208,7 +227,7 @@ public class WebApi {
 
         logger.info("getting activities " + email);
         LinkedList<Activity> activities = findAllActivities(email);
-        activities=  calculateCO2(activities);
+        activities = calculateCO2(activities);
         if (activities != null) {
             ActivityListResponse res = new ActivityListResponse();
             res.setActivities(activities);
@@ -223,19 +242,19 @@ public class WebApi {
         }
     }
 
-    public LinkedList<Activity> calculateCO2(LinkedList<Activity> activities){
-        for(Activity activity : activities){
+    private LinkedList<Activity> calculateCO2(LinkedList<Activity> activities) {
+        for (Activity activity : activities) {
             String activityType = activity.getActivity().toString().toLowerCase();
             float co2multiplier = getCO2FromDB(activityType);
-            activity.setCO2Amount(activity.getAmount()*co2multiplier);
+            activity.setCo2Amount(activity.getAmount() * co2multiplier);
         }
         return activities;
     }
 
-    private float getCO2FromDB(String valueName){
+    private float getCO2FromDB(String valueName) {
         String query = "select * from activityvalues WHERE name = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(query, valueName);
-        if(result.next()){
+        if (result.next()) {
             return result.getFloat("value");
         }
         return 0;
@@ -244,6 +263,7 @@ public class WebApi {
 
     /**
      * getUserIdFromEmail method.
+     *
      * @param email String
      * @return
      */
@@ -264,8 +284,9 @@ public class WebApi {
 
     /**
      * addActivityInDB method.
-     * @param email String
-     * @param amount integer
+     *
+     * @param email    String
+     * @param amount   integer
      * @param activity Activity
      * @return
      */
@@ -283,8 +304,10 @@ public class WebApi {
             return -1;
         }
     }
+
     /**
      * findAllActivities method.
+     *
      * @param email String
      * @return LinkedList
      */
@@ -297,7 +320,8 @@ public class WebApi {
                 Activity activity = new Activity();
                 activity.setAmount(activitiesDB.getInt("amount"));
                 activity.setTime(activitiesDB.getTimestamp("time"));
-                activity.setActivity(Activity.activityObject.valueOf(activitiesDB.getString("table_name")));
+                activity.setActivity(Activity.ActivityObject.valueOf(
+                    activitiesDB.getString("table_name")));
                 activitiesList.add(activity);
             }
             return activitiesList;
@@ -308,6 +332,7 @@ public class WebApi {
 
     /**
      * getAllActivitiesFromDB method.
+     *
      * @param userid integer
      * @return SqlRowSet
      */
@@ -317,6 +342,13 @@ public class WebApi {
         return result;
     }
 
+
+    /**
+     * Handles the request that is sent from client when they want to add a friend.
+     * Returns success if friend was added.
+     * @param addReq Object of class AddFriendRequest that contains the friend to add.
+     * @return AddFriendResponse
+     */
     @RequestMapping(path = "/addFriend",
         consumes = "application/json", produces = "application/json")
     public AddFriendResponse addFriend(@RequestBody AddFriendRequest addReq) {
@@ -325,36 +357,36 @@ public class WebApi {
 
         AuthToken token = addReq.getToken();
 
-        if(!checkTokenValidity(token.getToken())){
+        if (!checkTokenValidity(token.getToken())) {
             AddFriendResponse res = new AddFriendResponse();
             res.setAddFriendSuccess(false);
             return res;
         }
 
         logger.info("Attempting to add friends");
-        if(addFriendsToDB(friend1, friend2) != -1) {
+        if (addFriendsToDB(friend1, friend2) != -1) {
             AddFriendResponse res = new AddFriendResponse();
             res.setAddFriendSuccess(true);
             res.setFriend2(friend2);
             return res;
-        }else{
+        } else {
             AddFriendResponse res = new AddFriendResponse();
             res.setAddFriendSuccess(false);
             return res;
         }
     }
 
-    private int addFriendsToDB(String friend1email, String friend2email){
+    private int addFriendsToDB(String friend1email, String friend2email) {
         int friend1 = getUserIdFromEmail(friend1email);
         int friend2 = getUserIdFromEmail(friend2email);
 
-        if(friend1 == -1 || friend2 == -1){
+        if (friend1 == -1 || friend2 == -1) {
             return -1;
-        }else{
+        } else {
             String query = "INSERT INTO friends (friend1, friend2) VALUES (?,?)";
-            try{
-                jdbcTemplate.update(query, friend1,friend2);
-            }catch (DataAccessException e){
+            try {
+                jdbcTemplate.update(query, friend1, friend2);
+            } catch (DataAccessException e) {
                 logger.info("Two users are already friends");
                 return -1;
             }
@@ -362,9 +394,9 @@ public class WebApi {
         }
     }
 
-    private LinkedList<String> getFriends(String email){
+    private LinkedList<String> getFriends(String email) {
         int friend1ID = getUserIdFromEmail(email);
-        if(friend1ID != -1){
+        if (friend1ID != -1) {
             SqlRowSet result = getAllFriendsFromDB(friend1ID);
             LinkedList<String> friendsList = new LinkedList<>();
             while (result.next()) {
@@ -373,7 +405,7 @@ public class WebApi {
                 friendsList.add(friendEmail);
             }
             return friendsList;
-        }else{
+        } else {
             return null;
         }
     }
@@ -389,11 +421,18 @@ public class WebApi {
         }
     }
 
-    private SqlRowSet getAllFriendsFromDB(int userid){
+    private SqlRowSet getAllFriendsFromDB(int userid) {
         String query = "SELECT * FROM friends WHERE friend1 = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(query, userid);
         return result;
     }
+
+
+    /**
+     * Handles the request that is sent from client when they want to get a list of their friend.
+     * @param req Object of class FriendListRequest that contains the friend to add.
+     * @return AddFriendResponse A list of all the users friends.
+     */
 
     @RequestMapping(path = "/getFriendsList",
         consumes = "application/json", produces = "application/json")
@@ -401,7 +440,7 @@ public class WebApi {
         String email = req.getEmail();
         AuthToken token = req.getToken();
 
-        if(!checkTokenValidity(token.getToken())){
+        if (!checkTokenValidity(token.getToken())) {
             FriendListResponse res = new FriendListResponse();
             res.setEmail(email);
             res.setFriendsListSuccess(false);
@@ -424,7 +463,7 @@ public class WebApi {
         }
     }
 
-    private AuthToken generateAuthToken(String email){
+    private AuthToken generateAuthToken(String email) {
         removeDuplicateToken(email);
         removeExpiredTokens();
 
@@ -440,21 +479,22 @@ public class WebApi {
         return resToken;
     }
 
-    private void addTokenToDB(String email, String token){
+    private void addTokenToDB(String email, String token) {
         String query = "INSERT INTO sessiontokens (email, time, token) VALUES (?,?,?)";
         jdbcTemplate.update(query, email, new Timestamp(System.currentTimeMillis()), token);
     }
 
-    private void removeDuplicateToken(String email){
+    private void removeDuplicateToken(String email) {
         String query = "SELECT remove_duplicate_tokens(?)";
         SqlRowSet result = jdbcTemplate.queryForRowSet(query, email);
     }
-    private void removeExpiredTokens(){
+
+    private void removeExpiredTokens() {
         String query = "SELECT remove_expired_tokens()";
         SqlRowSet result = jdbcTemplate.queryForRowSet(query);
     }
 
-    private boolean checkTokenValidity(String token){
+    private boolean checkTokenValidity(String token) {
         removeExpiredTokens();
 
         String query = "SELECT * FROM sessiontokens WHERE token = ?";
