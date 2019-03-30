@@ -30,7 +30,6 @@ public class LoginController {
         String username = tf_email.getText();
         String password = pf_password.getText();
         System.out.println("email " + tf_email.getText() + " password " + pf_password.getText());
-        Application.loginToServer(tf_email.getText(), pf_password.getText());
 
         if (!Application.loginToServer(username,
             password).getName().equals("error")) {
