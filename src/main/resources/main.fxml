@@ -72,11 +72,11 @@
                      </AnchorPane>
                  </content>
              </Tab>
-            <Tab text="Friends">
+            <Tab onSelectionChanged="#displayFriends" text="Friends">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@dark-theme.css">
                      <children>
-                        <JFXListView fx:id="mylistview1" layoutX="71.0" layoutY="30.0" onMouseClicked="#clickedList" prefHeight="400.0" prefWidth="458.0" styleClass="mylistview" />
+                        <JFXListView fx:id="friendlistview" layoutX="71.0" layoutY="30.0" prefHeight="400.0" prefWidth="458.0" styleClass="mylistview" />
                         <Button layoutX="196.0" layoutY="504.0" mnemonicParsing="false" onMouseClicked="#friendButton" prefHeight="46.0" prefWidth="208.0" text="Add Friend" />
                         <JFXTextField fx:id="tf_friendmail" focusColor="#00ff55" layoutX="142.0" layoutY="430.0" prefHeight="58.0" prefWidth="316.0" promptText="Friend email">
                            <font>

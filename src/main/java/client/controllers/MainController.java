@@ -3,6 +3,8 @@ package client.controllers;
 import client.Application;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -11,13 +13,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import objects.FriendListResponse;
 
 import java.io.IOException;
+import java.util.LinkedList;
 
 public class MainController {
 
     @FXML
     private JFXListView<Label> mylistview;
+
+    @FXML
+    private JFXListView<String> friendlistview;
 
     @FXML
     private JFXTextField tf_friendmail;
@@ -49,17 +56,7 @@ public class MainController {
     void friendButton(MouseEvent event) {
         String email = tf_friendmail.getText();
         boolean response = Application.addFriend(email);
-        if (response == true) {
-            System.out.println(response);
-        } else {
-            System.out.println(response);
-        }
-    }
-    // STILL IN CONSTRUCTION!
-    @FXML
-    void displayFriends(MouseEvent event) {
-        String email = tf_friendmail.getText();
-        boolean response = Application.addFriend(email);
+        displayFriends();
         if (response == true) {
             System.out.println(response);
         } else {
@@ -67,4 +64,14 @@ public class MainController {
         }
     }
 
+    @FXML
+    void displayFriends() {
+       FriendListResponse response = Application.showFriends();
+       if (response.isFriendsListSuccess() == false) {
+           return;
+       }
+       LinkedList<String> friendlist = response.getFriends();
+       ObservableList<String> list = FXCollections.observableList(friendlist);
+       friendlistview.setItems(list);
+    }
 }

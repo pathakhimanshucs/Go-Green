@@ -220,7 +220,7 @@ public class Application {
     }
 
     public static FriendListResponse showFriends() {
-        final String baseUrl = "http://localhost:" + 8080 + "/addFriend/";
+        final String baseUrl = "http://localhost:" + 8080 + "/getFriendsList/";
         URI uri = null;
         try {
             uri = new URI(baseUrl);
