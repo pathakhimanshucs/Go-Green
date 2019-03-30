@@ -10,6 +10,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -114,8 +115,8 @@ public class Application {
      * adds Veg Meal method.
      * @param amount of vegmeal
      */
-    public static void addActivity(int amount) {
-        final String baseUrl = "http://localhost:" + 8080 + "/addactiviy/";
+    public static void addActivity(int amount, String ActivityName) {
+        final String baseUrl = "http://localhost:" + 8080 + "/addactivity/";
         URI uri = null;
         try {
             uri = new URI(baseUrl);
@@ -123,10 +124,18 @@ public class Application {
             System.err.println(e);
         }
 
+        Activity activity = new Activity();
+        activity.setAmount(amount);
+        Date date = new Date();
+        Timestamp time = new Timestamp(date.getTime());
+        activity.setTime(time);
+        activity.setActivity(Activity.ActivityObject.VEGMEAL);
+        activity.setCo2Amount(1);
+
         ActivityRequest actReq = new ActivityRequest();
-        actReq.getActivity().setAmount(amount);
         actReq.setToken(token);
         actReq.setEmail(token.getEmail());
+        actReq.setActivity(activity);
 
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<ActivityRequest> req = new HttpEntity<>(actReq, headers);
