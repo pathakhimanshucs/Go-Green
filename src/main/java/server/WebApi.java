@@ -352,10 +352,11 @@ public class WebApi {
     @RequestMapping(path = "/addFriend",
         consumes = "application/json", produces = "application/json")
     public AddFriendResponse addFriend(@RequestBody AddFriendRequest addReq) {
-        String friend1 = addReq.getFriend1email();
+        AuthToken token = addReq.getToken();
+
+        String friend1 = token.getEmail();
         String friend2 = addReq.getFriend2email();
 
-        AuthToken token = addReq.getToken();
 
         if (!checkTokenValidity(token.getToken())) {
             AddFriendResponse res = new AddFriendResponse();
@@ -437,8 +438,8 @@ public class WebApi {
     @RequestMapping(path = "/getFriendsList",
         consumes = "application/json", produces = "application/json")
     public FriendListResponse getFriendsList(@RequestBody FriendsListRequest req) {
-        String email = req.getEmail();
         AuthToken token = req.getToken();
+        String email = token.getEmail();
 
         if (!checkTokenValidity(token.getToken())) {
             FriendListResponse res = new FriendListResponse();
