@@ -24,15 +24,15 @@ public class Friend {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
 
-        Friend friend = (Friend) o;
+        Friend friend = (Friend) obj;
 
         if (Float.compare(friend.totalCO2, totalCO2) != 0) {
             return false;

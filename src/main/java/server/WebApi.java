@@ -244,7 +244,7 @@ public class WebApi {
     }
 
     private LinkedList<Activity> calculateCO2(LinkedList<Activity> activities) {
-        if(activities == null){
+        if (activities == null) {
             return null;
         }
 
@@ -256,6 +256,11 @@ public class WebApi {
         return activities;
     }
 
+    /**
+     * Gets CO2 from database.
+     * @param valueName Name of the value.
+     * @return
+     */
     public float getCO2FromDB(String valueName) {
         String query = "select * from activityvalues WHERE name = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(query, valueName);
@@ -419,6 +424,11 @@ public class WebApi {
         }
     }
 
+    /**
+     * Gets email from database using userID.
+     * @param userId UserID of client.
+     * @return
+     */
     public String getEmailFromUserID(int userId) {
         String query = "select * from users where userid = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(query, userId);
@@ -503,6 +513,11 @@ public class WebApi {
         SqlRowSet result = jdbcTemplate.queryForRowSet(query);
     }
 
+    /**
+     * Checks for user token validity.
+     * @param token Token of user.
+     * @return
+     */
     public boolean checkTokenValidity(String token) {
         removeExpiredTokens();
 
@@ -521,12 +536,16 @@ public class WebApi {
         }
     }
 
-    public float getTotalCO2ForUser(String email){
+    /**
+     * Gets total CO2 from user.
+     * @param email Email of user.
+     */
+    public float getTotalCO2ForUser(String email) {
         LinkedList<Activity> activities = findAllActivities(email);
         activities = calculateCO2(activities);
         float total = 0;
 
-        for(Activity activity : activities){
+        for (Activity activity : activities) {
             total += activity.getCo2Amount();
         }
         return total;

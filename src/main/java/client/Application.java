@@ -1,6 +1,20 @@
 package client;
 
-import objects.*;
+import objects.Activity;
+import objects.ActivityListRequest;
+import objects.ActivityListResponse;
+import objects.ActivityRequest;
+import objects.ActivityResponse;
+import objects.AddFriendRequest;
+import objects.AddFriendResponse;
+import objects.AuthToken;
+import objects.Encrypt;
+import objects.FriendListResponse;
+import objects.FriendsListRequest;
+import objects.LoginRequest;
+import objects.LoginResponse;
+import objects.RegisterRequest;
+import objects.RegisterResponse;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

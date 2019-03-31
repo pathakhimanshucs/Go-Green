@@ -32,15 +32,15 @@ public class FriendListResponse {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
 
-        FriendListResponse that = (FriendListResponse) o;
+        FriendListResponse that = (FriendListResponse) obj;
 
         if (friendsListSuccess != that.friendsListSuccess) {
             return false;
