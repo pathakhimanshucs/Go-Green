@@ -101,9 +101,9 @@
             </Tab>
          </tabs>
       </JFXTabPane>
-      <Button layoutX="500.0" layoutY="596.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="73.0" style="-fx-border-color: -fx-primary;">
+      <Button layoutX="500.0" layoutY="596.0" mnemonicParsing="false" onMouseClicked="#pressPlusButton" prefHeight="72.0" prefWidth="73.0" style="-fx-border-color: -fx-primary;">
          <graphic>
-            <FontAwesomeIconView glyphName="PLUS_CIRCLE" onMouseClicked="#pressPlusButton" size="50" text="" textAlignment="CENTER" x="550.0" y="650.0" />
+            <FontAwesomeIconView glyphName="PLUS_CIRCLE" size="50" text="" textAlignment="CENTER" x="550.0" y="650.0" />
          </graphic>
       </Button>
    </children>
