@@ -22,4 +22,21 @@ public class AddFriendResponse {
     public void setAddFriendSuccess(boolean addFriendSuccess) {
         this.addFriendSuccess = addFriendSuccess;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        AddFriendResponse that = (AddFriendResponse) o;
+
+        if (addFriendSuccess != that.addFriendSuccess) {
+            return false;
+        }
+        return friend2 != null ? friend2.equals(that.friend2) : that.friend2 == null;
+    }
 }

@@ -48,19 +48,6 @@ public class Activity {
         this.activity = activity;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        Activity activity = (Activity) obj;
-        return co2Amount == activity.co2Amount
-            && Objects.equals(time, activity.time);
-    }
-
     public enum ActivityObject {
         VEGMEAL,
         LOCALFOOD,
@@ -68,5 +55,28 @@ public class Activity {
         PUBTRANS,
         HOMETEMP,
         SOLARPANELS
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Activity activity1 = (Activity) o;
+
+        if (Float.compare(activity1.co2Amount, co2Amount) != 0) {
+            return false;
+        }
+        if (amount != activity1.amount) {
+            return false;
+        }
+        if (time != null ? !time.equals(activity1.time) : activity1.time != null) {
+            return false;
+        }
+        return activity == activity1.activity;
     }
 }
