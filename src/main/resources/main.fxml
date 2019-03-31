@@ -19,7 +19,7 @@
    <children>
       <JFXTabPane prefHeight="700.0" prefWidth="600.0">
          <tabs>
-            <Tab text="Profile">
+            <Tab onSelectionChanged="#displayActivity" text="Profile">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="600.0" stylesheets="@dark-theme.css">
                      <children>

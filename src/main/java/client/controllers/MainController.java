@@ -60,21 +60,11 @@ public class MainController {
         //---------------------------------------------------------------
 
         //mylistview.getItems().add(new Label("Item"));
-       //Application.addActivity(1, "VEGMEAL");
+       Application.addActivity(1, "VEGMEAL");
 
         //--------------------------------------------------------------
 
 
-        ActivityListResponse data = Application.getActivities();
-
-        LinkedList<Activity> list = data.getActivities();
-
-        ObservableList<Activity> observableList = FXCollections.observableList(list);
-
-        activityColumn1.setCellValueFactory(new PropertyValueFactory<Activity, String>("activity"));
-        activityColumn2.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("amount"));
-        activityColumn3.setCellValueFactory(new PropertyValueFactory<Activity, String>("time"));
-        tableview.setItems(observableList);
 
 
     }
@@ -118,5 +108,20 @@ public class MainController {
        LinkedList<String> friendlist = response.getFriends();
        ObservableList<String> list = FXCollections.observableList(friendlist);
        friendlistview.setItems(list);
+    }
+
+    @FXML
+    void displayActivity() {
+
+        ActivityListResponse data = Application.getActivities();
+
+        LinkedList<Activity> list = data.getActivities();
+
+        ObservableList<Activity> observableList = FXCollections.observableList(list);
+
+        activityColumn1.setCellValueFactory(new PropertyValueFactory<Activity, String>("activity"));
+        activityColumn2.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("amount"));
+        activityColumn3.setCellValueFactory(new PropertyValueFactory<Activity, String>("time"));
+        tableview.setItems(observableList);
     }
 }
