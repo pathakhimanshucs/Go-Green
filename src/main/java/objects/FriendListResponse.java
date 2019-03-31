@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class FriendListResponse {
     private String email;
-    private LinkedList<String> friends;
+    private LinkedList<Friend> friends;
     private boolean friendsListSuccess;
 
     public String getEmail() {
@@ -15,11 +15,11 @@ public class FriendListResponse {
         this.email = email;
     }
 
-    public LinkedList<String> getFriends() {
+    public LinkedList<Friend> getFriends() {
         return friends;
     }
 
-    public void setFriends(LinkedList<String> friends) {
+    public void setFriends(LinkedList<Friend> friends) {
         this.friends = friends;
     }
 
@@ -32,15 +32,15 @@ public class FriendListResponse {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
         }
-        if (obj == null || getClass() != obj.getClass()) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
 
-        FriendListResponse that = (FriendListResponse) obj;
+        FriendListResponse that = (FriendListResponse) o;
 
         if (friendsListSuccess != that.friendsListSuccess) {
             return false;

@@ -14,19 +14,12 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Client application with main method.
+ * Client application that contains all necessary api calls.
  */
 public class Application {
     //static String eMail;
     static AuthToken token;
-    /**
-     * Main method.
-     * @param args Provided arguments.
-     */
 
-    public static void main(String[] args) {
-        System.out.println("Welcome " + loginToServer("alice@gmail.com","alicepwd").toString());
-    }
 
     /**
      * Sends an HTTP request to the server with str as param.

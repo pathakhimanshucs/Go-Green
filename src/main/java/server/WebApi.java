@@ -9,6 +9,7 @@ import objects.AddFriendRequest;
 import objects.AddFriendResponse;
 import objects.AuthToken;
 import objects.Encrypt;
+import objects.Friend;
 import objects.FriendListResponse;
 import objects.FriendsListRequest;
 import objects.LoginRequest;
@@ -399,15 +400,18 @@ public class WebApi {
         }
     }
 
-    private LinkedList<String> getFriends(String email) {
+    private LinkedList<Friend> getFriends(String email) {
         int friend1ID = getUserIdFromEmail(email);
         if (friend1ID != -1) {
             SqlRowSet result = getAllFriendsFromDB(friend1ID);
-            LinkedList<String> friendsList = new LinkedList<>();
+            LinkedList<Friend> friendsList = new LinkedList<>();
             while (result.next()) {
-                int friend = result.getInt("friend2");
-                String friendEmail = getEmailFromUserID(friend);
-                friendsList.add(friendEmail);
+                Friend temp = new Friend();
+                int friendID = result.getInt("friend2");
+                String friendEmail = getEmailFromUserID(friendID);
+                temp.setEmail(friendEmail);
+                temp.setTotalCO2(getTotalCO2ForUser(friendEmail));
+                friendsList.add(temp);
             }
             return friendsList;
         } else {
@@ -453,7 +457,7 @@ public class WebApi {
         }
 
         logger.info("getting friends for" + email);
-        LinkedList<String> friends = getFriends(email);
+        LinkedList<Friend> friends = getFriends(email);
         if (friends != null) {
             FriendListResponse res = new FriendListResponse();
             res.setEmail(email);
@@ -515,6 +519,17 @@ public class WebApi {
             }
             return false;
         }
+    }
+
+    public float getTotalCO2ForUser(String email){
+        LinkedList<Activity> activities = findAllActivities(email);
+        activities = calculateCO2(activities);
+        float total = 0;
+
+        for(Activity activity : activities){
+            total += activity.getCo2Amount();
+        }
+        return total;
     }
 
 }
