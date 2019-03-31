@@ -7,10 +7,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DialogPane;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,17 +18,17 @@ import java.io.IOException;
 public class LoginController {
 
     @FXML
-    private JFXTextField tf_email;
+    private JFXTextField tfemail;
 
     @FXML
-    private JFXPasswordField pf_password;
+    private JFXPasswordField pfpassword;
 
     @FXML
     void btnLogin(MouseEvent event) {
         System.out.println("Login press");
-        String username = tf_email.getText();
-        String password = pf_password.getText();
-        System.out.println("email " + tf_email.getText() + " password " + pf_password.getText());
+        String username = tfemail.getText();
+        String password = pfpassword.getText();
+        System.out.println("email " + tfemail.getText() + " password " + pfpassword.getText());
 
         if (!Application.loginToServer(username,
             password).getName().equals("error")) {

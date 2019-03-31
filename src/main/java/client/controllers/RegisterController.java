@@ -19,13 +19,13 @@ import java.io.IOException;
 public class RegisterController {
 
     @FXML
-    private JFXTextField tf_name;
+    private JFXTextField tfname;
 
     @FXML
-    private JFXTextField tf_email;
+    private JFXTextField tfemail;
 
     @FXML
-    private JFXPasswordField pf_password;
+    private JFXPasswordField pfpassword;
 
     @FXML
     void backLogin(MouseEvent event) {
@@ -46,8 +46,8 @@ public class RegisterController {
 
     @FXML
     void btnRegister(MouseEvent event) {
-        RegisterResponse response = Application.createAccount(tf_email.getText(),
-            tf_name.getText(), pf_password.getText(), pf_password.getText());
+        RegisterResponse response = Application.createAccount(tfemail.getText(),
+            tfname.getText(), pfpassword.getText(), pfpassword.getText());
 
         if (response.getRegisterSuccess() == true) {
             Parent root = null;

@@ -12,14 +12,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import objects.Activity;
 
-
 import java.io.IOException;
 
 public class ActivityController {
     private Activity.ActivityObject activityType;
 
     @FXML
-    private JFXTextField tf_amount;
+    private JFXTextField tfamount;
 
     @FXML
     private MenuButton dropdown;
@@ -55,10 +54,10 @@ public class ActivityController {
             return;
         }
 
-        if (tf_amount.equals("")) {
+        if (tfamount.equals("")) {
             return;
         }
-        int value = Integer.parseInt(tf_amount.getText());
+        int value = Integer.parseInt(tfamount.getText());
         if (Application.addActivity(value, activityType) == true) {
             Parent root = null;
             try {

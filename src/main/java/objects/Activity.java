@@ -3,7 +3,6 @@ package objects;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.sql.Timestamp;
-import java.util.Objects;
 
 @JsonIgnoreProperties
 public class Activity {

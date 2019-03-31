@@ -21,7 +21,7 @@
             <MenuItem mnemonicParsing="false" onAction="#setSolarpanels" text="SOLARPANELS" />
         </items>
       </MenuButton>
-      <JFXTextField fx:id="tf_amount" layoutX="210.0" layoutY="332.0" />
+      <JFXTextField fx:id="tfamount" layoutX="210.0" layoutY="332.0" />
       <FontAwesomeIconView glyphName="CHEVRON_LEFT" layoutX="34.0" layoutY="656.0" onMouseClicked="#backMain" size="30" />
     </children>
 </AnchorPane>
