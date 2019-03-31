@@ -85,7 +85,7 @@ public class WebApi {
      * @param password string
      * @return String
      */
-    public String attemptLogin(String email, String password) {
+    private String attemptLogin(String email, String password) {
         String query = "SELECT * FROM users WHERE email = ?";
 
         SqlRowSet result = jdbcTemplate.queryForRowSet(query, email);
@@ -140,7 +140,7 @@ public class WebApi {
      * @return boolean
      */
 
-    public boolean checkIfEmailExists(String email) {
+    private boolean checkIfEmailExists(String email) {
         String query = "SELECT * FROM users WHERE email = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(query, email);
         if (!result.isBeforeFirst()) {
@@ -162,7 +162,7 @@ public class WebApi {
      * @param name     String
      * @param password String
      */
-    public void createAccInDB(String email, String name, String password) {
+    private void createAccInDB(String email, String name, String password) {
         logger.info("Added user to DB");
         String query = "INSERT INTO users (email, name, password) VALUES (?,?,?)";
         jdbcTemplate.update(query, email, name, password);
@@ -243,6 +243,10 @@ public class WebApi {
     }
 
     private LinkedList<Activity> calculateCO2(LinkedList<Activity> activities) {
+        if(activities == null){
+            return null;
+        }
+
         for (Activity activity : activities) {
             String activityType = activity.getActivity().toString().toLowerCase();
             float co2multiplier = getCO2FromDB(activityType);
@@ -267,7 +271,7 @@ public class WebApi {
      * @param email String
      * @return
      */
-    public int getUserIdFromEmail(String email) {
+    private int getUserIdFromEmail(String email) {
         if (checkIfEmailExists(email)) {
             String query = "select * from users where email = ?";
             SqlRowSet result = jdbcTemplate.queryForRowSet(query, email);
@@ -290,7 +294,7 @@ public class WebApi {
      * @param activity Activity
      * @return
      */
-    public int addActivityInDB(String email, int amount, Activity activity) {
+    private int addActivityInDB(String email, int amount, Activity activity) {
         int userid = getUserIdFromEmail(email);
         String activityType = activity.getActivity().toString();
 
@@ -311,7 +315,7 @@ public class WebApi {
      * @param email String
      * @return LinkedList
      */
-    public LinkedList<Activity> findAllActivities(String email) {
+    private LinkedList<Activity> findAllActivities(String email) {
         int userid = getUserIdFromEmail(email);
         if (userid != -1) {
             LinkedList<Activity> activitiesList = new LinkedList<>();
@@ -336,7 +340,7 @@ public class WebApi {
      * @param userid integer
      * @return SqlRowSet
      */
-    public SqlRowSet getAllActivitiesFromDB(int userid) {
+    private SqlRowSet getAllActivitiesFromDB(int userid) {
         String query = "SELECT * FROM activities WHERE userid = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(query, userid);
         return result;

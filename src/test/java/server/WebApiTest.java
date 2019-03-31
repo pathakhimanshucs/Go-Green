@@ -7,7 +7,9 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.internal.configuration.injection.MockInjection;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.test.context.jdbc.Sql;
@@ -42,301 +44,760 @@ public class WebApiTest {
     }
 
 
+    @Test
+    public void loginMappingSuccessTest() {
+
+        //AttemptLogin
+        SqlRowSet sqlRowSet1 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet1).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet1).next();
+        Mockito.doReturn(Encrypt.encryptPassWord("alice@gmail.com", "alicepwd")).when(sqlRowSet1).getString("password");
+        Mockito.doReturn("Alice").when(sqlRowSet1).getString("name");
+        Mockito.doReturn(true).when(sqlRowSet1).isBeforeFirst();
+
+        String encryptedPWD = Encrypt.encryptPassWord("alice@gmail.com", "alicepwd");
+        LoginRequest req = new LoginRequest();
+        req.setEmail("alice@gmail.com");
+        req.setPassword(encryptedPWD);
+
+        LoginResponse res = new LoginResponse();
+        res.setName("Alice");
+
+
+        assertEquals(webApi.login(req), res);
+    }
+
+    @Test
+    public void loginMappingWrongPassword() {
+
+        //AttemptLogin
+        SqlRowSet sqlRowSet1 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet1).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet1).next();
+        Mockito.doReturn(Encrypt.encryptPassWord("alice@gmail.com", "alicepwd")).when(sqlRowSet1).getString("password");
+        Mockito.doReturn("Alice").when(sqlRowSet1).getString("name");
+        Mockito.doReturn(true).when(sqlRowSet1).isBeforeFirst();
+
+        String encryptedPWD = Encrypt.encryptPassWord("alice@gmail.com", "wrongalicepwd");
+        LoginRequest req = new LoginRequest();
+        req.setEmail("alice@gmail.com");
+        req.setPassword(encryptedPWD);
+
+        LoginResponse res = new LoginResponse();
+        res.setName("error");
+
+
+        assertEquals(webApi.login(req), res);
+    }
+
 //    @Test
-//    public void loginMappingSuccessTest() {
-////        //CheckIfEmailExists
-////        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
-////        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
-////        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
-////        Mockito.doReturn(true).when(sqlRowSet).next();
+//    public void loginMappingWrongPasswordTest() {
 //
 //        //AttemptLogin
 //        SqlRowSet sqlRowSet1 = Mockito.mock(SqlRowSet.class);
 //        Mockito.doReturn(sqlRowSet1).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
-//        Mockito.doReturn(true).when(sqlRowSet1).next();
-//        Mockito.doReturn(Encrypt.encryptPassWord("alice@gmail.com", "alicepwd")).when(sqlRowSet1).getString("password");
-//        Mockito.doReturn("Alice").when(sqlRowSet1).getString("name");
-//        Mockito.doReturn(true).when(sqlRowSet1).isBeforeFirst();
-//
-//        String encryptedPWD = Encrypt.encryptPassWord("alice@gmail.com", "alicepwd");
+//        Mockito.doReturn(false).when(sqlRowSet1).next();
+//        String encryptedPWD = Encrypt.encryptPassWord("alice@gmail.com", "wrongalicepwd");
 //        LoginRequest req = new LoginRequest();
 //        req.setEmail("alice@gmail.com");
 //        req.setPassword(encryptedPWD);
 //
 //        LoginResponse res = new LoginResponse();
-//        res.setName("Alice");
-//
-//
-//        assertEquals(webApi.login(req), res);
-//    }
-//
-//    @Test
-//    public void loginMappingEmailExistFail() {
-//        //CheckIfEmailExists
-//        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
-////        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
-////        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
-////        Mockito.doReturn(true).when(sqlRowSet).next();
-//
-//        //AttemptLogin
-//        SqlRowSet sqlRowSet1 = Mockito.mock(SqlRowSet.class);
-//        Mockito.doReturn(sqlRowSet1).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
-////        Mockito.doReturn(false).when(sqlRowSet1).next();
-//
-//        LoginRequest req = new LoginRequest();
-//        req.setEmail("alice@gmail.com");
-//        req.setPassword("alicepwd");
-//
-//        LoginResponse res = new LoginResponse();
 //        res.setName("error");
 //
-//        assertEquals(webApi.login(req), res);
-//    }
-//
-//    @Test
-//    public void loginMappingEmailDoesntExist() {
-//        //CheckIfEmailExists
-//        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
-//        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
-//        Mockito.doReturn(false).when(sqlRowSet).isBeforeFirst();
-//
-//        LoginRequest req = new LoginRequest();
-//        req.setEmail("alice@gmail.com");
-//        req.setPassword("wrongpwd");
-//
-//        LoginResponse res = new LoginResponse();
-//        res.setName("error");
 //
 //        assertEquals(webApi.login(req), res);
 //    }
-//
-//    @Test
-//    public void testAttemptLoginSuccess(){
-//        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
-//        Mockito.doReturn(true).when(sqlRowSet).next();
-//        Mockito.doReturn("Alice").when(sqlRowSet).getString("name");
-//        Mockito.doReturn(Encrypt.encryptPassWord("alice@gmail.com", "alicepwd")).when(sqlRowSet).getString("password");
-//        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet(Mockito.anyString(), Mockito.anyString());
-//        String encryptedPWD = Encrypt.encryptPassWord("alice@gmail.com", "alicepwd");
-//        Assert.assertEquals(webApi.attemptLogin("alice@gmail.com", encryptedPWD), "Alice");
-//    }
-//
-//    @Test
-//    public void testAttemptLoginFail(){
-//        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
-//        Mockito.doReturn(false).when(sqlRowSet).next();
-//        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet(Mockito.anyString(), Mockito.anyString());
-//        Assert.assertEquals(webApi.attemptLogin("wrong@gmail.com", "wrongpwd"), null);
-//    }
-//
-//    @Test
-//    public void registerMappingSuccess(){
-//        //CheckIfEmailExists
-//        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
-//        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
-//        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
-//
-//        Mockito.doReturn(1).when(jdbcTemplate).update("INSERT INTO users (email, name, password) VALUES (?,?,?)", "alice@gmail.com", "Alice", "alicepwd");
-//
-//        RegisterRequest req = new RegisterRequest();
-//        req.setEmail("alice@gmail.com");
-//        req.setName("Alice");
-//        req.setPassword("alicepwd");
-//
-//        RegisterResponse res = new RegisterResponse();
-//        res.setName("Alice");
-//        res.setRegisterSuccess(true);
-//
-//        Assert.assertEquals(webApi.register(req), res);
-//    }
-//
-//    @Test
-//    public void registerMappingEmailExists(){
-//        //CheckIfEmailExists
-//        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
+
+    @Test
+    public void loginMappingEmailExistFail() {
+        //CheckIfEmailExists
+        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
 //        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
 //        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
 //        Mockito.doReturn(true).when(sqlRowSet).next();
-//
-//        RegisterRequest req = new RegisterRequest();
-//        req.setEmail("alice@gmail.com");
-//        req.setName("Alice");
-//        req.setPassword("alicepwd");
-//
-//        RegisterResponse res = new RegisterResponse();
-//        res.setRegisterSuccess(false);
-//
-//        Assert.assertEquals(webApi.register(req), res);
-//    }
-//
-//    @Test
-//    public void addVegMealSuccess(){
-//        //CheckIfEmailExists
-//        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
-//        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
-//        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
-//        Mockito.doReturn(true).when(sqlRowSet).next();
-//
-//        //GetUserIDFromEmail
-//        SqlRowSet sqlRowSet1 = Mockito.mock(SqlRowSet.class);
-//        Mockito.doReturn(sqlRowSet1).when(jdbcTemplate).queryForRowSet("select * from users where email = ?", "alice@gmail.com");
-//        Mockito.doReturn(true).when(sqlRowSet1).next();
-//        Mockito.doReturn(1).when(sqlRowSet1).getInt("userid");
-//
-//        //AddVMealInDB
-//        Mockito.doReturn(1).when(jdbcTemplate).update(Mockito.anyString(), Mockito.anyInt(), Mockito.any(Timestamp.class), Mockito.anyInt());
-//
-//        VegetarianMealRequest req = new VegetarianMealRequest();
-//        req.setEmail("alice@gmail.com");
-//        req.setAmount(1);
-//
-//        VegetarianMealResponse res = new VegetarianMealResponse();
-//        res.setAddVegetarianMealSuccess(true);
-//
-//        Assert.assertEquals(webApi.addvegmeal(req), res);
-//    }
-//
-//    @Test
-//    public void addVegMealEmailDoesntExist(){
-//        //CheckIfEmailExists
-//        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
-//        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
-//        Mockito.doReturn(false).when(sqlRowSet).isBeforeFirst();
-//
-//        VegetarianMealRequest req = new VegetarianMealRequest();
-//        req.setEmail("alice@gmail.com");
-//        req.setAmount(1);
-//
-//        VegetarianMealResponse res = new VegetarianMealResponse();
-//        res.setAddVegetarianMealSuccess(false);
-//
-//        Assert.assertEquals(webApi.addvegmeal(req), res);
-//    }
-//
-//    @Test
-//    public void addVegMeal0Amount(){
-//        //CheckIfEmailExists
-//        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
-//        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
-//        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
-//        Mockito.doReturn(true).when(sqlRowSet).next();
-//
-//        //GetUserIDFromEmail
-//        SqlRowSet sqlRowSet1 = Mockito.mock(SqlRowSet.class);
-//        Mockito.doReturn(sqlRowSet1).when(jdbcTemplate).queryForRowSet("select * from users where email = ?", "alice@gmail.com");
-//        Mockito.doReturn(true).when(sqlRowSet1).next();
-//        Mockito.doReturn(1).when(sqlRowSet1).getInt("userid");
-//
-//        VegetarianMealRequest req = new VegetarianMealRequest();
-//        req.setEmail("alice@gmail.com");
-//        req.setAmount(0);
-//
-//        VegetarianMealResponse res = new VegetarianMealResponse();
-//        res.setAddVegetarianMealSuccess(false);
-//
-//        Assert.assertEquals(webApi.addvegmeal(req), res);
-//    }
-//
-//    @Test
-//    public void getVegMealListSuccess(){
-//        //CheckIfEmailExists
-//        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
-//        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
-//        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
-//        Mockito.doReturn(true).when(sqlRowSet).next();
-//
-//        //GetUserIDFromEmail
-//        SqlRowSet sqlRowSet1 = Mockito.mock(SqlRowSet.class);
-//        Mockito.doReturn(sqlRowSet1).when(jdbcTemplate).queryForRowSet("select * from users where email = ?", "alice@gmail.com");
-//        Mockito.doReturn(true).when(sqlRowSet1).next();
-//        Mockito.doReturn(1).when(sqlRowSet1).getInt("userid");
-//
-//        //GetAllMealsFromDB
-//        SqlRowSet sqlRowSet2 = Mockito.mock(SqlRowSet.class);
-//        Mockito.doReturn(sqlRowSet2).when(jdbcTemplate).queryForRowSet("SELECT * FROM VEGMEAL WHERE USERID = ?", 1);
-//        Mockito.doReturn(true, false).when(sqlRowSet2).next();
-//        Mockito.doReturn(1).when(sqlRowSet2).getInt("amount");
-//        Mockito.doReturn(new Timestamp(1)).when(sqlRowSet2).getTimestamp("time");
-//
-//        LinkedList<Meal> resList = new LinkedList<Meal>();
-//        Meal tempMeal = new Meal();
-//        tempMeal.setTime(new Timestamp(1));
-//        tempMeal.setMealAmount(1);
-//        resList.add(tempMeal);
-//
-//        VegetarianMealListResponse resp = new VegetarianMealListResponse();
-//        resp.setMealsListSuccess(true);
-//        resp.setMeals(resList);
-//        resp.setEmail("alice@gmail.com");
-//
-//        VegetarianMealListRequest req = new VegetarianMealListRequest();
-//        req.setEmail("alice@gmail.com");
-//
-//        Assert.assertEquals(webApi.getVegMealsList(req), resp);
-//    }
-//
-//    @Test
-//    public void getVegMealListNull(){
-//        //CheckIfEmailExists
-//        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
-//        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
-//        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
-//        Mockito.doReturn(true).when(sqlRowSet).next();
-//
-//        //GetUserIDFromEmail
-//        SqlRowSet sqlRowSet1 = Mockito.mock(SqlRowSet.class);
-//        Mockito.doReturn(sqlRowSet1).when(jdbcTemplate).queryForRowSet("select * from users where email = ?", "alice@gmail.com");
-//        Mockito.doReturn(true).when(sqlRowSet1).next();
-//        Mockito.doReturn(1).when(sqlRowSet1).getInt("userid");
-//
-//        //GetAllMealsFromDB
-//        SqlRowSet sqlRowSet2 = Mockito.mock(SqlRowSet.class);
-//        Mockito.doReturn(sqlRowSet2).when(jdbcTemplate).queryForRowSet("SELECT * FROM VEGMEAL WHERE USERID = ?", 1);
-//        Mockito.doReturn(false).when(sqlRowSet2).next();
-//
-//        LinkedList<Meal> resList = new LinkedList<>();
-//
-//        VegetarianMealListResponse resp = new VegetarianMealListResponse();
-//        resp.setMealsListSuccess(true);
-//        resp.setMeals(resList);
-//        resp.setEmail("alice@gmail.com");
-//
-//        VegetarianMealListRequest req = new VegetarianMealListRequest();
-//        req.setEmail("alice@gmail.com");
-//
-//        Assert.assertEquals(webApi.getVegMealsList(req), resp);
-//    }
-//
-//    @Test
-//    public void getVegMealListFail(){
-//        //CheckIfEmailExists
-//        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
-//        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
-//        Mockito.doReturn(false).when(sqlRowSet).isBeforeFirst();
-//
-//        VegetarianMealListResponse resp = new VegetarianMealListResponse();
-//        resp.setMealsListSuccess(false);
-//        resp.setEmail("alice@gmail.com");
-//
-//        VegetarianMealListRequest req = new VegetarianMealListRequest();
-//        req.setEmail("alice@gmail.com");
-//
-//        Assert.assertEquals(webApi.getVegMealsList(req), resp);
-//    }
-//
-//    @Test
-//    public void getUserEmailFail(){
-//        //CheckIfEmailExists
-//        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
-//        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
-//        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
-//        Mockito.doReturn(true).when(sqlRowSet).next();
-//
-//        //GetUserIDFromEmail
-//        SqlRowSet sqlRowSet1 = Mockito.mock(SqlRowSet.class);
-//        Mockito.doReturn(sqlRowSet1).when(jdbcTemplate).queryForRowSet("select * from users where email = ?", "alice@gmail.com");
+
+        //AttemptLogin
+        SqlRowSet sqlRowSet1 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet1).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
 //        Mockito.doReturn(false).when(sqlRowSet1).next();
-//
-//        Assert.assertEquals(webApi.getUserIdFromEmail("alice@gmail.com"), -1);
-//    }
+
+        LoginRequest req = new LoginRequest();
+        req.setEmail("alice@gmail.com");
+        req.setPassword("alicepwd");
+
+        LoginResponse res = new LoginResponse();
+        res.setName("error");
+
+        assertEquals(webApi.login(req), res);
+    }
+
+    @Test
+    public void loginMappingEmailDoesntExist() {
+        //CheckIfEmailExists
+        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
+        Mockito.doReturn(false).when(sqlRowSet).isBeforeFirst();
+
+        LoginRequest req = new LoginRequest();
+        req.setEmail("alice@gmail.com");
+        req.setPassword("wrongpwd");
+
+        LoginResponse res = new LoginResponse();
+        res.setName("error");
+
+        assertEquals(webApi.login(req), res);
+    }
+
+    @Test
+    public void registerMappingSuccess(){
+        //CheckIfEmailExists
+        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
+
+        Mockito.doReturn(1).when(jdbcTemplate).update("INSERT INTO users (email, name, password) VALUES (?,?,?)", "alice@gmail.com", "Alice", "alicepwd");
+
+        RegisterRequest req = new RegisterRequest();
+        req.setEmail("alice@gmail.com");
+        req.setName("Alice");
+        req.setPassword("alicepwd");
+
+        RegisterResponse res = new RegisterResponse();
+        res.setName("Alice");
+        res.setRegisterSuccess(true);
+
+        Assert.assertEquals(webApi.register(req), res);
+    }
+
+    @Test
+    public void registerMappingEmailExists(){
+        //CheckIfEmailExists
+        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
+        Mockito.doReturn(true).when(sqlRowSet).next();
+
+        RegisterRequest req = new RegisterRequest();
+        req.setEmail("alice@gmail.com");
+        req.setName("Alice");
+        req.setPassword("alicepwd");
+
+        RegisterResponse res = new RegisterResponse();
+        res.setRegisterSuccess(false);
+
+        Assert.assertEquals(webApi.register(req), res);
+    }
+
+    @Test
+    public void addActivitySuccess(){
+        //CheckTokenValidity Success
+        SqlRowSet checkTokenValidityRowSet = Mockito.mock(SqlRowSet.class);
+        String query = "SELECT * FROM sessiontokens WHERE token = ?";
+        Mockito.doReturn(checkTokenValidityRowSet).when(jdbcTemplate).queryForRowSet(query, "token");
+        Mockito.doReturn(true).when(checkTokenValidityRowSet).isBeforeFirst();
+        Mockito.doReturn(true).when(checkTokenValidityRowSet).next();
+
+//        //AddActivityInDB Success
+//        SqlRowSet addActivityInDBRowSet = Mockito.mock(SqlRowSet.class);
+//        String query2 = "INSERT INTO \"VEGMEAL\" (userid, time, amount) VALUES (?,?,?)";
+//        Mockito.doReturn(addActivityInDBRowSet).when(jdbcTemplate).queryForRowSet(query2, 1, "2019-01-01 00:00:00", 1);
+
+        //CheckIfEmailExists
+        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
+        Mockito.doReturn(true).when(sqlRowSet).next();
+        Mockito.doReturn("Alice").when(sqlRowSet).getString("name");
+
+        //GetUserIDFromEmail
+        SqlRowSet sqlRowSet1 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet1).when(jdbcTemplate).queryForRowSet("select * from users where email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet1).next();
+        Mockito.doReturn(1).when(sqlRowSet1).getInt("userid");
+
+        //Model Response
+        ActivityResponse res = new ActivityResponse();
+        res.setAddActivitySuccess(true);
+
+        //Test Request
+        ActivityRequest req = new ActivityRequest();
+        AuthToken token = new AuthToken();
+        token.setEmail("alice@gmail.com");
+        token.setToken("token");
+        req.setToken(token);
+        Activity act = new Activity();
+        act.setAmount(1);
+        act.setActivity(Activity.ActivityObject.VEGMEAL);
+        req.setActivity(act);
+
+        Assert.assertEquals(webApi.addActivity(req), res);
+    }
+
+    @Test
+    public void addActivityUserNotFound(){
+        //CheckTokenValidity Success
+        SqlRowSet checkTokenValidityRowSet = Mockito.mock(SqlRowSet.class);
+        String query = "SELECT * FROM sessiontokens WHERE token = ?";
+        Mockito.doReturn(checkTokenValidityRowSet).when(jdbcTemplate).queryForRowSet(query, "token");
+        Mockito.doReturn(true).when(checkTokenValidityRowSet).isBeforeFirst();
+        Mockito.doReturn(true).when(checkTokenValidityRowSet).next();
+
+        //CheckIfEmailExists
+        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
+        Mockito.doReturn(false).when(sqlRowSet).isBeforeFirst();
+
+        //Model Response
+        ActivityResponse res = new ActivityResponse();
+        res.setAddActivitySuccess(false);
+
+        //Test Request
+        ActivityRequest req = new ActivityRequest();
+        AuthToken token = new AuthToken();
+        token.setEmail("alice@gmail.com");
+        token.setToken("token");
+        req.setToken(token);
+        Activity act = new Activity();
+        act.setAmount(1);
+        act.setActivity(Activity.ActivityObject.VEGMEAL);
+        req.setActivity(act);
+
+        Assert.assertEquals(webApi.addActivity(req), res);
+    }
+
+    @Test
+    public void addActivityAmount0(){
+        //CheckTokenValidity Success
+        SqlRowSet checkTokenValidityRowSet = Mockito.mock(SqlRowSet.class);
+        String query = "SELECT * FROM sessiontokens WHERE token = ?";
+        Mockito.doReturn(checkTokenValidityRowSet).when(jdbcTemplate).queryForRowSet(query, "token");
+        Mockito.doReturn(true).when(checkTokenValidityRowSet).isBeforeFirst();
+        Mockito.doReturn(true).when(checkTokenValidityRowSet).next();
+
+        //CheckIfEmailExists
+        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
+        Mockito.doReturn(true).when(sqlRowSet).next();
+        Mockito.doReturn("Alice").when(sqlRowSet).getString("name");
+
+        //GetUserIDFromEmail
+        SqlRowSet sqlRowSet1 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet1).when(jdbcTemplate).queryForRowSet("select * from users where email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet1).next();
+        Mockito.doReturn(1).when(sqlRowSet1).getInt("userid");
+
+        //Model Response
+        ActivityResponse res = new ActivityResponse();
+        res.setAddActivitySuccess(false);
+
+        //Test Request
+        ActivityRequest req = new ActivityRequest();
+        AuthToken token = new AuthToken();
+        token.setEmail("alice@gmail.com");
+        token.setToken("token");
+        req.setToken(token);
+        Activity act = new Activity();
+        act.setAmount(0);
+        act.setActivity(Activity.ActivityObject.VEGMEAL);
+        req.setActivity(act);
+
+        Assert.assertEquals(webApi.addActivity(req), res);
+    }
+
+    @Test
+    public void addActivityInvalidToken(){
+        //CheckTokenValidity Success
+        SqlRowSet checkTokenValidityRowSet = Mockito.mock(SqlRowSet.class);
+        String query = "SELECT * FROM sessiontokens WHERE token = ?";
+        Mockito.doReturn(checkTokenValidityRowSet).when(jdbcTemplate).queryForRowSet(query, "token");
+        Mockito.doReturn(false).when(checkTokenValidityRowSet).isBeforeFirst();
+
+        //Model Response
+        ActivityResponse res = new ActivityResponse();
+        res.setAddActivitySuccess(false);
+
+        //Test Request
+        ActivityRequest req = new ActivityRequest();
+        AuthToken token = new AuthToken();
+        token.setEmail("alice@gmail.com");
+        token.setToken("token");
+        req.setToken(token);
+        Activity act = new Activity();
+        act.setAmount(0);
+        act.setActivity(Activity.ActivityObject.VEGMEAL);
+        req.setActivity(act);
+
+        Assert.assertEquals(webApi.addActivity(req), res);
+    }
+
+    @Test
+    public void getFriendsListSuccess(){
+        //CheckTokenValidity Success
+        SqlRowSet checkTokenValidityRowSet = Mockito.mock(SqlRowSet.class);
+        String query = "SELECT * FROM sessiontokens WHERE token = ?";
+        Mockito.doReturn(checkTokenValidityRowSet).when(jdbcTemplate).queryForRowSet(query, "token");
+        Mockito.doReturn(true).when(checkTokenValidityRowSet).isBeforeFirst();
+        Mockito.doReturn(true).when(checkTokenValidityRowSet).next();
+
+        //CheckIfEmailExists
+        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
+        Mockito.doReturn(true).when(sqlRowSet).next();
+        Mockito.doReturn("Alice").when(sqlRowSet).getString("name");
+
+        //GetUserIDFromEmail
+        SqlRowSet sqlRowSet1 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet1).when(jdbcTemplate).queryForRowSet("select * from users where email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet1).next();
+        Mockito.doReturn(1).when(sqlRowSet1).getInt("userid");
+
+        //GetAllFriendsFromDB
+        SqlRowSet sqlRowSet2 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet2).when(jdbcTemplate).queryForRowSet("SELECT * FROM friends WHERE friend1 = ?", 1);
+        Mockito.doReturn(true, false).when(sqlRowSet2).next();
+        Mockito.doReturn(2).when(sqlRowSet2).getInt("friend2");
+
+        //GetEmailFromUserID
+        SqlRowSet sqlRowSet3 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet3).when(jdbcTemplate).queryForRowSet("select * from users where userid = ?", 2);
+        Mockito.doReturn(true).when(sqlRowSet3).next();
+        Mockito.doReturn("bob@gmail.com").when(sqlRowSet3).getString("email");
+
+        //Model Response
+        FriendListResponse res = new FriendListResponse();
+        res.setFriendsListSuccess(true);
+        LinkedList<String> friendsList = new LinkedList<>();
+        friendsList.add("bob@gmail.com");
+        res.setFriends(friendsList);
+        res.setEmail("alice@gmail.com");
+
+        //Test request
+        FriendsListRequest req = new FriendsListRequest();
+        AuthToken token = new AuthToken();
+        token.setToken("token");
+        token.setEmail("alice@gmail.com");
+        req.setToken(token);
+
+        Assert.assertEquals(webApi.getFriendsList(req), res);
+    }
+
+    @Test
+    public void getFriendsListFail(){
+        //CheckTokenValidity Success
+        SqlRowSet checkTokenValidityRowSet = Mockito.mock(SqlRowSet.class);
+        String query = "SELECT * FROM sessiontokens WHERE token = ?";
+        Mockito.doReturn(checkTokenValidityRowSet).when(jdbcTemplate).queryForRowSet(query, "token");
+        Mockito.doReturn(true).when(checkTokenValidityRowSet).isBeforeFirst();
+        Mockito.doReturn(true).when(checkTokenValidityRowSet).next();
+
+        //CheckIfEmailExists
+        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
+        Mockito.doReturn(true).when(sqlRowSet).next();
+        Mockito.doReturn("Alice").when(sqlRowSet).getString("name");
+
+        //GetUserIDFromEmail
+        SqlRowSet sqlRowSet1 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet1).when(jdbcTemplate).queryForRowSet("select * from users where email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet1).next();
+        Mockito.doReturn(-1).when(sqlRowSet1).getInt("userid");
+
+        //Model Response
+        FriendListResponse res = new FriendListResponse();
+        res.setFriendsListSuccess(false);
+        res.setEmail("alice@gmail.com");
+
+        //Test request
+        FriendsListRequest req = new FriendsListRequest();
+        AuthToken token = new AuthToken();
+        token.setToken("token");
+        token.setEmail("alice@gmail.com");
+        req.setToken(token);
+
+        Assert.assertEquals(webApi.getFriendsList(req), res);
+    }
+
+    @Test
+    public void getFriendsListWrongToken(){
+        //CheckTokenValidity Success
+        SqlRowSet checkTokenValidityRowSet = Mockito.mock(SqlRowSet.class);
+        String query = "SELECT * FROM sessiontokens WHERE token = ?";
+        Mockito.doReturn(checkTokenValidityRowSet).when(jdbcTemplate).queryForRowSet(query, "wrongtoken");
+        Mockito.doReturn(false).when(checkTokenValidityRowSet).isBeforeFirst();
+
+        //Model Response
+        FriendListResponse res = new FriendListResponse();
+        res.setEmail("alice@gmail.com");
+        res.setFriendsListSuccess(false);
+
+        //Test request
+        FriendsListRequest req = new FriendsListRequest();
+        AuthToken token = new AuthToken();
+        token.setToken("wrongtoken");
+        token.setEmail("alice@gmail.com");
+        req.setToken(token);
+
+        Assert.assertEquals(webApi.getFriendsList(req), res);
+    }
+
+    @Test
+    public void getActivityListSuccess(){
+        //CheckTokenValidity Success
+        SqlRowSet checkTokenValidityRowSet = Mockito.mock(SqlRowSet.class);
+        String query = "SELECT * FROM sessiontokens WHERE token = ?";
+        Mockito.doReturn(checkTokenValidityRowSet).when(jdbcTemplate).queryForRowSet(query, "token");
+        Mockito.doReturn(true).when(checkTokenValidityRowSet).isBeforeFirst();
+        Mockito.doReturn(true).when(checkTokenValidityRowSet).next();
+
+        //CheckIfEmailExists
+        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
+        Mockito.doReturn(true).when(sqlRowSet).next();
+        Mockito.doReturn("Alice").when(sqlRowSet).getString("name");
+
+        //GetUserIDFromEmail
+        SqlRowSet sqlRowSet1 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet1).when(jdbcTemplate).queryForRowSet("select * from users where email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet1).next();
+        Mockito.doReturn(1).when(sqlRowSet1).getInt("userid");
+
+        //GetAllActivities
+        SqlRowSet sqlRowSet2 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet2).when(jdbcTemplate).queryForRowSet("SELECT * FROM activities WHERE userid = ?", 1);
+        Mockito.doReturn(true, false).when(sqlRowSet2).next();
+        Mockito.doReturn(1).when(sqlRowSet2).getInt("amount");
+        Mockito.doReturn(new Timestamp(1)).when(sqlRowSet2).getTimestamp("time");
+        Mockito.doReturn("VEGMEAL").when(sqlRowSet2).getString("table_name");
+
+        //CalculateCO2
+        SqlRowSet sqlRowSet3 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet3).when(jdbcTemplate).queryForRowSet("select * from activityvalues WHERE name = ?", "vegmeal");
+        Mockito.doReturn(true).when(sqlRowSet3).next();
+        Mockito.doReturn(14.5f).when(sqlRowSet3).getFloat("value");
+
+        //Model Response
+        ActivityListResponse res = new ActivityListResponse();
+        res.setActivityListSuccess(true);
+        res.setEmail("alice@gmail.com");
+        Activity activity = new Activity();
+        activity.setAmount(1);
+        activity.setTime(new Timestamp(1));
+        activity.setActivity(Activity.ActivityObject.VEGMEAL);
+        activity.setCo2Amount(14.5f);
+        LinkedList<Activity> activities = new LinkedList<>();
+        activities.add(activity);
+        res.setActivities(activities);
+
+        //Test request
+        ActivityListRequest req = new ActivityListRequest();
+        AuthToken token = new AuthToken();
+        token.setToken("token");
+        token.setEmail("alice@gmail.com");
+        req.setToken(token);
+
+        Assert.assertEquals(webApi.getActivityList(req), res);
+    }
+
+    @Test
+    public void getActivityListWrongToken(){
+        //CheckTokenValidity Success
+        SqlRowSet checkTokenValidityRowSet = Mockito.mock(SqlRowSet.class);
+        String query = "SELECT * FROM sessiontokens WHERE token = ?";
+        Mockito.doReturn(checkTokenValidityRowSet).when(jdbcTemplate).queryForRowSet(query, "wrongtoken");
+        Mockito.doReturn(false).when(checkTokenValidityRowSet).isBeforeFirst();
+
+        //Model Response
+        ActivityListResponse res = new ActivityListResponse();
+        res.setEmail("alice@gmail.com");
+        res.setActivityListSuccess(false);
+
+        //Test request
+        ActivityListRequest req = new ActivityListRequest();
+        AuthToken token = new AuthToken();
+        token.setToken("wrongtoken");
+        token.setEmail("alice@gmail.com");
+        req.setToken(token);
+
+        Assert.assertEquals(webApi.getActivityList(req), res);
+    }
+
+    @Test
+    public void getActivityListFail(){
+        //CheckTokenValidity Success
+        SqlRowSet checkTokenValidityRowSet = Mockito.mock(SqlRowSet.class);
+        String query = "SELECT * FROM sessiontokens WHERE token = ?";
+        Mockito.doReturn(checkTokenValidityRowSet).when(jdbcTemplate).queryForRowSet(query, "token");
+        Mockito.doReturn(true).when(checkTokenValidityRowSet).isBeforeFirst();
+        Mockito.doReturn(true).when(checkTokenValidityRowSet).next();
+
+        //CheckIfEmailExists
+        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
+        Mockito.doReturn(true).when(sqlRowSet).next();
+        Mockito.doReturn("Alice").when(sqlRowSet).getString("name");
+
+        //GetUserIDFromEmail
+        SqlRowSet sqlRowSet1 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet1).when(jdbcTemplate).queryForRowSet("select * from users where email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet1).next();
+        Mockito.doReturn(-1).when(sqlRowSet1).getInt("userid");
+
+        //Model Response
+        ActivityListResponse res = new ActivityListResponse();
+        res.setEmail("alice@gmail.com");
+        res.setActivityListSuccess(false);
+
+        //Test request
+        ActivityListRequest req = new ActivityListRequest();
+        AuthToken token = new AuthToken();
+        token.setToken("token");
+        token.setEmail("alice@gmail.com");
+        req.setToken(token);
+
+        Assert.assertEquals(webApi.getActivityList(req), res);
+    }
+
+    @Test
+    public void addFriendSuccess(){
+        //CheckTokenValidity Success
+        SqlRowSet checkTokenValidityRowSet = Mockito.mock(SqlRowSet.class);
+        String query = "SELECT * FROM sessiontokens WHERE token = ?";
+        Mockito.doReturn(checkTokenValidityRowSet).when(jdbcTemplate).queryForRowSet(query, "token");
+        Mockito.doReturn(true).when(checkTokenValidityRowSet).isBeforeFirst();
+        Mockito.doReturn(true).when(checkTokenValidityRowSet).next();
+
+        //CheckIfEmailExists
+        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
+        Mockito.doReturn(true).when(sqlRowSet).next();
+        Mockito.doReturn("Alice").when(sqlRowSet).getString("name");
+
+        //CheckIfEmailExists
+        SqlRowSet sqlRowSet3 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet3).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "bob@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet3).isBeforeFirst();
+        Mockito.doReturn(true).when(sqlRowSet3).next();
+        Mockito.doReturn("Bob").when(sqlRowSet3).getString("name");
+
+        //GetUserIDFromEmail
+        SqlRowSet sqlRowSet1 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet1).when(jdbcTemplate).queryForRowSet("select * from users where email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet1).next();
+        Mockito.doReturn(1).when(sqlRowSet1).getInt("userid");
+
+        //GetUserIDFromEmail
+        SqlRowSet sqlRowSet2 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet2).when(jdbcTemplate).queryForRowSet("select * from users where email = ?", "bob@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet2).next();
+        Mockito.doReturn(2).when(sqlRowSet2).getInt("userid");
+
+        Mockito.doReturn(1).when(jdbcTemplate).update("INSERT INTO friends (friend1, friend2) VALUES (?,?)", 1,2);
+
+        //Model Response
+        AddFriendResponse res = new AddFriendResponse();
+        res.setAddFriendSuccess(true);
+        res.setFriend2("bob@gmail.com");
+
+        //Test Request
+        AddFriendRequest req = new AddFriendRequest();
+        AuthToken token = new AuthToken();
+        token.setToken("token");
+        token.setEmail("alice@gmail.com");
+        req.setToken(token);
+        req.setFriend2email("bob@gmail.com");
+
+        Assert.assertEquals(webApi.addFriend(req), res);
+
+    }
+
+    @Test
+    public void addFriendUser2DoesntExist(){
+        //CheckTokenValidity Success
+        SqlRowSet checkTokenValidityRowSet = Mockito.mock(SqlRowSet.class);
+        String query = "SELECT * FROM sessiontokens WHERE token = ?";
+        Mockito.doReturn(checkTokenValidityRowSet).when(jdbcTemplate).queryForRowSet(query, "token");
+        Mockito.doReturn(true).when(checkTokenValidityRowSet).isBeforeFirst();
+        Mockito.doReturn(true).when(checkTokenValidityRowSet).next();
+
+        //CheckIfEmailExists
+        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
+        Mockito.doReturn(true).when(sqlRowSet).next();
+        Mockito.doReturn("Alice").when(sqlRowSet).getString("name");
+
+        //CheckIfEmailExists
+        SqlRowSet sqlRowSet3 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet3).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "bob@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet3).isBeforeFirst();
+        Mockito.doReturn(true).when(sqlRowSet3).next();
+        Mockito.doReturn("Bob").when(sqlRowSet3).getString("name");
+
+        //GetUserIDFromEmail
+        SqlRowSet sqlRowSet1 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet1).when(jdbcTemplate).queryForRowSet("select * from users where email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet1).next();
+        Mockito.doReturn(-1).when(sqlRowSet1).getInt("userid");
+
+        //GetUserIDFromEmail
+        SqlRowSet sqlRowSet2 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet2).when(jdbcTemplate).queryForRowSet("select * from users where email = ?", "bob@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet2).next();
+        Mockito.doReturn(2).when(sqlRowSet2).getInt("userid");
+
+//        Mockito.doReturn(1).when(jdbcTemplate).update("INSERT INTO friends (friend1, friend2) VALUES (?,?)", 1,2);
+
+        //Model Response
+        AddFriendResponse res = new AddFriendResponse();
+        res.setAddFriendSuccess(false);
+
+        //Test Request
+        AddFriendRequest req = new AddFriendRequest();
+        AuthToken token = new AuthToken();
+        token.setToken("token");
+        token.setEmail("alice@gmail.com");
+        req.setToken(token);
+        req.setFriend2email("bob@gmail.com");
+
+        Assert.assertEquals(webApi.addFriend(req), res);
+
+    }
+
+    @Test
+    public void addFriendUser1DoesntExist(){
+        //CheckTokenValidity Success
+        SqlRowSet checkTokenValidityRowSet = Mockito.mock(SqlRowSet.class);
+        String query = "SELECT * FROM sessiontokens WHERE token = ?";
+        Mockito.doReturn(checkTokenValidityRowSet).when(jdbcTemplate).queryForRowSet(query, "token");
+        Mockito.doReturn(true).when(checkTokenValidityRowSet).isBeforeFirst();
+        Mockito.doReturn(true).when(checkTokenValidityRowSet).next();
+
+        //CheckIfEmailExists
+        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
+        Mockito.doReturn(true).when(sqlRowSet).next();
+        Mockito.doReturn("Alice").when(sqlRowSet).getString("name");
+
+        //CheckIfEmailExists
+        SqlRowSet sqlRowSet3 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet3).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "bob@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet3).isBeforeFirst();
+        Mockito.doReturn(true).when(sqlRowSet3).next();
+        Mockito.doReturn("Bob").when(sqlRowSet3).getString("name");
+
+        //GetUserIDFromEmail
+        SqlRowSet sqlRowSet1 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet1).when(jdbcTemplate).queryForRowSet("select * from users where email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet1).next();
+        Mockito.doReturn(1).when(sqlRowSet1).getInt("userid");
+
+        //GetUserIDFromEmail
+        SqlRowSet sqlRowSet2 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet2).when(jdbcTemplate).queryForRowSet("select * from users where email = ?", "bob@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet2).next();
+        Mockito.doReturn(-1).when(sqlRowSet2).getInt("userid");
+
+//        Mockito.doReturn(1).when(jdbcTemplate).update("INSERT INTO friends (friend1, friend2) VALUES (?,?)", 1,2);
+
+        //Model Response
+        AddFriendResponse res = new AddFriendResponse();
+        res.setAddFriendSuccess(false);
+
+        //Test Request
+        AddFriendRequest req = new AddFriendRequest();
+        AuthToken token = new AuthToken();
+        token.setToken("token");
+        token.setEmail("alice@gmail.com");
+        req.setToken(token);
+        req.setFriend2email("bob@gmail.com");
+
+        Assert.assertEquals(webApi.addFriend(req), res);
+
+    }
+
+    @Test
+    public void addFriendWrongToken(){
+        //CheckTokenValidity Success
+        SqlRowSet checkTokenValidityRowSet = Mockito.mock(SqlRowSet.class);
+        String query = "SELECT * FROM sessiontokens WHERE token = ?";
+        Mockito.doReturn(checkTokenValidityRowSet).when(jdbcTemplate).queryForRowSet(query, "wrongtoken");
+        Mockito.doReturn(false).when(checkTokenValidityRowSet).isBeforeFirst();
+
+        //Model Response
+        AddFriendResponse res = new AddFriendResponse();
+        res.setAddFriendSuccess(false);
+
+        //Test request
+        AddFriendRequest req = new AddFriendRequest();
+        AuthToken token = new AuthToken();
+        token.setToken("wrongtoken");
+        token.setEmail("alice@gmail.com");
+        req.setToken(token);
+        req.setFriend2email("bob@gmail.com");
+
+        Assert.assertEquals(webApi.addFriend(req), res);
+    }
+
+    @Test
+    public void addFriendAlreadyFriends(){
+        //CheckTokenValidity Success
+        SqlRowSet checkTokenValidityRowSet = Mockito.mock(SqlRowSet.class);
+        String query = "SELECT * FROM sessiontokens WHERE token = ?";
+        Mockito.doReturn(checkTokenValidityRowSet).when(jdbcTemplate).queryForRowSet(query, "token");
+        Mockito.doReturn(true).when(checkTokenValidityRowSet).isBeforeFirst();
+        Mockito.doReturn(true).when(checkTokenValidityRowSet).next();
+
+        //CheckIfEmailExists
+        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
+        Mockito.doReturn(true).when(sqlRowSet).next();
+        Mockito.doReturn("Alice").when(sqlRowSet).getString("name");
+
+        //CheckIfEmailExists
+        SqlRowSet sqlRowSet3 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet3).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "bob@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet3).isBeforeFirst();
+        Mockito.doReturn(true).when(sqlRowSet3).next();
+        Mockito.doReturn("Bob").when(sqlRowSet3).getString("name");
+
+        //GetUserIDFromEmail
+        SqlRowSet sqlRowSet1 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet1).when(jdbcTemplate).queryForRowSet("select * from users where email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet1).next();
+        Mockito.doReturn(1).when(sqlRowSet1).getInt("userid");
+
+        //GetUserIDFromEmail
+        SqlRowSet sqlRowSet2 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet2).when(jdbcTemplate).queryForRowSet("select * from users where email = ?", "bob@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet2).next();
+        Mockito.doReturn(2).when(sqlRowSet2).getInt("userid");
+
+        DataAccessException exception = Mockito.mock(DataAccessException.class);
+        Mockito.doThrow(exception).when(jdbcTemplate).update("INSERT INTO friends (friend1, friend2) VALUES (?,?)", 1,2);
+
+        //Model Response
+        AddFriendResponse res = new AddFriendResponse();
+        res.setAddFriendSuccess(false);
+
+        //Test Request
+        AddFriendRequest req = new AddFriendRequest();
+        AuthToken token = new AuthToken();
+        token.setToken("token");
+        token.setEmail("alice@gmail.com");
+        req.setToken(token);
+        req.setFriend2email("bob@gmail.com");
+
+        Assert.assertEquals(webApi.addFriend(req), res);
+
+    }
+
 }
