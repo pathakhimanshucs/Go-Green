@@ -8,6 +8,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,7 +21,16 @@
          <tabs>
             <Tab text="Profile">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="600.0" stylesheets="@dark-theme.css" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="600.0" stylesheets="@dark-theme.css">
+                     <children>
+                        <TableView fx:id="tableview" layoutX="69.0" layoutY="56.0" prefHeight="445.0" prefWidth="462.0">
+                          <columns>
+                            <TableColumn fx:id="activityColumn1" prefWidth="126.0" text="Activity" />
+                            <TableColumn fx:id="activityColumn2" prefWidth="136.0" text="Amount" />
+                              <TableColumn fx:id="activityColumn3" prefWidth="199.0" text="Time" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
                </content>
             </Tab>
             <Tab text="Leaderboard">

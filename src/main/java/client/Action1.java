@@ -179,7 +179,7 @@ class Action1 extends JFrame implements ActionListener {
 
             String[] columnNames = {"Time",
                 "Amount"};
-
+            /*
             Object[][] data = Application.getActivities();
 
             final JTable table = new JTable(data, columnNames);
@@ -203,7 +203,7 @@ class Action1 extends JFrame implements ActionListener {
             frame3.setBackground(Color.green);
 
             //button2.addActionListener(new Action());
-
+            */
         }
         //// DEMO 2 GUI PART
     }

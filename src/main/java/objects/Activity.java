@@ -66,6 +66,7 @@ public class Activity {
             return false;
         }
 
+
         Activity activity1 = (Activity) o;
 
         if (Float.compare(activity1.co2Amount, co2Amount) != 0) {
@@ -79,4 +80,13 @@ public class Activity {
         }
         return activity == activity1.activity;
     }
+    /*
+    @Override
+    public String toString() {
+
+
+
+        return "";
+    }
+    */
 }

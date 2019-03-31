@@ -152,7 +152,7 @@ public class Application {
      * Retrieves vergmeals from server.
      * @return Object.
      */
-    public static Object[][] getActivities() {
+    public static ActivityListResponse getActivities() {
         final String baseUrl = "http://localhost:" + 8080 + "/getActivityList/";
         URI uri = null;
         try {
@@ -168,7 +168,7 @@ public class Application {
         RestTemplate restTemplate = new RestTemplate();
         ActivityListResponse res = restTemplate.postForObject(uri,
             req, ActivityListResponse.class);
-
+        /*
         int size = res.getActivities().size();
         Object[][] data = new Object[size][2];
         for (int i = 0; i < size; i++) {
@@ -177,8 +177,8 @@ public class Application {
             int amount = curr.getAmount();
             data[i][0] = time;
             data[i][1] = amount;
-        }
-        return data;
+        } */
+        return res;
     }
 
     private static String timeFormatter(Timestamp time) {
