@@ -61,7 +61,7 @@ public class AuthTokenTest {
         token.setToken("kek");
         AuthToken token2 = new AuthToken();
         token2.setEmail("kek");
-        token.setToken("kek");
+        token2.setToken("kek");
         assertFalse(token.equals(token2));
     }
 
@@ -72,7 +72,7 @@ public class AuthTokenTest {
         //token.setToken("kek");
         AuthToken token2 = new AuthToken();
         token2.setEmail("kek");
-        token.setToken("kek");
+        token2.setToken("kek");
         assertFalse(token.equals(token2));
     }
 
@@ -83,7 +83,7 @@ public class AuthTokenTest {
         token.setToken("kek");
         AuthToken token2 = new AuthToken();
         //token2.setEmail("kek");
-        token.setToken("kek");
+        token2.setToken("kek");
         assertFalse(token.equals(token2));
     }
 
@@ -94,7 +94,7 @@ public class AuthTokenTest {
         token.setToken("kek");
         AuthToken token2 = new AuthToken();
         token2.setEmail("kek");
-        //token.setToken("kek");
+        //token2.setToken("kek");
         assertFalse(token.equals(token2));
     }
 
@@ -105,7 +105,7 @@ public class AuthTokenTest {
         token.setToken("kek");
         AuthToken token2 = new AuthToken();
         token2.setEmail("kek");
-        token.setToken("kkek");
+        token2.setToken("kkek");
         assertFalse(token.equals(token2));
     }
 
@@ -116,7 +116,7 @@ public class AuthTokenTest {
         token.setToken("kkek");
         AuthToken token2 = new AuthToken();
         token2.setEmail("kek");
-        token.setToken("kek");
+        token2.setToken("kek");
         assertFalse(token.equals(token2));
     }
 
