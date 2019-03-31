@@ -15,6 +15,14 @@ public class LoginResponseTest {
     }
 
     @Test
+    public void setTokenTest(){
+        LoginResponse loginRes = new LoginResponse();
+        AuthToken at = new AuthToken();
+        loginRes.setToken(at);
+        assertEquals(loginRes.getToken(), at);
+    }
+
+    @Test
     public void getNameTest(){
         LoginResponse loginRes = new LoginResponse();
         loginRes.setName("Alice");
