@@ -57,16 +57,16 @@ public class Activity {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
 
 
-        Activity activity1 = (Activity) o;
+        Activity activity1 = (Activity) obj;
 
         if (Float.compare(activity1.co2Amount, co2Amount) != 0) {
             return false;
@@ -79,13 +79,4 @@ public class Activity {
         }
         return activity == activity1.activity;
     }
-    /*
-    @Override
-    public String toString() {
-
-
-
-        return "";
-    }
-    */
 }

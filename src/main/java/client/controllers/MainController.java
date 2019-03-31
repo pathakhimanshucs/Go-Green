@@ -11,8 +11,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -101,7 +101,7 @@ public class MainController {
     void displayFriends() {
         FriendListResponse response = Application.showFriends();
         if (response.isFriendsListSuccess() == false) {
-           return;
+            return;
         }
         LinkedList<String> friendlist = response.getFriends();
         ObservableList<String> list = FXCollections.observableList(friendlist);

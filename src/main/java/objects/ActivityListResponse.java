@@ -42,15 +42,15 @@ public class ActivityListResponse {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
 
-        ActivityListResponse that = (ActivityListResponse) o;
+        ActivityListResponse that = (ActivityListResponse) obj;
 
         if (activityListSuccess != that.activityListSuccess) {
             return false;
