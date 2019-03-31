@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" stylesheets="@dark-theme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.ActivityController">
+    <children>
+        <Label layoutX="93.0" layoutY="45.0" prefHeight="69.0" prefWidth="416.0" text="Please select an activity to add." />
+        <Button layoutX="234.0" layoutY="490.0" mnemonicParsing="false" onMouseClicked="#addActivity" text="Add activity" />
+        <Label layoutX="250.0" layoutY="273.0" text="Amount:" />
+      <MenuButton fx:id="dropdown" layoutX="167.0" layoutY="151.0" mnemonicParsing="false" text="Select an option">
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#setVegmeal" text="VEGMEAL" />
+            <MenuItem mnemonicParsing="false" onAction="#setLocalfood" text="LOCALFOOD" />
+          <MenuItem mnemonicParsing="false" onAction="#setBike" text="BIKE" />
+            <MenuItem mnemonicParsing="false" onAction="#setSolarpanels" text="SOLARPANELS" />
+        </items>
+      </MenuButton>
+      <JFXTextField fx:id="tf_amount" layoutX="210.0" layoutY="332.0" />
+      <FontAwesomeIconView glyphName="CHEVRON_LEFT" layoutX="34.0" layoutY="656.0" onMouseClicked="#backMain" size="30" />
+    </children>
+</AnchorPane>

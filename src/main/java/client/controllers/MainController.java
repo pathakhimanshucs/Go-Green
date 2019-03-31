@@ -63,7 +63,7 @@ public class MainController {
         //---------------------------------------------------------------
 
         //mylistview.getItems().add(new Label("Item"));
-       Application.addActivity(1, "VEGMEAL");
+       //Application.addActivity(1, "VEGMEAL");
 
         //--------------------------------------------------------------
 
@@ -77,7 +77,7 @@ public class MainController {
 
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("/popup.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/Activity.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
         }

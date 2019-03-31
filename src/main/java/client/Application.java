@@ -115,7 +115,7 @@ public class Application {
      * adds Veg Meal method.
      * @param amount of vegmeal
      */
-    public static void addActivity(int amount, String ActivityName) {
+    public static boolean addActivity(int amount, Activity.ActivityObject activityobj) {
         final String baseUrl = "http://localhost:" + 8080 + "/addactivity/";
         URI uri = null;
         try {
@@ -129,7 +129,7 @@ public class Application {
         Date date = new Date();
         Timestamp time = new Timestamp(date.getTime());
         activity.setTime(time);
-        activity.setActivity(Activity.ActivityObject.VEGMEAL);
+        activity.setActivity(activityobj);
         activity.setCo2Amount(1);
 
         ActivityRequest actReq = new ActivityRequest();
@@ -145,7 +145,9 @@ public class Application {
 
         if (response.isAddActivitySuccess()) {
             System.out.println("Succesfully added veg meal to db");
+            return true;
         }
+        else return false;
     }
 
     /**
