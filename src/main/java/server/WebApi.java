@@ -85,7 +85,7 @@ public class WebApi {
      * @param password string
      * @return String
      */
-    private String attemptLogin(String email, String password) {
+    public String attemptLogin(String email, String password) {
         String query = "SELECT * FROM users WHERE email = ?";
 
         SqlRowSet result = jdbcTemplate.queryForRowSet(query, email);
@@ -255,7 +255,7 @@ public class WebApi {
         return activities;
     }
 
-    private float getCO2FromDB(String valueName) {
+    public float getCO2FromDB(String valueName) {
         String query = "select * from activityvalues WHERE name = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(query, valueName);
         if (result.next()) {
@@ -271,7 +271,7 @@ public class WebApi {
      * @param email String
      * @return
      */
-    private int getUserIdFromEmail(String email) {
+    public int getUserIdFromEmail(String email) {
         if (checkIfEmailExists(email)) {
             String query = "select * from users where email = ?";
             SqlRowSet result = jdbcTemplate.queryForRowSet(query, email);
@@ -415,7 +415,7 @@ public class WebApi {
         }
     }
 
-    private String getEmailFromUserID(int userId) {
+    public String getEmailFromUserID(int userId) {
         String query = "select * from users where userid = ?";
         SqlRowSet result = jdbcTemplate.queryForRowSet(query, userId);
         if (result.next()) {
@@ -499,7 +499,7 @@ public class WebApi {
         SqlRowSet result = jdbcTemplate.queryForRowSet(query);
     }
 
-    private boolean checkTokenValidity(String token) {
+    public boolean checkTokenValidity(String token) {
         removeExpiredTokens();
 
         String query = "SELECT * FROM sessiontokens WHERE token = ?";
