@@ -797,7 +797,60 @@ public class WebApiTest {
         req.setFriend2email("bob@gmail.com");
 
         Assert.assertEquals(webApi.addFriend(req), res);
-
     }
 
+    @Test
+    public void attemptLoginFailTest(){
+        SqlRowSet mock = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(mock).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
+        Mockito.doReturn(false).when(mock).next();
+
+        Assert.assertNull(webApi.attemptLogin("alice@gmail.com", "alice"));
+    }
+
+    @Test
+    public void getCO2FromDBFail(){
+        SqlRowSet mock = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(mock).when(jdbcTemplate).queryForRowSet("select * from activityvalues WHERE name = ?", "WRONGTABLE");
+        Mockito.doReturn(false).when(mock).next();
+
+        assertEquals(webApi.getCO2FromDB("WRONGTABLE"), 0, 0);
+    }
+
+    @Test
+    public void getUserIdFromEmailFail(){
+        SqlRowSet mock = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(mock).when(jdbcTemplate).queryForRowSet("select * from users where email = ?", "alice@gmail.com");
+        Mockito.doReturn(false).when(mock).next();
+
+        //CheckIfEmailExists
+        SqlRowSet sqlRowSet = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "alice@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet).isBeforeFirst();
+        Mockito.doReturn(true).when(sqlRowSet).next();
+        Mockito.doReturn("Alice").when(sqlRowSet).getString("name");
+
+        Assert.assertEquals(webApi.getUserIdFromEmail("alice@gmail.com"), -1);
+    }
+
+    @Test
+    public void getEmailFromIDFail(){
+        SqlRowSet mock = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(mock).when(jdbcTemplate).queryForRowSet("select * from users where userid = ?", 1);
+        Mockito.doReturn(false).when(mock).next();
+
+        Assert.assertNull(webApi.getEmailFromUserID(1));
+    }
+
+    @Test
+    public void checkTokenValidityFail(){
+        Mockito.doReturn(null).when(jdbcTemplate).queryForRowSet("SELECT remove_expired_tokens()");
+
+        SqlRowSet mockRowSet = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(mockRowSet).when(jdbcTemplate).queryForRowSet("SELECT * FROM sessiontokens WHERE token = ?", "token");
+        Mockito.doReturn(true).when(mockRowSet).isBeforeFirst();
+        Mockito.doReturn(false).when(mockRowSet).next();
+
+        Assert.assertFalse(webApi.checkTokenValidity("token"));
+    }
 }
