@@ -51,6 +51,9 @@ public class MainController {
     @FXML
     private TableColumn activityColumn3;
 
+    @FXML
+    private TableColumn activityColumn4;
+
 
 
 
@@ -122,6 +125,7 @@ public class MainController {
         activityColumn1.setCellValueFactory(new PropertyValueFactory<Activity, String>("activity"));
         activityColumn2.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("amount"));
         activityColumn3.setCellValueFactory(new PropertyValueFactory<Activity, String>("time"));
+        activityColumn4.setCellValueFactory(new PropertyValueFactory<Activity, Float>("co2Amount"));
         tableview.setItems(observableList);
     }
 }

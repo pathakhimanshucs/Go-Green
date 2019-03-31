@@ -25,9 +25,10 @@
                      <children>
                         <TableView fx:id="tableview" layoutX="69.0" layoutY="56.0" prefHeight="445.0" prefWidth="462.0">
                           <columns>
-                            <TableColumn fx:id="activityColumn1" prefWidth="126.0" text="Activity" />
-                            <TableColumn fx:id="activityColumn2" prefWidth="136.0" text="Amount" />
-                              <TableColumn fx:id="activityColumn3" prefWidth="199.0" text="Time" />
+                            <TableColumn fx:id="activityColumn1" prefWidth="112.0" text="Activity" />
+                            <TableColumn fx:id="activityColumn2" prefWidth="130.0" text="Amount" />
+                              <TableColumn fx:id="activityColumn3" prefWidth="147.0" text="Time" />
+                              <TableColumn fx:id="activityColumn4" prefWidth="72.0" text="CO2" />
                           </columns>
                         </TableView>
                      </children></AnchorPane>
