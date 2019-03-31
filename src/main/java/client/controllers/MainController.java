@@ -18,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import objects.Activity;
 import objects.ActivityListResponse;
+import objects.Friend;
 import objects.FriendListResponse;
 
 import java.io.IOException;
@@ -29,7 +30,7 @@ public class MainController {
     private JFXListView<Label> mylistview;
 
     @FXML
-    private JFXListView<String> friendlistview;
+    private TableView<Friend> friendTable;
 
     @FXML
     private JFXTextField tffriendmail;
@@ -48,6 +49,12 @@ public class MainController {
 
     @FXML
     private TableColumn activityColumn4;
+
+    @FXML
+    private TableColumn friendColumn;
+
+    @FXML
+    private TableColumn friendco2Column;
 
 
 
@@ -103,9 +110,11 @@ public class MainController {
         if (response.isFriendsListSuccess() == false) {
             return;
         }
-        LinkedList<String> friendlist = response.getFriends();
-        ObservableList<String> list = FXCollections.observableList(friendlist);
-        friendlistview.setItems(list);
+        friendColumn.setCellValueFactory(new PropertyValueFactory<Friend, String>("email"));
+        friendco2Column.setCellValueFactory(new PropertyValueFactory<Friend, Float>("totalCO2"));
+        LinkedList<Friend> friendlist = response.getFriends();
+        ObservableList<Friend> list = FXCollections.observableList(friendlist);
+        friendTable.setItems(list);
     }
 
     @FXML

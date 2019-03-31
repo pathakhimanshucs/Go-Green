@@ -369,9 +369,13 @@ public class WebApiTest {
         //Model Response
         FriendListResponse res = new FriendListResponse();
         res.setFriendsListSuccess(true);
-        LinkedList<String> friendsList = new LinkedList<>();
-        friendsList.add("bob@gmail.com");
+        LinkedList<Friend> friendsList = new LinkedList<>();
+        Friend a = new Friend();
+        a.setEmail("bob@gmail.com");
+        friendsList.add(a);
         res.setFriends(friendsList);
+        Friend b = new Friend();
+        b.setEmail("alice@gmail.com");
         res.setEmail("alice@gmail.com");
 
         //Test request

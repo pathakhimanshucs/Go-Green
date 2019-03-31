@@ -127,7 +127,6 @@ public class AuthTokenTest {
         token.setToken("kkek");
         AuthToken token2 = new AuthToken();
         //token2.setEmail("kek");
-        token.setToken("kek");
         assertFalse(token.equals(token2));
     }
 
