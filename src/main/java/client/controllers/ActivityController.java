@@ -1,21 +1,17 @@
 package client.controllers;
 
 import client.Application;
-import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.DialogPane;
-import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import objects.Activity;
-import objects.RegisterResponse;
+
 
 import java.io.IOException;
 
@@ -29,25 +25,25 @@ public class ActivityController {
     private MenuButton dropdown;
 
     @FXML
-    void setBike(){
+    void setBike() {
         activityType = Activity.ActivityObject.BIKE;
         dropdown.setText("BIKE");
     }
 
     @FXML
-    void setVegmeal(){
+    void setVegmeal() {
         activityType = Activity.ActivityObject.VEGMEAL;
         dropdown.setText("VEGMEAL");
     }
 
     @FXML
-    void setSolarpanels(){
+    void setSolarpanels() {
         activityType = Activity.ActivityObject.SOLARPANELS;
         dropdown.setText("SOLARPANELS");
     }
 
     @FXML
-    void setLocalfood(){
+    void setLocalfood() {
         activityType = Activity.ActivityObject.LOCALFOOD;
         dropdown.setText("LOCALFOOD");
     }

@@ -50,7 +50,7 @@ public class Application {
         HttpEntity<LoginRequest> request = new HttpEntity<>(loginReq, headers);
         RestTemplate restTemplate = new RestTemplate();
         LoginResponse login = restTemplate.postForObject(uri, request, LoginResponse.class);
-        if (login.getName().equals("error") == false){
+        if (login.getName().equals("error") == false) {
             token = login.getToken();
             System.out.println(token.getToken());
             System.out.println(token.getEmail());
@@ -146,8 +146,9 @@ public class Application {
         if (response.isAddActivitySuccess()) {
             System.out.println("Succesfully added veg meal to db");
             return true;
+        } else {
+            return false;
         }
-        else return false;
     }
 
     /**
@@ -207,7 +208,7 @@ public class Application {
 
         String friendEmail = email.toLowerCase();
 
-        if (friendEmail.equals(token.getEmail())){
+        if (friendEmail.equals(token.getEmail())) {
             return false;
         }
 
@@ -230,6 +231,10 @@ public class Application {
         }
     }
 
+    /**
+     * Reqeusts server for friendlist.
+     * @return
+     */
     public static FriendListResponse showFriends() {
         final String baseUrl = "http://localhost:" + 8080 + "/getFriendsList/";
         URI uri = null;

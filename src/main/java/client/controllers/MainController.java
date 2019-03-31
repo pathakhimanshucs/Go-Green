@@ -3,7 +3,6 @@ package client.controllers;
 import client.Application;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXTreeTableView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,11 +19,7 @@ import javafx.stage.Stage;
 import objects.Activity;
 import objects.ActivityListResponse;
 import objects.FriendListResponse;
-import org.h2.table.Table;
-import server.App;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 import java.util.LinkedList;
 
@@ -73,7 +68,7 @@ public class MainController {
     }
 
     @FXML
-    void pressPlusButton(MouseEvent event){
+    void pressPlusButton(MouseEvent event) {
 
         Parent root = null;
         try {
@@ -115,17 +110,13 @@ public class MainController {
 
     @FXML
     void displayActivity() {
-
         ActivityListResponse data = Application.getActivities();
-
         LinkedList<Activity> list = data.getActivities();
-
-        ObservableList<Activity> observableList = FXCollections.observableList(list);
-
         activityColumn1.setCellValueFactory(new PropertyValueFactory<Activity, String>("activity"));
         activityColumn2.setCellValueFactory(new PropertyValueFactory<Activity, Integer>("amount"));
         activityColumn3.setCellValueFactory(new PropertyValueFactory<Activity, String>("time"));
         activityColumn4.setCellValueFactory(new PropertyValueFactory<Activity, Float>("co2Amount"));
+        ObservableList<Activity> observableList = FXCollections.observableList(list);
         tableview.setItems(observableList);
     }
 }
