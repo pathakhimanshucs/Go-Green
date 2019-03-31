@@ -354,6 +354,19 @@ public class WebApiTest {
         Mockito.doReturn(true).when(sqlRowSet1).next();
         Mockito.doReturn(1).when(sqlRowSet1).getInt("userid");
 
+        //CheckIfEmailExists
+        SqlRowSet sqlRowSet4 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet4).when(jdbcTemplate).queryForRowSet("SELECT * FROM users WHERE email = ?", "bob@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet4).isBeforeFirst();
+        Mockito.doReturn(true).when(sqlRowSet4).next();
+        Mockito.doReturn("Bob").when(sqlRowSet4).getString("name");
+
+        //GetUserIDFromEmail
+        SqlRowSet sqlRowSet5 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet5).when(jdbcTemplate).queryForRowSet("select * from users where email = ?", "bob@gmail.com");
+        Mockito.doReturn(true).when(sqlRowSet5).next();
+        Mockito.doReturn(2).when(sqlRowSet5).getInt("userid");
+
         //GetAllFriendsFromDB
         SqlRowSet sqlRowSet2 = Mockito.mock(SqlRowSet.class);
         Mockito.doReturn(sqlRowSet2).when(jdbcTemplate).queryForRowSet("SELECT * FROM friends WHERE friend1 = ?", 1);
@@ -366,12 +379,29 @@ public class WebApiTest {
         Mockito.doReturn(true).when(sqlRowSet3).next();
         Mockito.doReturn("bob@gmail.com").when(sqlRowSet3).getString("email");
 
+        //GetCO2FromDB
+        SqlRowSet sqlRowSet6 = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(sqlRowSet6).when(jdbcTemplate).queryForRowSet("select * from activityvalues WHERE name = ?", "vegmeal");
+        Mockito.doReturn(true).when(sqlRowSet6).next();
+        Mockito.doReturn(0.0f).when(sqlRowSet6).getFloat("value");
+
+        //GetTotalCo2ForUser
+        SqlRowSet getActivitiesRow = Mockito.mock(SqlRowSet.class);
+        Mockito.doReturn(getActivitiesRow).when(jdbcTemplate).queryForRowSet("SELECT * FROM activities WHERE userid = ?", 2);
+        Mockito.doReturn(true, false).when(getActivitiesRow).next();
+        Mockito.doReturn(1).when(getActivitiesRow).getInt("amount");
+        Mockito.doReturn(new Timestamp(1)).when(getActivitiesRow).getTimestamp("time");
+        Mockito.doReturn("VEGMEAL").when(getActivitiesRow).getString("table_name");
+
         //Model Response
         FriendListResponse res = new FriendListResponse();
         res.setFriendsListSuccess(true);
-        LinkedList<String> friendsList = new LinkedList<>();
-        friendsList.add("bob@gmail.com");
+        LinkedList<Friend> friendsList = new LinkedList<>();
+        Friend temp = new Friend();
+        temp.setEmail("bob@gmail.com");
+        temp.setTotalCO2(0.0f);
         res.setFriends(friendsList);
+        friendsList.add(temp);
         res.setEmail("alice@gmail.com");
 
         //Test request
