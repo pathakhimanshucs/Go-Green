@@ -14,6 +14,14 @@ public class RegisterResponseTest {
     }
 
     @Test
+    public void getToken() {
+        RegisterResponse regRes = new RegisterResponse();
+        AuthToken at = new AuthToken();
+        regRes.setToken(at);
+        assertTrue(regRes.getToken() == at);
+    }
+
+    @Test
     public void getRegisterSuccess() {
         RegisterResponse regRes = new RegisterResponse();
         regRes.setRegisterSuccess(true);
@@ -74,7 +82,7 @@ public class RegisterResponseTest {
         RegisterResponse regRes = new RegisterResponse();
         regRes.setRegisterSuccess(true);
         regRes.setName("kek");
-        Meal meal = new Meal();
-        assertFalse(regRes.equals(meal));
+        LoginResponse response = new LoginResponse();
+        assertFalse(regRes.equals(response));
     }
 }

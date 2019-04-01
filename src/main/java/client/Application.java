@@ -1,14 +1,20 @@
 package client;
 
+import objects.Activity;
+import objects.ActivityListRequest;
+import objects.ActivityListResponse;
+import objects.ActivityRequest;
+import objects.ActivityResponse;
+import objects.AddFriendRequest;
+import objects.AddFriendResponse;
+import objects.AuthToken;
+import objects.Encrypt;
+import objects.FriendListResponse;
+import objects.FriendsListRequest;
 import objects.LoginRequest;
 import objects.LoginResponse;
-import objects.Meal;
 import objects.RegisterRequest;
 import objects.RegisterResponse;
-import objects.VegetarianMealListRequest;
-import objects.VegetarianMealListResponse;
-import objects.VegetarianMealRequest;
-import objects.VegetarianMealResponse;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -18,21 +24,16 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 /**
- * Client application with main method.
+ * Client application that contains all necessary api calls.
  */
 public class Application {
-    static String eMail;
-    /**
-     * Main method.
-     * @param args Provided arguments.
-     */
+    //static String eMail;
+    static AuthToken token;
 
-    public static void main(String[] args) {
-        System.out.println("Welcome " + loginToServer("alice@gmail.com","alicepwd").toString());
-    }
 
     /**
      * Sends an HTTP request to the server with str as param.
@@ -50,14 +51,18 @@ public class Application {
         String newEmail = email.toLowerCase();
         LoginRequest loginReq = new LoginRequest();
         loginReq.setEmail(newEmail);
-        loginReq.setPassword(password);
+        loginReq.setPassword(Encrypt.encryptPassWord(email, password));
 
         HttpHeaders headers = new HttpHeaders();
-
         HttpEntity<LoginRequest> request = new HttpEntity<>(loginReq, headers);
         RestTemplate restTemplate = new RestTemplate();
         LoginResponse login = restTemplate.postForObject(uri, request, LoginResponse.class);
-        eMail = newEmail;
+        if (login.getName().equals("error") == false) {
+            token = login.getToken();
+            System.out.println(token.getToken());
+            System.out.println(token.getEmail());
+            System.out.println("Logged in");
+        }
         return login;
     }
 
@@ -94,7 +99,7 @@ public class Application {
         RegisterRequest registerReq = new RegisterRequest();
         registerReq.setEmail(newEmail);
         registerReq.setName(name);
-        registerReq.setPassword(password);
+        registerReq.setPassword(Encrypt.encryptPassWord(email,password));
 
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<RegisterRequest> req = new HttpEntity<>(registerReq, headers);
@@ -108,6 +113,7 @@ public class Application {
         } else {
             response.setName("Account " + responseMessage.getName() + " created");
             response.setRegisterSuccess(true);
+            token = responseMessage.getToken();
             return response;
         }
     }
@@ -116,8 +122,8 @@ public class Application {
      * adds Veg Meal method.
      * @param amount of vegmeal
      */
-    public static void addVegMeal(int amount) {
-        final String baseUrl = "http://localhost:" + 8080 + "/addvegmeal/";
+    public static boolean addActivity(int amount, Activity.ActivityObject activityobj) {
+        final String baseUrl = "http://localhost:" + 8080 + "/addactivity/";
         URI uri = null;
         try {
             uri = new URI(baseUrl);
@@ -125,18 +131,30 @@ public class Application {
             System.err.println(e);
         }
 
-        VegetarianMealRequest vegReq = new VegetarianMealRequest();
-        vegReq.setAmount(amount);
-        vegReq.setEmail(eMail);
+        Activity activity = new Activity();
+        activity.setAmount(amount);
+        Date date = new Date();
+        Timestamp time = new Timestamp(date.getTime());
+        activity.setTime(time);
+        activity.setActivity(activityobj);
+        activity.setCo2Amount(1);
+
+        ActivityRequest actReq = new ActivityRequest();
+        actReq.setToken(token);
+        actReq.setEmail(token.getEmail());
+        actReq.setActivity(activity);
 
         HttpHeaders headers = new HttpHeaders();
-        HttpEntity<VegetarianMealRequest> req = new HttpEntity<>(vegReq, headers);
+        HttpEntity<ActivityRequest> req = new HttpEntity<>(actReq, headers);
         RestTemplate restTemplate = new RestTemplate();
-        VegetarianMealResponse response = restTemplate.postForObject(uri,
-                req, VegetarianMealResponse.class);
+        ActivityResponse response = restTemplate.postForObject(uri,
+                req, ActivityResponse.class);
 
-        if (response.isAddVegetarianMealSuccess()) {
+        if (response.isAddActivitySuccess()) {
             System.out.println("Succesfully added veg meal to db");
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -144,8 +162,8 @@ public class Application {
      * Retrieves vergmeals from server.
      * @return Object.
      */
-    public static Object[][] getVegMeals() {
-        final String baseUrl = "http://localhost:" + 8080 + "/getVegMealsList/";
+    public static ActivityListResponse getActivities() {
+        final String baseUrl = "http://localhost:" + 8080 + "/getActivityList/";
         URI uri = null;
         try {
             uri = new URI(baseUrl);
@@ -153,23 +171,24 @@ public class Application {
             System.err.println(e);
         }
 
-        VegetarianMealListRequest req = new VegetarianMealListRequest();
-        req.setEmail(eMail);
+        ActivityListRequest req = new ActivityListRequest();
+        req.setToken(token);
+        req.setEmail(token.getEmail());
 
         RestTemplate restTemplate = new RestTemplate();
-        VegetarianMealListResponse res = restTemplate.postForObject(uri,
-            req, VegetarianMealListResponse.class);
-
-        int size = res.getMeals().size();
+        ActivityListResponse res = restTemplate.postForObject(uri,
+            req, ActivityListResponse.class);
+        /*
+        int size = res.getActivities().size();
         Object[][] data = new Object[size][2];
         for (int i = 0; i < size; i++) {
-            Meal curr = res.getMeals().get(i);
+            Activity curr = res.getActivities().get(i);
             String time = timeFormatter(curr.getTime());
-            int amount = curr.getMealAmount();
+            int amount = curr.getAmount();
             data[i][0] = time;
             data[i][1] = amount;
-        }
-        return data;
+        } */
+        return res;
     }
 
     private static String timeFormatter(Timestamp time) {
@@ -179,4 +198,70 @@ public class Application {
 
         return simpleDateFormat.format(time);
     }
+
+    /**
+     * Adds friend.
+     * @param email Email of friend.
+     * @return
+     */
+    public static boolean addFriend(String email) {
+        final String baseUrl = "http://localhost:" + 8080 + "/addFriend/";
+        URI uri = null;
+        try {
+            uri = new URI(baseUrl);
+        } catch (URISyntaxException e) {
+            System.err.println(e);
+        }
+
+        String friendEmail = email.toLowerCase();
+
+        if (friendEmail.equals(token.getEmail())) {
+            return false;
+        }
+
+
+        AddFriendRequest fr = new AddFriendRequest();
+        fr.setFriend1email(token.getEmail());
+        fr.setFriend2email(friendEmail);
+        fr.setToken(token);
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<AddFriendRequest> req = new HttpEntity<>(fr, headers);
+        RestTemplate restTemplate = new RestTemplate();
+        AddFriendResponse response = restTemplate.postForObject(uri,
+                req, AddFriendResponse.class);
+
+        if (response.isAddFriendSuccess()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Reqeusts server for friendlist.
+     * @return
+     */
+    public static FriendListResponse showFriends() {
+        final String baseUrl = "http://localhost:" + 8080 + "/getFriendsList/";
+        URI uri = null;
+        try {
+            uri = new URI(baseUrl);
+        } catch (URISyntaxException e) {
+            System.err.println(e);
+        }
+
+        FriendsListRequest fr = new FriendsListRequest();
+        fr.setEmail(token.getEmail());
+        fr.setToken(token);
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<FriendsListRequest> req = new HttpEntity<>(fr, headers);
+        RestTemplate restTemplate = new RestTemplate();
+        FriendListResponse response = restTemplate.postForObject(uri,
+                req, FriendListResponse.class);
+        return response;
+    }
+
+
 }

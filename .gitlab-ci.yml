@@ -1,0 +1,37 @@
+image: tgalopin/maven-javafx:latest
+
+before_script:
+  - "mvn clean package -B"
+
+
+cache:
+  paths:
+    - target/
+
+stages:
+  - build
+  - test
+
+Test:
+  stage: test
+  script:
+    - mvn test
+
+Build:
+  stage: build
+  script:
+    - mvn clean
+    - mvn install
+    - mvn compile
+
+code-coverage:
+  stage: test
+  script:
+    - mvn -B verify site
+  after_script:
+    - cat target/site/jacoco/index.html
+
+Checkstyle:
+  stage: test
+  script:
+    - mvn checkstyle:checkstyle

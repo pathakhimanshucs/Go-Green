@@ -6,7 +6,8 @@ import java.util.Objects;
 
 @JsonIgnoreProperties
 public class LoginResponse {
-    public String name;
+    private AuthToken token;
+    private String name;
 
     public LoginResponse(){
     }
@@ -17,6 +18,14 @@ public class LoginResponse {
 
     public String getName() {
         return name;
+    }
+
+    public AuthToken getToken() {
+        return token;
+    }
+
+    public void setToken(AuthToken token) {
+        this.token = token;
     }
 
     @Override
