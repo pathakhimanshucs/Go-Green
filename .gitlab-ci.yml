@@ -3,7 +3,6 @@ image: tgalopin/maven-javafx:latest
 build:
   script:
    - "mvn clean package -B"
-   - "sudo apt-get install openjfx"
 
 
 cache:
