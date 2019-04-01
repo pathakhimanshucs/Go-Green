@@ -1,8 +1,7 @@
 image: tgalopin/maven-javafx:latest
 
-build:
-  script:
-   - "mvn clean package -B"
+before_script:
+  - "mvn clean package -B"
 
 
 cache:
