@@ -18,7 +18,9 @@
           <MenuItem mnemonicParsing="false" onAction="#setVegmeal" text="VEGMEAL" />
             <MenuItem mnemonicParsing="false" onAction="#setLocalfood" text="LOCALFOOD" />
           <MenuItem mnemonicParsing="false" onAction="#setBike" text="BIKE" />
+            <MenuItem mnemonicParsing="false" onAction="#setPubtrans" text="PUBTRANS" />
             <MenuItem mnemonicParsing="false" onAction="#setSolarpanels" text="SOLARPANELS" />
+            <MenuItem mnemonicParsing="false" onAction="#setHometemp" text="HOMETEMP" />
         </items>
       </MenuButton>
       <JFXTextField fx:id="tfamount" layoutX="210.0" layoutY="332.0" />

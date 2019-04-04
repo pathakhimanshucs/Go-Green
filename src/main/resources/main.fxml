@@ -84,6 +84,40 @@
                      </AnchorPane>
                  </content>
              </Tab>
+            <Tab onSelectionChanged="#totalCo2" text="Saved Trees">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="treesSaved" layoutX="179.0" layoutY="46.0" prefHeight="72.0" prefWidth="430.0" text="You saved trees" />
+                        <ImageView fx:id="tree4" fitHeight="169.0" fitWidth="183.0" layoutX="65.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@AllerallerMooisteBoom.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="tree5" fitHeight="169.0" fitWidth="183.0" layoutX="378.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@AllerallerMooisteBoom.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="tree1" fitHeight="243.0" fitWidth="282.0" layoutX="185.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@AllerallerMooisteBoom.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="tree2" fitHeight="272.0" fitWidth="287.0" layoutX="307.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@AllerallerMooisteBoom.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="tree3" fitHeight="267.0" fitWidth="301.0" layoutX="46.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@AllerallerMooisteBoom.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
             <Tab onSelectionChanged="#displayFriends" text="Friends">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@dark-theme.css">
@@ -103,6 +137,21 @@
                      </children>
                   </AnchorPane>
                </content>
+            </Tab>
+            <Tab text="Trivia">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="70.0" prefHeight="62.0" prefWidth="502.0" text="The Chinese are responsible for 27 percent of global emissions" />
+                        <Label layoutX="14.0" layoutY="132.0" prefHeight="72.0" prefWidth="1587.0" text="If the European Union is calculated together, it will also be in the top five, accounting for 10 percent of global emissions." textOverrun="WORD_ELLIPSIS" />
+                        <Label layoutX="14.0" layoutY="204.0" prefHeight="36.0" prefWidth="1110.0" text="Oil, natural gas and cement production: 32.6 billion tonnes of CO2 are emitted per year." />
+                        <Label layoutX="14.0" layoutY="267.0" prefWidth="837.0" text="Animals and people Emissions:15.8 billion tons of CO2 per year." />
+                        <Label layoutX="14.0" layoutY="331.0" text="Burning down forests emits 3.3 billion tonnes of CO2 per year." />
+                        <Label layoutX="14.0" layoutY="389.0" text="Oceans absorb 9.5 billion tons of CO2 per year." />
+                        <Label layoutX="14.0" layoutY="439.0" text="Plants worldwide absorb 10.6 billion tonnes of CO2 per year" />
+                     </children>
+                  </AnchorPane>
+              </content>
             </Tab>
          </tabs>
       </JFXTabPane>

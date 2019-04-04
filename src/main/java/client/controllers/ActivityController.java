@@ -48,6 +48,20 @@ public class ActivityController {
     }
 
     @FXML
+    void setHometemp() {
+        activityType = Activity.ActivityObject.HOMETEMP;
+        dropdown.setText("HOMETEMP");
+    }
+
+    @FXML
+    void setPubtrans() {
+        activityType = Activity.ActivityObject.PUBTRANS;
+        dropdown.setText("PUBTRANS");
+    }
+
+
+
+    @FXML
     void addActivity(MouseEvent event) {
         System.out.println("press");
         if (activityType == null) {
