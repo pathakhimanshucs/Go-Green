@@ -23,6 +23,7 @@ import objects.Friend;
 import objects.FriendListResponse;
 
 //import javax.swing.text.html.ImageView;
+
 import java.io.IOException;
 import java.util.LinkedList;
 
@@ -148,20 +149,21 @@ public class MainController {
         ObservableList<Activity> observableList = FXCollections.observableList(list);
         tableview.setItems(observableList);
     }
+
     @FXML
     void totalCo2() {
         ActivityListResponse data = Application.getActivities();
         LinkedList<Activity> list = data.getActivities();
         float total = 0;
-        for (int i = 0; i < list.size(); i++){
+        for (int i = 0; i < list.size(); i++) {
             total = total + list.get(i).getCo2Amount();
         }
-//treesSaved//
+        //treesSaved//
 
-        double savedtrees = Math.floor(total/20000);
+        double savedtrees = Math.floor(total / 20000);
         long roundedTrees = Math.round(savedtrees);
-//        String trees = Double.toString(savedtrees);
-//        int treeInt = Integer.parseInt(trees);
+        //        String trees = Double.toString(savedtrees);
+        //        int treeInt = Integer.parseInt(trees);
         if (roundedTrees == 1) {
             treesSaved.setText("You saved " + roundedTrees + " tree");
         } else {
