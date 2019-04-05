@@ -370,7 +370,7 @@ public class WebApiTest {
         //GetAllFriendsFromDB
         SqlRowSet sqlRowSet2 = Mockito.mock(SqlRowSet.class);
         Mockito.doReturn(sqlRowSet2).when(jdbcTemplate).queryForRowSet("SELECT * FROM friends WHERE friend1 = ?", 1);
-        Mockito.doReturn(true, false).when(sqlRowSet2).next();
+        Mockito.doReturn(true).when(sqlRowSet2).next();
         Mockito.doReturn(2).when(sqlRowSet2).getInt("friend2");
 
         //GetEmailFromUserID
@@ -388,7 +388,7 @@ public class WebApiTest {
         //GetTotalCo2ForUser
         SqlRowSet getActivitiesRow = Mockito.mock(SqlRowSet.class);
         Mockito.doReturn(getActivitiesRow).when(jdbcTemplate).queryForRowSet("SELECT * FROM activities WHERE userid = ?", 2);
-        Mockito.doReturn(true, false).when(getActivitiesRow).next();
+        Mockito.doReturn(true).when(getActivitiesRow).next();
         Mockito.doReturn(1).when(getActivitiesRow).getInt("amount");
         Mockito.doReturn(new Timestamp(1)).when(getActivitiesRow).getTimestamp("time");
         Mockito.doReturn("VEGMEAL").when(getActivitiesRow).getString("table_name");
@@ -501,7 +501,7 @@ public class WebApiTest {
         //GetAllActivities
         SqlRowSet sqlRowSet2 = Mockito.mock(SqlRowSet.class);
         Mockito.doReturn(sqlRowSet2).when(jdbcTemplate).queryForRowSet("SELECT * FROM activities WHERE userid = ?", 1);
-        Mockito.doReturn(true, false).when(sqlRowSet2).next();
+        Mockito.doReturn(true).when(sqlRowSet2).next();
         Mockito.doReturn(1).when(sqlRowSet2).getInt("amount");
         Mockito.doReturn(new Timestamp(1)).when(sqlRowSet2).getTimestamp("time");
         Mockito.doReturn("VEGMEAL").when(sqlRowSet2).getString("table_name");
