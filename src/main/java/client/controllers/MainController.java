@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -76,6 +77,16 @@ public class MainController {
 
     @FXML
     private ImageView tree5;
+
+    @FXML
+    private ProgressBar food_bar;
+
+    @FXML
+    private ProgressBar public_transport_bar;
+
+    @FXML
+    private ProgressBar energy_bar;
+
 
 
 
@@ -191,5 +202,22 @@ public class MainController {
             tree5.setVisible(true);
         }
     }
+
+    @FXML
+    void displayAchievements(){
+        float sumFood = Application.calculateFood();
+        float foodRatio = sumFood/21770; // 21770 is the amount of CO2 a 10 trees consume over a century
+        food_bar.setProgress(foodRatio);
+
+        float sumPubTransport = Application.calculatePubTransport();
+        float pubTransportRatio = sumPubTransport/21770; // 21770 is the amount of CO2 a 10 trees consume over a century
+        public_transport_bar.setProgress(pubTransportRatio);
+
+        float sumEnergy = Application.calculateEnergy();
+        float energyRatio = sumEnergy/21770; // 21770 is the amount of CO2 a 10 trees consume over a century
+        energy_bar.setProgress(energyRatio);
+
+    }
+
 
 }

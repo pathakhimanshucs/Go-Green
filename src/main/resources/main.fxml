@@ -43,7 +43,7 @@
                   </AnchorPane>
               </content>
             </Tab>
-             <Tab text="Achievements">
+             <Tab onSelectionChanged="#displayAchievements" text="Achievements">
                  <content>
                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@dark-theme.css">
                      <children>
@@ -73,8 +73,6 @@
                                <Label layoutX="26.0" layoutY="60.0" text="Food" />
                               <Label layoutX="26.0" layoutY="298.0" prefHeight="38.0" prefWidth="219.0" text="Green  Energy" />
                               <Label layoutX="26.0" layoutY="164.0" prefHeight="69.0" prefWidth="248.0" text="Public Transport" />
-                              <Label layoutX="26.0" layoutY="409.0" prefHeight="38.0" prefWidth="356.0" text="Overall score (saved trees)" />
-                              <Label layoutX="433.0" layoutY="412.0" text="# *" />
                               <ProgressBar fx:id="food_bar" layoutX="260.0" layoutY="67.0" prefWidth="200.0" progress="0.0" />
                               <ProgressBar fx:id="public_transport_bar" layoutX="260.0" layoutY="188.0" prefWidth="200.0" progress="0.69" />
                               <ProgressBar fx:id="energy_bar" layoutX="260.0" layoutY="307.0" prefWidth="200.0" progress="0.57" />
