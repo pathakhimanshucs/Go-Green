@@ -12,14 +12,14 @@
     <children>
         <Label layoutX="93.0" layoutY="45.0" prefHeight="69.0" prefWidth="416.0" text="Please select an activity to add." />
         <Button layoutX="234.0" layoutY="490.0" mnemonicParsing="false" onMouseClicked="#addActivity" text="Add activity" />
-        <Label layoutX="250.0" layoutY="273.0" text="Amount:" />
+        <Label fx:id="description" layoutX="55.0" layoutY="276.0" text="#" />
       <MenuButton fx:id="dropdown" layoutX="167.0" layoutY="151.0" mnemonicParsing="false" text="Select an option">
         <items>
-          <MenuItem mnemonicParsing="false" onAction="#setVegmeal" text="VEGMEAL" />
-            <MenuItem mnemonicParsing="false" onAction="#setLocalfood" text="LOCALFOOD" />
-          <MenuItem mnemonicParsing="false" onAction="#setBike" text="BIKE" />
-            <MenuItem mnemonicParsing="false" onAction="#setPubtrans" text="PUBTRANS" />
-            <MenuItem mnemonicParsing="false" onAction="#setSolarpanels" text="SOLARPANELS" />
+          <MenuItem mnemonicParsing="false" onAction="#setVegmeal" text="VEGMEAL (0.2 kg)" />
+            <MenuItem mnemonicParsing="false" onAction="#setLocalfood" text="LOCALFOOD (kg)" />
+          <MenuItem mnemonicParsing="false" onAction="#setBike" text="BIKE (km)" />
+            <MenuItem mnemonicParsing="false" onAction="#setPubtrans" text="PUBTRANS (km)" />
+            <MenuItem mnemonicParsing="false" onAction="#setSolarpanels" text="SOLARPANELS (m^2)" />
             <MenuItem mnemonicParsing="false" onAction="#setHometemp" text="HOMETEMP" />
         </items>
       </MenuButton>
