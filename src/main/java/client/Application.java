@@ -268,17 +268,18 @@ public class Application {
      * calculates the amount of CO2 one saves in terms of food consumption.
      * @return a float with the amount of CO2 he/she has saved
      */
-    public static float calculateFood(){
+    public static float calculateFood() {
         ActivityListResponse activities =  Application.getActivities();
         LinkedList<Activity> getFood = activities.getActivities();
-        int i = 0;
+        int countValue = 0;
         float sumFood = 0;
-        while(i < getFood.size()) {
-            if(getFood.get(i).getActivity().equals(Activity.ActivityObject.VEGMEAL) ||
-                    getFood.get(i).getActivity().equals(Activity.ActivityObject.LOCALFOOD)) {
-                sumFood += getFood.get(i).getCo2Amount();
+        while (countValue < getFood.size()) {
+            if (getFood.get(countValue).getActivity().equals(Activity.ActivityObject.VEGMEAL)
+                    || getFood.get(countValue).getActivity()
+                    .equals(Activity.ActivityObject.LOCALFOOD)) {
+                sumFood += getFood.get(countValue).getCo2Amount();
             }
-            i++;
+            countValue++;
         }
         return sumFood;
     }
@@ -286,17 +287,21 @@ public class Application {
      * calculates the amount of CO2 one saved in terms of transport.
      * @return a float with the amount of CO2 he/she has saved
      */
-    public static float calculatePubTransport(){
+
+    public static float calculatePubTransport() {
         ActivityListResponse activities =  Application.getActivities();
         LinkedList<Activity> getPubTransport = activities.getActivities();
-        int i = 0;
+        int countValue = 0;
         float sumPubTransport = 0;
-        while(i < getPubTransport.size()) {
-            if(getPubTransport.get(i).getActivity().equals(Activity.ActivityObject.BIKE) ||
-                    getPubTransport.get(i).getActivity().equals(Activity.ActivityObject.PUBTRANS)) {
-                sumPubTransport += getPubTransport.get(i).getCo2Amount();
+        while (countValue < getPubTransport.size()) {
+            if (getPubTransport.get(countValue).getActivity()
+                    .equals(Activity.ActivityObject.BIKE)
+                    ||
+                    getPubTransport.get(countValue).getActivity()
+                            .equals(Activity.ActivityObject.PUBTRANS)) {
+                sumPubTransport += getPubTransport.get(countValue).getCo2Amount();
             }
-            i++;
+            countValue++;
         }
         return sumPubTransport;
     }
@@ -304,17 +309,20 @@ public class Application {
      * calculates the amount of CO2 one saved in terms of energy.
      * @return a float with the amount of CO2 he/she has saved
      */
-    public static float calculateEnergy(){
+
+    public static float calculateEnergy() {
         ActivityListResponse activities =  Application.getActivities();
         LinkedList<Activity> getEnergy = activities.getActivities();
-        int i = 0;
+        int countValue = 0;
         float sumEnergy = 0;
-        while(i < getEnergy.size()) {
-            if(getEnergy.get(i).getActivity().equals(Activity.ActivityObject.SOLARPANELS) ||
-                    getEnergy.get(i).getActivity().equals(Activity.ActivityObject.HOMETEMP)) {
-                sumEnergy += getEnergy.get(i).getCo2Amount();
+        while (countValue < getEnergy.size()) {
+            if (getEnergy.get(countValue).getActivity()
+                    .equals(Activity.ActivityObject.SOLARPANELS)
+                    || getEnergy.get(countValue).getActivity()
+                    .equals(Activity.ActivityObject.HOMETEMP)) {
+                sumEnergy += getEnergy.get(countValue).getCo2Amount();
             }
-            i++;
+            countValue++;
         }
         return sumEnergy;
     }

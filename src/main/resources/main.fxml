@@ -73,9 +73,9 @@
                                <Label layoutX="26.0" layoutY="60.0" text="Food" />
                               <Label layoutX="26.0" layoutY="298.0" prefHeight="38.0" prefWidth="219.0" text="Green  Energy" />
                               <Label layoutX="26.0" layoutY="164.0" prefHeight="69.0" prefWidth="248.0" text="Public Transport" />
-                              <ProgressBar fx:id="food_bar" layoutX="260.0" layoutY="67.0" prefWidth="200.0" progress="0.0" />
-                              <ProgressBar fx:id="public_transport_bar" layoutX="260.0" layoutY="188.0" prefWidth="200.0" progress="0.69" />
-                              <ProgressBar fx:id="energy_bar" layoutX="260.0" layoutY="307.0" prefWidth="200.0" progress="0.57" />
+                              <ProgressBar fx:id="foodBar" layoutX="260.0" layoutY="67.0" prefWidth="200.0" progress="0.0" />
+                              <ProgressBar fx:id="publicTransportBar" layoutX="260.0" layoutY="188.0" prefWidth="200.0" progress="0.69" />
+                              <ProgressBar fx:id="energyBar" layoutX="260.0" layoutY="307.0" prefWidth="200.0" progress="0.57" />
                            </children>
                         </AnchorPane>
                      </children>

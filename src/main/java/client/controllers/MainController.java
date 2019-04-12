@@ -79,13 +79,13 @@ public class MainController {
     private ImageView tree5;
 
     @FXML
-    private ProgressBar food_bar;
+    private ProgressBar foodBar;
 
     @FXML
-    private ProgressBar public_transport_bar;
+    private ProgressBar publicTransportBar;
 
     @FXML
-    private ProgressBar energy_bar;
+    private ProgressBar energyBar;
 
 
 
@@ -204,18 +204,21 @@ public class MainController {
     }
 
     @FXML
-    void displayAchievements(){
+    void displayAchievements() {
         float sumFood = Application.calculateFood();
-        float foodRatio = sumFood/21770; // 21770 is the amount of CO2 a 10 trees consume over a century
-        food_bar.setProgress(foodRatio);
+        float foodRatio = sumFood / 21770;
+        // 21770 is the amount of CO2 a 10 trees consume over a century
+        foodBar.setProgress(foodRatio);
 
         float sumPubTransport = Application.calculatePubTransport();
-        float pubTransportRatio = sumPubTransport/21770; // 21770 is the amount of CO2 a 10 trees consume over a century
-        public_transport_bar.setProgress(pubTransportRatio);
+        float pubTransportRatio = sumPubTransport / 21770;
+        // 21770 is the amount of CO2 a 10 trees consume over a century
+        publicTransportBar.setProgress(pubTransportRatio);
 
         float sumEnergy = Application.calculateEnergy();
-        float energyRatio = sumEnergy/21770; // 21770 is the amount of CO2 a 10 trees consume over a century
-        energy_bar.setProgress(energyRatio);
+        float energyRatio = sumEnergy / 21770;
+        // 21770 is the amount of CO2 a 10 trees consume over a century
+        energyBar.setProgress(energyRatio);
 
     }
 
