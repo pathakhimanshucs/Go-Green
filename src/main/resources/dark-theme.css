@@ -132,3 +132,7 @@
 #description{
     -fx-font-size: 15pt;
 }
+
+#triviaFont {
+    -fx-font-size: 11pt;
+}

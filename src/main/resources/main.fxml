@@ -54,11 +54,6 @@
                                     <Image url="@green-house-png-6.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fitHeight="120.0" fitWidth="130.0" layoutX="460.0" layoutY="368.0">
-                                 <image>
-                                    <Image url="@tree.png" />
-                                 </image>
-                              </ImageView>
                               <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="465.0" layoutY="138.0">
                                  <image>
                                     <Image url="@bus-icon.png" />
@@ -137,16 +132,17 @@
                </content>
             </Tab>
             <Tab text="Trivia">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Label layoutX="14.0" layoutY="70.0" prefHeight="62.0" prefWidth="502.0" text="The Chinese are responsible for 27 percent of global emissions" />
-                        <Label layoutX="14.0" layoutY="132.0" prefHeight="72.0" prefWidth="1587.0" text="If the European Union is calculated together, it will also be in the top five, accounting for 10 percent of global emissions." textOverrun="WORD_ELLIPSIS" />
-                        <Label layoutX="14.0" layoutY="204.0" prefHeight="36.0" prefWidth="1110.0" text="Oil, natural gas and cement production: 32.6 billion tonnes of CO2 are emitted per year." />
-                        <Label layoutX="14.0" layoutY="267.0" prefWidth="837.0" text="Animals and people Emissions:15.8 billion tons of CO2 per year." />
-                        <Label layoutX="14.0" layoutY="331.0" text="Burning down forests emits 3.3 billion tonnes of CO2 per year." />
-                        <Label layoutX="14.0" layoutY="389.0" text="Oceans absorb 9.5 billion tons of CO2 per year." />
-                        <Label layoutX="14.0" layoutY="439.0" text="Plants worldwide absorb 10.6 billion tonnes of CO2 per year" />
+              <content  >
+                <AnchorPane  minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children >
+
+                        <Label id="triviaFont" layoutX="14.0" layoutY="70.0" prefHeight="62.0" prefWidth="502.0" text="The Chinese are responsible for 27 percent of global emissions" />
+                        <Label id="triviaFont" layoutX="14.0" layoutY="132.0" prefHeight="72.0" prefWidth="1587.0" text="If you also include the European Union, it's in the top five, responsible for 10 percent." textOverrun="WORD_ELLIPSIS" />
+                        <Label id="triviaFont" layoutX="14.0" layoutY="204.0" prefHeight="36.0" prefWidth="1110.0" text="Oil, natural gas and cement production: 32.6 billion tonnes of CO2 are emitted per year." />
+                        <Label id="triviaFont" layoutX="14.0" layoutY="267.0" prefWidth="837.0" text="Animals and people Emissions:15.8 billion tons of CO2 per year." />
+                        <Label id="triviaFont" layoutX="14.0" layoutY="331.0" text="Burning down forests emits 3.3 billion tonnes of CO2 per year." />
+                        <Label id="triviaFont" layoutX="14.0" layoutY="389.0" text="Oceans absorb 9.5 billion tons of CO2 per year." />
+                        <Label id="triviaFont" layoutX="14.0" layoutY="439.0" text="Plants worldwide absorb 10.6 billion tonnes of CO2 per year" />
                      </children>
                   </AnchorPane>
               </content>
