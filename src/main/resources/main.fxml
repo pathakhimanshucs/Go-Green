@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
@@ -34,16 +33,7 @@
                      </children></AnchorPane>
                </content>
             </Tab>
-            <Tab text="Leaderboard">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@dark-theme.css">
-                     <children>
-                        <JFXListView fx:id="mylistview" layoutX="62.0" layoutY="89.0" onMouseClicked="#clickedList" prefHeight="400.0" prefWidth="458.0" styleClass="mylistview" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-             <Tab text="Achievements">
+             <Tab onSelectionChanged="#displayAchievements" text="Achievements">
                  <content>
                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@dark-theme.css">
                      <children>
@@ -52,11 +42,6 @@
                               <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="470.0" layoutY="258.0">
                                  <image>
                                     <Image url="@green-house-png-6.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="120.0" fitWidth="130.0" layoutX="460.0" layoutY="368.0">
-                                 <image>
-                                    <Image url="@tree.png" />
                                  </image>
                               </ImageView>
                               <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="465.0" layoutY="138.0">
@@ -73,17 +58,49 @@
                                <Label layoutX="26.0" layoutY="60.0" text="Food" />
                               <Label layoutX="26.0" layoutY="298.0" prefHeight="38.0" prefWidth="219.0" text="Green  Energy" />
                               <Label layoutX="26.0" layoutY="164.0" prefHeight="69.0" prefWidth="248.0" text="Public Transport" />
-                              <Label layoutX="26.0" layoutY="409.0" prefHeight="38.0" prefWidth="356.0" text="Overall score (saved trees)" />
-                              <Label layoutX="433.0" layoutY="412.0" text="# *" />
-                              <ProgressBar fx:id="food_bar" layoutX="260.0" layoutY="67.0" prefWidth="200.0" progress="0.0" />
-                              <ProgressBar fx:id="public_transport_bar" layoutX="260.0" layoutY="188.0" prefWidth="200.0" progress="0.69" />
-                              <ProgressBar fx:id="energy_bar" layoutX="260.0" layoutY="307.0" prefWidth="200.0" progress="0.57" />
+                              <ProgressBar fx:id="foodBar" layoutX="260.0" layoutY="67.0" prefWidth="200.0" progress="0.0" />
+                              <ProgressBar fx:id="publicTransportBar" layoutX="260.0" layoutY="188.0" prefWidth="200.0" progress="0.69" />
+                              <ProgressBar fx:id="energyBar" layoutX="260.0" layoutY="307.0" prefWidth="200.0" progress="0.57" />
                            </children>
                         </AnchorPane>
                      </children>
                      </AnchorPane>
                  </content>
              </Tab>
+            <Tab onSelectionChanged="#totalCo2" text="Saved Trees">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="treesSaved" layoutX="179.0" layoutY="46.0" prefHeight="72.0" prefWidth="430.0" text="You saved trees" />
+                        <ImageView fx:id="tree4" fitHeight="169.0" fitWidth="183.0" layoutX="65.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@AllerallerMooisteBoom.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="tree5" fitHeight="169.0" fitWidth="183.0" layoutX="378.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@AllerallerMooisteBoom.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="tree1" fitHeight="243.0" fitWidth="282.0" layoutX="185.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@AllerallerMooisteBoom.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="tree2" fitHeight="272.0" fitWidth="287.0" layoutX="307.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@AllerallerMooisteBoom.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="tree3" fitHeight="267.0" fitWidth="301.0" layoutX="46.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@AllerallerMooisteBoom.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
             <Tab onSelectionChanged="#displayFriends" text="Friends">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@dark-theme.css">
@@ -103,6 +120,22 @@
                      </children>
                   </AnchorPane>
                </content>
+            </Tab>
+            <Tab text="Trivia">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+
+                        <Label id="triviaFont" layoutX="14.0" layoutY="70.0" prefHeight="62.0" prefWidth="502.0" text="The Chinese are responsible for 27 percent of global emissions" />
+                        <Label id="triviaFont" layoutX="14.0" layoutY="132.0" prefHeight="72.0" prefWidth="1587.0" text="If you also include the European Union, it's in the top five, responsible for 10 percent." textOverrun="WORD_ELLIPSIS" />
+                        <Label id="triviaFont" layoutX="14.0" layoutY="204.0" prefHeight="36.0" prefWidth="1110.0" text="Oil, natural gas and cement production: 32.6 billion tonnes of CO2 are emitted per year." />
+                        <Label id="triviaFont" layoutX="14.0" layoutY="267.0" prefWidth="837.0" text="Animals and people Emissions:15.8 billion tons of CO2 per year." />
+                        <Label id="triviaFont" layoutX="14.0" layoutY="331.0" text="Burning down forests emits 3.3 billion tonnes of CO2 per year." />
+                        <Label id="triviaFont" layoutX="14.0" layoutY="389.0" text="Oceans absorb 9.5 billion tons of CO2 per year." />
+                        <Label id="triviaFont" layoutX="14.0" layoutY="439.0" text="Plants worldwide absorb 10.6 billion tonnes of CO2 per year" />
+                     </children>
+                  </AnchorPane>
+              </content>
             </Tab>
          </tabs>
       </JFXTabPane>

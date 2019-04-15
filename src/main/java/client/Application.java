@@ -25,6 +25,7 @@ import java.net.URISyntaxException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.Locale;
 
 /**
@@ -261,6 +262,69 @@ public class Application {
         FriendListResponse response = restTemplate.postForObject(uri,
                 req, FriendListResponse.class);
         return response;
+    }
+
+    /**
+     * calculates the amount of CO2 one saves in terms of food consumption.
+     * @return a float with the amount of CO2 he/she has saved
+     */
+    public static float calculateFood() {
+        ActivityListResponse activities =  Application.getActivities();
+        LinkedList<Activity> getFood = activities.getActivities();
+        int countValue = 0;
+        float sumFood = 0;
+        while (countValue < getFood.size()) {
+            if (getFood.get(countValue).getActivity().equals(Activity.ActivityObject.VEGMEAL)
+                    || getFood.get(countValue).getActivity()
+                    .equals(Activity.ActivityObject.LOCALFOOD)) {
+                sumFood += getFood.get(countValue).getCo2Amount();
+            }
+            countValue++;
+        }
+        return sumFood;
+    }
+    /**
+     * calculates the amount of CO2 one saved in terms of transport.
+     * @return a float with the amount of CO2 he/she has saved
+     */
+
+    public static float calculatePubTransport() {
+        ActivityListResponse activities =  Application.getActivities();
+        LinkedList<Activity> getPubTransport = activities.getActivities();
+        int countValue = 0;
+        float sumPubTransport = 0;
+        while (countValue < getPubTransport.size()) {
+            if (getPubTransport.get(countValue).getActivity()
+                    .equals(Activity.ActivityObject.BIKE)
+                    ||
+                    getPubTransport.get(countValue).getActivity()
+                            .equals(Activity.ActivityObject.PUBTRANS)) {
+                sumPubTransport += getPubTransport.get(countValue).getCo2Amount();
+            }
+            countValue++;
+        }
+        return sumPubTransport;
+    }
+    /**
+     * calculates the amount of CO2 one saved in terms of energy.
+     * @return a float with the amount of CO2 he/she has saved
+     */
+
+    public static float calculateEnergy() {
+        ActivityListResponse activities =  Application.getActivities();
+        LinkedList<Activity> getEnergy = activities.getActivities();
+        int countValue = 0;
+        float sumEnergy = 0;
+        while (countValue < getEnergy.size()) {
+            if (getEnergy.get(countValue).getActivity()
+                    .equals(Activity.ActivityObject.SOLARPANELS)
+                    || getEnergy.get(countValue).getActivity()
+                    .equals(Activity.ActivityObject.HOMETEMP)) {
+                sumEnergy += getEnergy.get(countValue).getCo2Amount();
+            }
+            countValue++;
+        }
+        return sumEnergy;
     }
 
 

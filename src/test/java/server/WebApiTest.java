@@ -501,7 +501,7 @@ public class WebApiTest {
         //GetAllActivities
         SqlRowSet sqlRowSet2 = Mockito.mock(SqlRowSet.class);
         Mockito.doReturn(sqlRowSet2).when(jdbcTemplate).queryForRowSet("SELECT * FROM activities WHERE userid = ?", 1);
-        Mockito.doReturn(true, false).when(sqlRowSet2).next();
+        Mockito.doReturn(true,false).when(sqlRowSet2).next();
         Mockito.doReturn(1).when(sqlRowSet2).getInt("amount");
         Mockito.doReturn(new Timestamp(1)).when(sqlRowSet2).getTimestamp("time");
         Mockito.doReturn("VEGMEAL").when(sqlRowSet2).getString("table_name");

@@ -11,15 +11,19 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import objects.Activity;
 import objects.ActivityListResponse;
 import objects.Friend;
 import objects.FriendListResponse;
+
+//import javax.swing.text.html.ImageView;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -55,6 +59,34 @@ public class MainController {
 
     @FXML
     private TableColumn friendco2Column;
+
+    @FXML
+    private Label treesSaved;
+
+    @FXML
+    private ImageView tree1;
+
+    @FXML
+    private ImageView tree2;
+
+    @FXML
+    private ImageView tree3;
+
+    @FXML
+    private ImageView tree4;
+
+    @FXML
+    private ImageView tree5;
+
+    @FXML
+    private ProgressBar foodBar;
+
+    @FXML
+    private ProgressBar publicTransportBar;
+
+    @FXML
+    private ProgressBar energyBar;
+
 
 
 
@@ -128,4 +160,67 @@ public class MainController {
         ObservableList<Activity> observableList = FXCollections.observableList(list);
         tableview.setItems(observableList);
     }
+
+    @FXML
+    void totalCo2() {
+        ActivityListResponse data = Application.getActivities();
+        LinkedList<Activity> list = data.getActivities();
+        float total = 0;
+        for (int i = 0; i < list.size(); i++) {
+            total = total + list.get(i).getCo2Amount();
+        }
+        //treesSaved//
+
+        double savedtrees = Math.floor(total / 20000);
+        long roundedTrees = Math.round(savedtrees);
+        //        String trees = Double.toString(savedtrees);
+        //        int treeInt = Integer.parseInt(trees);
+        if (roundedTrees == 1) {
+            treesSaved.setText("You saved " + roundedTrees + " tree");
+        } else {
+            treesSaved.setText("You saved " + roundedTrees + " trees");
+        }
+        //treesSaved.setAlignment(center);
+
+        if (roundedTrees >= 1) {
+            tree1.setVisible(true);
+        }
+
+        if (roundedTrees >= 2) {
+            tree2.setVisible(true);
+        }
+
+        if (roundedTrees >= 3) {
+            tree3.setVisible(true);
+        }
+
+        if (roundedTrees >= 4) {
+            tree4.setVisible(true);
+        }
+
+        if (roundedTrees >= 5) {
+            tree5.setVisible(true);
+        }
+    }
+
+    @FXML
+    void displayAchievements() {
+        float sumFood = Application.calculateFood();
+        float foodRatio = sumFood / 21770;
+        // 21770 is the amount of CO2 a 10 trees consume over a century
+        foodBar.setProgress(foodRatio);
+
+        float sumPubTransport = Application.calculatePubTransport();
+        float pubTransportRatio = sumPubTransport / 21770;
+        // 21770 is the amount of CO2 a 10 trees consume over a century
+        publicTransportBar.setProgress(pubTransportRatio);
+
+        float sumEnergy = Application.calculateEnergy();
+        float energyRatio = sumEnergy / 21770;
+        // 21770 is the amount of CO2 a 10 trees consume over a century
+        energyBar.setProgress(energyRatio);
+
+    }
+
+
 }
