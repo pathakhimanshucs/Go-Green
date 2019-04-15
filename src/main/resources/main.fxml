@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXListView?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
@@ -33,15 +32,6 @@
                         </TableView>
                      </children></AnchorPane>
                </content>
-            </Tab>
-            <Tab text="Leaderboard">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@dark-theme.css">
-                     <children>
-                        <JFXListView fx:id="mylistview" layoutX="62.0" layoutY="89.0" onMouseClicked="#clickedList" prefHeight="400.0" prefWidth="458.0" styleClass="mylistview" />
-                     </children>
-                  </AnchorPane>
-              </content>
             </Tab>
              <Tab onSelectionChanged="#displayAchievements" text="Achievements">
                  <content>
@@ -132,9 +122,9 @@
                </content>
             </Tab>
             <Tab text="Trivia">
-              <content  >
-                <AnchorPane  minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children >
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
 
                         <Label id="triviaFont" layoutX="14.0" layoutY="70.0" prefHeight="62.0" prefWidth="502.0" text="The Chinese are responsible for 27 percent of global emissions" />
                         <Label id="triviaFont" layoutX="14.0" layoutY="132.0" prefHeight="72.0" prefWidth="1587.0" text="If you also include the European Union, it's in the top five, responsible for 10 percent." textOverrun="WORD_ELLIPSIS" />
